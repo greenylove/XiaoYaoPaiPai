@@ -1,0 +1,65 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="CMSEmergencySystem.Site" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/sandstone.bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/sandstone.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/custom.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <script>
+    function w3_close() {
+        document.getElementById("wrapmap").style.marginLeft = "0%";
+        document.getElementById("mySidenav").style.display = "none";
+        document.getElementById("hiddenleftpanel").style.display = "none";
+        document.getElementById("leftsidepanel").style.display = "inline-block";
+        document.getElementById("hiddenleftpanel").style.width = "0%";
+        document.getElementById("rightpanel").style.marginLeft = document.getElementById("leftsidepanel").offsetWidth + "px";
+    }
+    </script>
+</head>
+<body onload="w3_close();">
+<div class="navbar navbar-inverse navbar-fixed-top">
+
+        <!--<div class="page">-->
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/Default.aspx">Crisis Management System</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
+                    <AnonymousTemplate>
+
+                    <ul class="nav navbar-nav navbar-right">
+                <!--<li><a href="/Account/Register" id="registerLink">Register</a></li>-->
+
+                <li><a href="~/Account/Login.aspx" id="HeadLoginStatus" runat="server">Log In</a></li>
+            </ul>
+                         
+                    </AnonymousTemplate>
+                    <LoggedInTemplate>
+                        Welcome <span class="bold">
+                            <asp:LoginName ID="HeadLoginName" runat="server" />
+                        </span>! [
+                        <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out"
+                            LogoutPageUrl="~/" />
+                        ]
+                    </LoggedInTemplate>
+                </asp:LoginView>
+                <div class="loginDisplay">
+                </div>
+                <div class="clear hideSkiplink">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+    <div class="footer">
+    </div>
+</body>
+</html>

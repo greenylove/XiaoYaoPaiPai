@@ -1,0 +1,27 @@
+﻿body {
+}
+.navbar-inverse
+{
+    position:fixed;
+    background-color: #3E3F39;
+    border-color: #3E3F39;   
+}
+.navbar
+{
+    margin-bottom: 0px;
+}
+div.wrapper
+{
+    position: relative;
+    top: 60px;
+}
+.wrapMap
+{
+    position: relative;
+    top: 60px;
+}
+.navbar-inverse .navbar-nav>li>a
+{
+    color:#FFFFFF;
+}
+    
