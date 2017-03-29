@@ -561,7 +561,6 @@
                     <td colspan="3">the fire was raging and had engulfed the entire house, with the fire penetrating through the roof.</td>
                 </tr>
                 <tr>
-                <tr>
                     <td colspan="4"></td>
                 </tr>
                 <th>Status Log:</th>
