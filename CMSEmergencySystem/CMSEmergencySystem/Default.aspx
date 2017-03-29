@@ -52,6 +52,7 @@
     function initialize() {
         // Get the modal
         // how sia
+        //gg
         var modal = document.getElementById('myModal');
         var createModal = document.getElementById('CreateIncidentDialogBox');
 
