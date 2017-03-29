@@ -1,0 +1,165 @@
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\ApplicationInsights.config
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\csc.exe
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.CodeAnalysis.dll
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.CSharp.Core.targets
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.VisualBasic.Core.targets
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\System.Collections.Immutable.dll
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\System.Reflection.Metadata.dll
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\vbc.exe
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\VBCSCompiler.exe
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\VBCSCompiler.exe.config
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\CMSEmergencySystem.dll.config
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\CMSEmergencySystem.dll
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\CMSEmergencySystem.pdb
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.Agent.Intercept.dll
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.DependencyCollector.dll
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.PerfCounterCollector.dll
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.ServerTelemetryChannel.dll
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.Web.dll
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.WindowsServer.dll
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.ApplicationInsights.dll
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.DependencyCollector.xml
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.ServerTelemetryChannel.xml
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.Web.xml
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.WindowsServer.xml
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.ApplicationInsights.xml
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\obj\Debug\CMSEmergencySystem.csprojResolveAssemblyReference.cache
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\obj\Debug\CMSEmergencySystem.dll
+c:\users\lance lim\documents\visual studio 2015\Projects\CMSEmergencySystem\CMSEmergencySystem\obj\Debug\CMSEmergencySystem.pdb
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\ApplicationInsights.config
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\csc.exe
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\vbc.exe
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\VBCSCompiler.exe
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\CMSEmergencySystem.dll.config
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\CMSEmergencySystem.dll
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\CMSEmergencySystem.pdb
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.Web.dll
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.ApplicationInsights.dll
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.Web.xml
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.ApplicationInsights.xml
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\obj\Debug\CMSEmergencySystem.csprojResolveAssemblyReference.cache
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\obj\Debug\CMSEmergencySystem.dll
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\obj\Debug\CMSEmergencySystem.pdb
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\ApplicationInsights.config
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\csc.exe
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\vbc.exe
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\VBCSCompiler.exe
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\CMSEmergencySystem.dll.config
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\CMSEmergencySystem.dll
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\CMSEmergencySystem.pdb
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.Web.dll
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.ApplicationInsights.dll
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.Web.xml
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.ApplicationInsights.xml
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\obj\Debug\CMSEmergencySystem.csprojResolveAssemblyReference.cache
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\obj\Debug\CMSEmergencySystem.dll
+C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\obj\Debug\CMSEmergencySystem.pdb
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\ApplicationInsights.config
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\csc.exe
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\vbc.exe
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\VBCSCompiler.exe
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\CMSEmergencySystem.dll.config
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\CMSEmergencySystem.dll
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\CMSEmergencySystem.pdb
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.Web.dll
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.ApplicationInsights.dll
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.Web.xml
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.ApplicationInsights.xml
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\obj\Debug\CMSEmergencySystem.csprojResolveAssemblyReference.cache
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\obj\Debug\CMSEmergencySystem.dll
+C:\Users\Lance Lim\Source\Repos\xiaoyaopaipai\CMSEmergencySystem\CMSEmergencySystem\obj\Debug\CMSEmergencySystem.pdb
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\ApplicationInsights.config
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\csc.exe
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\vbc.exe
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\VBCSCompiler.exe
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\CMSEmergencySystem.dll.config
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\CMSEmergencySystem.dll
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\CMSEmergencySystem.pdb
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.Web.dll
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.ApplicationInsights.dll
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.Web.xml
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.ApplicationInsights.xml
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\obj\Debug\CMSEmergencySystem.csprojResolveAssemblyReference.cache
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\obj\Debug\CMSEmergencySystem.dll
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\obj\Debug\CMSEmergencySystem.pdb
