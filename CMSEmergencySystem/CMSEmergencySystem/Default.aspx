@@ -517,7 +517,7 @@
                 infowindowContent.children['lat'].textContent = results[0].geometry.location.lat();
                 infowindowContent.children['lng'].textContent = results[0].geometry.location.lng();
 
-                document.getElementById('locationTxtbox').value = infowindowContent.children['place-address'].textContent;
+                document.getElementById('locationTextBox').value = infowindowContent.children['place-address'].textContent;
 
                 infowindow.open(map, marker);
             });
@@ -531,6 +531,7 @@
     };
 
 </script>
+<form id="IncidentForm" runat="server">
   <!-- The Modal -->
 <div id="myModal" class="modal">
 
@@ -541,63 +542,64 @@
             <h2>View Incident Report</h2>
         </div>
         <div class="modal-body">
-            <table class="CurrentIncident" width="100%">
-                <tr>
-                    <th>Date/Time of Report:</th>
-                    <td>1/1/2017 23:59</td>
-                    <th colspan="3"></th>
-                </tr>
-                <tr>
-                    <th>Type of Incident:</th>
-                    <td>Large fire</td>
-                    <th>Incident ID:</th>
-                    <td>7593648</td>
-                </tr>
-                <tr>
-                    <th>Reporting Person:</th>
-                    <td>Tan Ying Hao</td>
-                    <th>Contact No:</th>
-                    <td>96857947</td>
-                </tr>
-                <tr>
-                    <th>Location:</th>
-                    <td>Chua Chu Kang Stadium</td>
-                    <th>Postal Code:</th>
-                    <td> 689236</td>
-                </tr>
-                <tr>
-                    <th>Main Dispatch:</th>
-                    <td>SCDF - FireFighting</td>
-                    <th>Assist Type:</th>
-                    <td> SPF - Community Engagement<br />SCDF - Rescue and Evacuation</td>
-                </tr>
-                <tr>
-                    <th>Description:</th>
-                    <td colspan="3">the fire was raging and had engulfed the entire house, with the fire penetrating through the roof.</td>
-                </tr>
-                <tr>
-                    <td colspan="4"></td>
-                </tr>
-                <th>Status Log:</th>
-                <td colspan="3">
-                    <textarea rows="7" cols="90" disabled>
-                        [12/1/2017 00:00:00] Dispatched SCDF - FireFighting Crew
-                        [12/1/2017 00:00:05] SPF - Community Engagement
-                        [12/1/2017 00:05:08] FireFighting crew arrived location
-                        [12/1/2017 00:07:10] Black smoke raging and spreading
-                        [12/1/2017 00:08:34] SPF crew arrived location
-                        [12/1/2017 00:09:43] Firefighters used 3 water jets to penetrate the burning stadium
-                        [12/1/2017 00:10:00] The fire was brought under control
-                        [12/1/2017 00:15:00] Conducting search and rescue operations within the stadium
-                        [12/1/2017 00:30:00] No casualty found
-                    </textarea>
-                </td>
-                </tr>
-                <tr>
-                    <th>Add Status:</th>
-                    <td colspan="3"><input type="text" name="firstname" size="90" />&nbsp;<button>Add Status</button></td>
-                </tr>
-            </table>
+                <table class="CurrentIncident" width="100%">
+                    <tr>
+                        <th>Date/Time of Report:</th>
+                        <td><asp:Label ID="DateTimeDisplay" runat="server" Text="TEMPTXT, REMOVE WHEN CODED"></asp:Label></td>
+                        <th colspan="3"></th>
+                    </tr>
+                    <tr>
+                        <th>Type of Incident:</th>
+                        <td><asp:Label ID="incidentType" runat="server" Text="TEMPTXT, REMOVE WHEN CODED"></asp:Label></td>
+                        <th>Incident ID:</th>
+                        <td><asp:Label ID="IncidentID" runat="server" Text="TEMPTXT, REMOVE WHEN CODED"></asp:Label></td>
+                    </tr>
+                    <tr>
+                        <th>Reporting Person:</th>
+                        <td><asp:Label ID="reporterName" runat="server" Text="TEMPTXT, REMOVE WHEN CODED"></asp:Label></td>
+                        <th>Contact No:</th>
+                        <td><asp:Label ID="contactNumber" runat="server" Text="TEMPTXT, REMOVE WHEN CODED"></asp:Label></td>
+                    </tr>
+                    <tr>
+                        <th>Location:</th>
+                        <td><asp:Label ID="Location" runat="server" Text="TEMPTXT, REMOVE WHEN CODED"></asp:Label></td>
+                        <th>Postal Code:</th>
+                        <td><asp:Label ID="postalCode" runat="server" Text="TEMPTXT, REMOVE WHEN CODED"></asp:Label></td>
+                    </tr>
+                    <tr>
+                        <th>Main Dispatch:</th>
+                        <td><asp:Label ID="mainDispatch" runat="server" Text="TEMPTXT, REMOVE WHEN CODED"></asp:Label></td>
+                        <th>Assist Type:</th>
+                        <td><asp:TextBox id="supportType" TextMode="multiline" Columns="30" Rows="5" runat="server" ReadOnly="True" /></td>
+                    </tr>
+                    <tr>
+                        <th>Description:</th>
+                        <td colspan="3"><asp:Label ID="incidentDesc" runat="server" Text="TEMPTXT, REMOVE WHEN CODED"></asp:Label> </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"></td>
+                    </tr>
+                    <th>Status Log:</th>
+                    <td colspan="3">
+                        <%--<asp:TextBox id="statusLog" TextMode="multiline" Columns="30" Rows="5" runat="server" ReadOnly="True" Width="452px" />--%> 
+                        <%--<textarea rows="7" cols="90" disabled>
+                            [12/1/2017 00:00:00] Dispatched SCDF - FireFighting Crew
+                            [12/1/2017 00:00:05] SPF - Community Engagement
+                            [12/1/2017 00:05:08] FireFighting crew arrived location
+                            [12/1/2017 00:07:10] Black smoke raging and spreading
+                            [12/1/2017 00:08:34] SPF crew arrived location
+                            [12/1/2017 00:09:43] Firefighters used 3 water jets to penetrate the burning stadium
+                            [12/1/2017 00:10:00] The fire was brought under control
+                            [12/1/2017 00:15:00] Conducting search and rescue operations within the stadium
+                            [12/1/2017 00:30:00] No casualty found
+                        </textarea>--%>
+                    </td>
+         
+                    <tr>
+                        <th>Add Status:</th>
+                        <td colspan="3"><input type="text" name="firstname" size="90" />&nbsp;<button>Add Status</button></td>
+                    </tr>
+                </table>
         </div>
         <div class="modal-footer">
         </div>
@@ -616,45 +618,45 @@
             <h2>Create Incident Report</h2>
         </div>
         <div class="modal-body">
-            <form id="IncidentForm" runat="server">
+            <%--<form id="CreateIncidentForm" runat="server">--%>
                 <table class="CreateIncident" width="100%">
                     <tr>
                         <th>Type of Incident:</th>
                         <td colspan="3">
-                            <select>
-                                <option value="Dengue outbreak">Fire outbreak</option>
-                                <option value="Haze">Haze</option>
-                                <option value="Fire outbreak">Dengue outbreak</option>
-                                <option value="Earthquake">Earthquake</option>
-                            </select>
-                        </td>
+                            <asp:DropDownList ID="typeOfIncidentDDL" runat="server">
+                                <asp:ListItem Text="Fire Outbreak" Value="Fire Outbreak" />
+                                <asp:ListItem Text="Dengue Outbreak" Value="Dengue Outbreak" />
+                                <asp:ListItem Text="Earthquake" Value="Earthquake" />
+                            </asp:DropDownList></td>
                     </tr>
                     <tr>
                         <th>Reporting Person:</th>
-                        <td><input type="text" name="ReportPerson"/></td>
+                        <td><asp:TextBox ID="reportPersonTextBox" runat="server"></asp:TextBox></td>
+
                         <th style="text-align: right;padding-right: 13px;">Contact No:</th>
-                        <td><input type="text" name="ContactNo" /></td>
+                        <td><asp:TextBox ID="contactNoTextBox" runat="server" ></asp:TextBox></td>
                     </tr>
                     <tr>
                         <th>Location:</th>
-                        <td><asp:TextBox ID="locationTxtbox" runat="server" ClientIDMode="Static"></asp:TextBox></td>
+                        <td><asp:TextBox ID="locationTextBox" runat="server" ClientIDMode="Static"></asp:TextBox></td>
+                        
                         <th style="text-align: right;padding-right: 13px;">Postal Code:</th>
-                        <td> <input type="text" name="postalCode"/></td>
+                        <td><asp:TextBox ID="postalCodeTextBox" runat="server"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <th>Main Dispatch:</th>
                         <td colspan="3">
-                            <select>
-                                <option value="SCDF - Emergency Ambulance">SCDF - Emergency Ambulance</option>
-                                <option value="SCDF - Rescue and Evacuation">SCDF - Rescue and Evacuation</option>
-                                <option value="SCDF - FireFighting">SCDF - FireFighting</option>
-                                <option value="SCDF - Hazmat Responder">SCDF - Hazmat Responder</option>
-                                <option value="SPF - Protective Security">SPF - Protective Security</option>
-                                <option value="SPF - Police Tactical Troop">SPF - Police Tactical Troop</option>
-                                <option value="SPF - Neighbourhood Policing">SPF - Neighbourhood Policing</option>
-                                <option value="SPF - Community Engagement">SPF - Community Engagement</option>
-                                <option value="SAF - Medical unit">SAF - Medical unit</option>
-                            </select>
+                            <asp:DropDownList ID="MainDispatchDDL" runat="server">
+                                <asp:ListItem Text="SCDF - Emergency Ambulance" Value="Emergency Ambulance" />
+                                <asp:ListItem Text="SCDF - Rescue and Evacuation" Value="Rescue and Evacuation" />
+                                <asp:ListItem Text="SCDF - FireFighting" Value="FireFighting" />
+                                <asp:ListItem Text="SCDF - Hazmat Responder" Value="Hazmat Responder" />
+                                <asp:ListItem Text="SPF - Protective Sercurity" Value="Protective Sercurity" />
+                                <asp:ListItem Text="SPF - Police Tactical Troop" Value="Police Tactical Troop" />
+                                <asp:ListItem Text="SPF - Neighbouring Policing" Value="Neighbouring Policing" />
+                                <asp:ListItem Text="SPF - Community Engagement Policing" Value="Community Engagement Policing" />
+                                <asp:ListItem Text="SAF - Medical Unit" Value="Medical Unit" />
+                            </asp:DropDownList>
                         </td>
                     </tr>
                     <tr>
@@ -665,36 +667,43 @@
                     </tr>
                     <tr>
                         <td>
-                            <input type="checkbox" name="Assistance" value="SCDF - Emergency Ambulance" />Emergency Ambulance<br />
-                            <input type="checkbox" name="Assistance" value="SCDF - Rescue and Evacuation" />Rescue and Evacuation<br />
-                            <input type="checkbox" name="Assistance" value="SCDF - FireFighting" />FireFighting<br />
-                            <input type="checkbox" name="Assistance" value="Hazmat Responder" />Hazmat Responder
+                            <asp:CheckBoxList ID="assistTypeCheckBoxList" runat="server" Width="369px">
+                                <asp:ListItem Text="Emergency Ambulance" Value="1" ></asp:ListItem>
+                                <asp:ListItem Text="Rescue and Evacuation" Value="2" ></asp:ListItem>
+                                <asp:ListItem Text="FireFighting" Value="3" ></asp:ListItem>
+                                <asp:ListItem Text="Hazmat Responder" Value="4" ></asp:ListItem>
+                            </asp:CheckBoxList>
                         </td>
                         <td>
-                            <input type="checkbox" name="Assistance" value="SPF - Protective Security" />Protective Security<br />
-                            <input type="checkbox" name="Assistance" value="SPF - Police Tactical Troop" />Police Tactical Troop<br />
-                            <input type="checkbox" name="Assistance" value="SPF - Neighbourhood Policing" />Neighbourhood Policing<br />
-                            <input type="checkbox" name="Assistance" value="SPF - Community Engagement" />Community Engagement
+                           <asp:CheckBoxList ID="CheckBoxList1" runat="server" Width="369px">
+                               <asp:ListItem Text="Protective Sercurity" Value="5" ></asp:ListItem>
+                               <asp:ListItem Text="Police Tactical Troop" Value="6" ></asp:ListItem>
+                               <asp:ListItem Text="Neighbouring Policing" Value="7" ></asp:ListItem> 
+                               <asp:ListItem Text="Community Engagement Policing" Value="8" ></asp:ListItem>
+                            </asp:CheckBoxList>
                         </td>
-                        <td><input type="checkbox" name="Assistance" value="SAF - Medical unit" />Medical unit</td>
+                        <td>
+                            <asp:CheckBoxList ID="CheckBoxList2" runat="server" Width="369px">
+                                <asp:ListItem Text="Medical Unit" Value="9" ></asp:ListItem> 
+                            </asp:CheckBoxList>
+                        </td>
                     </tr>
                     <tr>
                         <th>Description:</th>
-                        <td colspan="3"><textarea rows="4" cols="97"></textarea></td>
+                        <td colspan="3"><asp:TextBox ID="descriptionTextBox" runat="server" Height="86px" Width="937px"></asp:TextBox></td>
                     </tr>
                     <tr>
-                        <td colspan="4"><center><button>Create Incident</button></center></td>
+                        <td colspan="4"><center><asp:Button ID="submit" Text="Create Incident" runat="server" OnClick="CreateIncidentButton" Height="29px"/></center></td>
                     </tr>
                 </table>
 
-            </form>
+            <%--</form>--%>
         </div>
         <div class="modal-footer">
         </div>
     </div>
-
 </div>
-
+</form>
 <div class="wrapMap" id="wrapmap">
 
     <div id="leftpanel" style="position:fixed;">
