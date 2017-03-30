@@ -513,16 +513,15 @@
                 marker.setVisible(true);
                 infowindowContent.children['place-name'].textContent = place.name;
                 infowindowContent.children['place-id'].textContent = place.place_id;
-                infowindowContent.children['place-address'].textContent =
-                    results[0].formatted_address;
-                infowindowContent.children['lat'].textContent =
-                    results[0].geometry.location.lat();
-                infowindowContent.children['lng'].textContent =
-                    results[0].geometry.location.lng();
+                infowindowContent.children['place-address'].textContent = results[0].formatted_address;
+                infowindowContent.children['lat'].textContent = results[0].geometry.location.lat();
+                infowindowContent.children['lng'].textContent = results[0].geometry.location.lng();
 
+                document.getElementById('locationTxtbox').value = infowindowContent.children['place-address'].textContent;
 
                 infowindow.open(map, marker);
             });
+            
         });
 
         //End Open Info Window
@@ -617,7 +616,7 @@
             <h2>Create Incident Report</h2>
         </div>
         <div class="modal-body">
-            <form id="IncidentForm">
+            <form id="IncidentForm" runat="server">
                 <table class="CreateIncident" width="100%">
                     <tr>
                         <th>Type of Incident:</th>
@@ -632,15 +631,15 @@
                     </tr>
                     <tr>
                         <th>Reporting Person:</th>
-                        <td><input type="text" name="ReportPerson" /></td>
+                        <td><input type="text" name="ReportPerson"/></td>
                         <th style="text-align: right;padding-right: 13px;">Contact No:</th>
                         <td><input type="text" name="ContactNo" /></td>
                     </tr>
                     <tr>
                         <th>Location:</th>
-                        <td><input type="text" name="location" /></td>
+                        <td><asp:TextBox ID="locationTxtbox" runat="server" ClientIDMode="Static"></asp:TextBox></td>
                         <th style="text-align: right;padding-right: 13px;">Postal Code:</th>
-                        <td> <input type="text" name="postalCode" /></td>
+                        <td> <input type="text" name="postalCode"/></td>
                     </tr>
                     <tr>
                         <th>Main Dispatch:</th>
