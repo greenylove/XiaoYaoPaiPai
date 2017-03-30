@@ -346,26 +346,26 @@
                     break;
             }
 
-    /*
-
-                    var infowindow = new google.maps.InfoWindow({
-                        content: "Fuck my life"
-                    });
-
-                    var markertype = 'info'
-                    var myLatlng;
-                    var marker = new google.maps.Marker({
-                        position: latLng,
-                        type: markertype,
-                        icon: icons[markertype].icon,
-                        map: map,
-                        title: 'NTU'
-                    });
-                    marker.setMap(map);
-                    marker.addListener('click', function() {
-                        infowindow.open(map, marker);
-                    });
-                    break;*/
+            /*
+        
+                            var infowindow = new google.maps.InfoWindow({
+                                content: "Fuck my life"
+                            });
+        
+                            var markertype = 'info'
+                            var myLatlng;
+                            var marker = new google.maps.Marker({
+                                position: latLng,
+                                type: markertype,
+                                icon: icons[markertype].icon,
+                                map: map,
+                                title: 'NTU'
+                            });
+                            marker.setMap(map);
+                            marker.addListener('click', function() {
+                                infowindow.open(map, marker);
+                            });
+                            break;*/
 
 
 
@@ -471,6 +471,7 @@
         var autocomplete = new google.maps.places.Autocomplete(
             input, { placeIdOnly: true });
         autocomplete.bindTo('bounds', map);
+        autocomplete.setComponentRestrictions({ country: "SG" });
 
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
@@ -487,8 +488,8 @@
 
         autocomplete.addListener('place_changed', function () {
             infowindow.close();
+            infowindow.open(map, marker);
             var place = autocomplete.getPlace();
-
             if (!place.place_id) {
                 return;
             }
@@ -500,6 +501,10 @@
                 }
                 map.setZoom(11);
                 map.setCenter(results[0].geometry.location);
+
+                console.log(results[0].geometry.location.lat());
+                console.log(results[0].geometry.location.lng());
+
                 // Set the position of the marker using the place ID and location.
                 marker.setPlace({
                     placeId: place.place_id,
@@ -510,6 +515,12 @@
                 infowindowContent.children['place-id'].textContent = place.place_id;
                 infowindowContent.children['place-address'].textContent =
                     results[0].formatted_address;
+                infowindowContent.children['lat'].textContent =
+                    results[0].geometry.location.lat();
+                infowindowContent.children['lng'].textContent =
+                    results[0].geometry.location.lng();
+
+
                 infowindow.open(map, marker);
             });
         });
@@ -722,6 +733,8 @@
       <span id="place-name"  class="title"></span><br>
       Place ID <span id="place-id"></span><br>
       <a id="CreateIncident">Create Incident</a><br>
+      <span id="lat">Latitude: </span><br>
+      <span id="lng">Longtidue: </span><br>
       <span id="place-address"></span>
     </div>
         <div id="legend"><h4>Legend</h4></div>
