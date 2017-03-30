@@ -3,7 +3,12 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
+
+    
 <script>
+
+
+
         function w3_openleft() {
             document.getElementById("hiddenleftpanel").style.width = "auto";
             document.getElementById("mySidenav").style.width = "100%";
@@ -560,7 +565,6 @@
                     <th>Description:</th>
                     <td colspan="3">the fire was raging and had engulfed the entire house, with the fire penetrating through the roof.</td>
                 </tr>
-                <tr>
                 <tr>
                     <td colspan="4"></td>
                 </tr>
