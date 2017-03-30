@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMSEmergencySystem", "CMSEmergencySystem\CMSEmergencySystem.csproj", "{26755042-207C-4042-A577-F209D314156C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1Test", "..\..\..\..\Documents\Visual Studio 2010\Projects\WebApplication1Test\WebApplication1Test\WebApplication1Test.csproj", "{8FB9F7D9-65DA-46B5-B27D-06D9B5C3970F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{26755042-207C-4042-A577-F209D314156C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26755042-207C-4042-A577-F209D314156C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26755042-207C-4042-A577-F209D314156C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FB9F7D9-65DA-46B5-B27D-06D9B5C3970F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FB9F7D9-65DA-46B5-B27D-06D9B5C3970F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FB9F7D9-65DA-46B5-B27D-06D9B5C3970F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FB9F7D9-65DA-46B5-B27D-06D9B5C3970F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -111,7 +111,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!--End implement JQuery tab panel-->
 <!--Api Key-->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5FsVm3tclN8aQmB1575QCaYorHSkY_wk&extension=.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-SUfpR6e3ZBZ9z06cdPOICWb46-0QEXk&libraries=places&extension=.js"></script>
 <script>
     google.maps.event.addDomListener(window, 'load', init); /*Right click for context menu*/
     var map;
@@ -310,7 +310,7 @@
 
                     var marker = new google.maps.Marker({
                         position: latLng,
-                        icon: 'https://maps.google.com/mapfiles/kml/shapes/info-i_maps.png',
+                        icon: 'marker/dengue-icon.png',
                         map: map
                     });
                     marker.setMap(map);
@@ -399,7 +399,7 @@
             legend.appendChild(div);
         }
 
-        map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(legend);
 
 
 
@@ -715,8 +715,15 @@
 
 
     <div id="rightpanel">
+        <input id="pac-input" class="controls" type="text" placeholder="Search Box" style="width: 300px;">
         <div id="map">
         </div>
+        <div id="infowindow-content">
+      <span id="place-name"  class="title"></span><br>
+      Place ID <span id="place-id"></span><br>
+      <a id="CreateIncident">Create Incident</a><br>
+      <span id="place-address"></span>
+    </div>
         <div id="legend"><h4>Legend</h4></div>
         <div id="Incidents" style="margin: 10px;">
             <div id="tabs">
