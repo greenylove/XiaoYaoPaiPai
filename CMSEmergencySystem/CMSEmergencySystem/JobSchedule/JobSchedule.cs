@@ -25,7 +25,7 @@ namespace CMSEmergencySystem.JobSchedule
                  .ForJob(emailJob)
                  .WithIdentity("trigger1")
                  .StartNow()
-                 .WithCronSchedule("0 0/1 * * * ?") // Time : Every 30 Minutes job execute
+                 .WithCronSchedule("0 0/30 * * * ?") // Time : Every 30 Minutes job execute
                  .Build();
 
             ISchedulerFactory sf = new StdSchedulerFactory();

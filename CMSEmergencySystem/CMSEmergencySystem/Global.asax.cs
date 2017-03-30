@@ -14,7 +14,11 @@ namespace CMSEmergencySystem
 
         protected void Application_Start(object sender, EventArgs e)
         {
-            JobSchedule.JobSchedule.Start();
+          
+                JobSchedule.JobSchedule.Start();
+            
+
+
         }
 
         protected void Session_Start(object sender, EventArgs e)
