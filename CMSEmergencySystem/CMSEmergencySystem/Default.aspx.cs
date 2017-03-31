@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using CMSEmergencySystem.Controllers;
 
 namespace CMSEmergencySystem
 {
@@ -115,6 +116,9 @@ namespace CMSEmergencySystem
             //int DepartmentID = 0;
             //int newIncidentID = 0;
 
+            IncidentManager.createIncident(reportPersonTextBox.Text, typeOfIncidentDDL.Text,
+                locationTextBox.Text, MainDispatchDDL.Text, assistTypeCheckBoxList.Text, contactNoTextBox.Text,
+                postalCodeTextBox.Text, descriptionTextBox.Text, 0, 0);
             //con.Open();
             //newIncidentID = myDB.Create_Incident(typeOfIncident, reportPerson, contactNo, location, postalCode, mainDispatch, description);
             //con.Close();
