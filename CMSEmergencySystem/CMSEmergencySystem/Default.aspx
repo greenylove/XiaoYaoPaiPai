@@ -4,11 +4,22 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
 
-    
 <script>
+// Only works after `FB.init` is called
+function myFacebookLogin() {
+    FB.login(function () { }, { scope: 'publish_actions' });
 
+}
+function myFacebookPost() {
 
+    FB.login(function () {
+        // Note: The call will only work if you accept the permission request
+        FB.api('/Crisis-Management-System-Xiao-Yao-Pai-406096709760870/posts', 'post', { message: 'Hello, world!' });
+    }, { scope: 'publish_actions' });
 
+}
+</script>
+<script>
         function w3_openleft() {
             document.getElementById("hiddenleftpanel").style.width = "auto";
             document.getElementById("mySidenav").style.width = "100%";
@@ -719,14 +730,17 @@
             <div style="position: inherit;display: none;height:100%;overflow-y:scroll;" id="mySidenav">
 
                 <div id="livefeed">
-                    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FBuzzFeedFood%2Fvideos%2F1593650737314813%2F&show_text=0&width=400" width="200" height="200" style="display:block;border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
-                    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FBuzzFeedFood%2Fvideos%2F1593650737314813%2F&show_text=0&width=400" width="200" height="200" style="display:block;border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
-                    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FBuzzFeedFood%2Fvideos%2F1593650737314813%2F&show_text=0&width=400" width="200" height="200" style="display:block;border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
-                    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FBuzzFeedFood%2Fvideos%2F1593650737314813%2F&show_text=0&width=400" width="200" height="200" style="display:block;border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
-                    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FBuzzFeedFood%2Fvideos%2F1593650737314813%2F&show_text=0&width=400" width="200" height="200" style="display:block;border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
-                    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FBuzzFeedFood%2Fvideos%2F1593650737314813%2F&show_text=0&width=400" width="200" height="200" style="display:block;border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
-                    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FBuzzFeedFood%2Fvideos%2F1593650737314813%2F&show_text=0&width=400" width="200" height="200" style="display:block;border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
-                    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FBuzzFeedFood%2Fvideos%2F1593650737314813%2F&show_text=0&width=400" width="200" height="200" style="display:block;border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+                        <div id="fbLiveFeed">
+                            <asp:Button ID="Button1" Text="Login to Facebook" onClick="myFacebookLogin()">Login to Facebook!</asp:Button>
+                            <asp:Button ID="Button2" Text="Post to Facebook" onClick="myFacebookPost()">Post to Facebook!</asp:Button>
+
+                        </div>
+
+                        <div id="twitterLiveFeed">
+
+
+                        </div>
+
                 </div>
             </div>
         </div>
