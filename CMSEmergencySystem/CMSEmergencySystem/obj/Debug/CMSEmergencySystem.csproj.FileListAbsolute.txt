@@ -247,3 +247,14 @@ C:\Users\jaichyi\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySyste
 C:\Users\jaichyi\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\obj\Debug\CMSEmergencySystem.csprojResolveAssemblyReference.cache
 C:\Users\jaichyi\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\obj\Debug\CMSEmergencySystem.dll
 C:\Users\jaichyi\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\obj\Debug\CMSEmergencySystem.pdb
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\Common.Logging.Core.dll
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\Common.Logging.dll
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\Newtonsoft.Json.dll
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\Quartz.dll
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\Common.Logging.pdb
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\Common.Logging.xml
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\Common.Logging.Core.pdb
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\Common.Logging.Core.xml
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\Newtonsoft.Json.xml
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\Quartz.pdb
+C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\Quartz.xml
