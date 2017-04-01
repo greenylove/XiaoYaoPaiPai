@@ -2,24 +2,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
-
+    
 <script>
-// Only works after `FB.init` is called
-function myFacebookLogin() {
-    FB.login(function () { }, { scope: 'publish_actions' });
 
-}
-function myFacebookPost() {
-
-    FB.login(function () {
-        // Note: The call will only work if you accept the permission request
-        FB.api('/Crisis-Management-System-Xiao-Yao-Pai-406096709760870/posts', 'post', { message: 'Hello, world!' });
-    }, { scope: 'publish_actions' });
-
-}
-</script>
-<script>
         function w3_openleft() {
             document.getElementById("hiddenleftpanel").style.width = "auto";
             document.getElementById("mySidenav").style.width = "100%";
@@ -73,7 +58,7 @@ function myFacebookPost() {
         var createModal = document.getElementById('CreateIncidentDialogBox');
 
         // Get the button that opens the modal
-        var btn = document.getElementById("ViewDetails");
+        //var btn = document.getElementById("ViewDetails");
 
         var btn1 = document.getElementById("CreateIncident");
 
@@ -82,10 +67,10 @@ function myFacebookPost() {
         var span1 = document.getElementsByClassName("close1")[0];
 
         // When the user clicks the button, open the modal
-        btn.onclick = function () {
+        /*btn.onclick = function () {
             modal.style.display = "block";
             return false;
-        }
+        }*/
 
         btn1.onclick = function () {
             createModal.style.display = "block";
@@ -112,6 +97,61 @@ function myFacebookPost() {
                 createModal.style.display = "none";
             }
         }
+    }
+    document.addEventListener('DOMContentLoaded', initialize, false);
+
+    function displayModal() {
+        document.getElementById('myModal').style.display = "block";
+    }
+</script>
+
+    <script>
+    function ViewIncidentButtonTest() {
+        // Get the modal
+        // how sia
+        //gg
+        var modal = document.getElementById('myModal');
+        //var createModal = document.getElementById('CreateIncidentDialogBox');
+
+       
+
+        //var btn1 = document.getElementById("CreateIncident");
+
+        // Get the <span> element that closes the modal
+        var spanTest = document.getElementsByClassName("close")[0];
+        //var span1 = document.getElementsByClassName("close1")[0];
+
+        // When the user clicks the button, open the modal
+        viewIncidentTest.onclick = function () {
+            modal.style.display = "block";
+            return false;
+        }
+
+        /*btn1.onclick = function () {
+            createModal.style.display = "block";
+            return false;
+        }*/
+
+        // When the user clicks on <span> (x), close the modal
+        spanTest.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        //span1.onclick = function () {
+        //    createModal.style.display = "none";
+        //}
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        //window.onclick = function (event) {
+        //    if (event.target == createModal) {
+        //        createModal.style.display = "none";
+        //    }
+        //}
     }
     document.addEventListener('DOMContentLoaded', initialize, false);
 </script>
@@ -529,6 +569,8 @@ function myFacebookPost() {
                 infowindowContent.children['lng'].textContent = results[0].geometry.location.lng();
 
                 document.getElementById('locationTextBox').value = infowindowContent.children['place-address'].textContent;
+                document.getElementById('LatInfo').value = infowindowContent.children['lat'].textContent;
+                document.getElementById('LngInfo').value = infowindowContent.children['lng'].textContent;
 
                 infowindow.open(map, marker);
             });
@@ -540,7 +582,7 @@ function myFacebookPost() {
 
 
     };
-
+    
 </script>
 <form id="IncidentForm" runat="server">
   <!-- The Modal -->
@@ -553,65 +595,70 @@ function myFacebookPost() {
             <h2>View Incident Report</h2>
         </div>
         <div class="modal-body">
-                <table class="CurrentIncident" width="100%">
+                 <asp:ScriptManager ID="ScriptManager1" runat="server">
+                </asp:ScriptManager>
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <ContentTemplate>
+                 
+                <table class="CurrentIncident">
                     <tr>
                         <th>Date/Time of Report:</th>
-                        <td><asp:Label ID="DateTimeDisplay" runat="server" Text="TEMPTXT, REMOVE WHEN CODED"></asp:Label></td>
+                        <td><asp:Label ID="DateTimeDisplay" runat="server" Text=""></asp:Label></td>
                         <th colspan="3"></th>
                     </tr>
                     <tr>
                         <th>Type of Incident:</th>
-                        <td><asp:Label ID="incidentType" runat="server" Text="TEMPTXT, REMOVE WHEN CODED"></asp:Label></td>
+                        <td><asp:Label ID="incidentType" runat="server" Text=""></asp:Label></td>
                         <th>Incident ID:</th>
-                        <td><asp:Label ID="IncidentID" runat="server" Text="TEMPTXT, REMOVE WHEN CODED"></asp:Label></td>
+                        <td><asp:Label ID="IncidentID" runat="server" Text=""></asp:Label></td>
                     </tr>
                     <tr>
                         <th>Reporting Person:</th>
-                        <td><asp:Label ID="reporterName" runat="server" Text="TEMPTXT, REMOVE WHEN CODED"></asp:Label></td>
+                        <td><asp:Label ID="reporterName" runat="server" Text=""></asp:Label></td>
                         <th>Contact No:</th>
-                        <td><asp:Label ID="contactNumber" runat="server" Text="TEMPTXT, REMOVE WHEN CODED"></asp:Label></td>
+                        <td><asp:Label ID="contactNumber" runat="server" Text=""></asp:Label></td>
                     </tr>
                     <tr>
                         <th>Location:</th>
-                        <td><asp:Label ID="Location" runat="server" Text="TEMPTXT, REMOVE WHEN CODED"></asp:Label></td>
+                        <td><asp:Label ID="Location" runat="server" Text=""></asp:Label></td>
                         <th>Postal Code:</th>
-                        <td><asp:Label ID="postalCode" runat="server" Text="TEMPTXT, REMOVE WHEN CODED"></asp:Label></td>
+                        <td><asp:Label ID="postalCode" runat="server" Text=""></asp:Label></td>
                     </tr>
                     <tr>
                         <th>Main Dispatch:</th>
-                        <td><asp:Label ID="mainDispatch" runat="server" Text="TEMPTXT, REMOVE WHEN CODED"></asp:Label></td>
+                        <td><asp:Label ID="mainDispatch" runat="server" Text=""></asp:Label></td>
                         <th>Assist Type:</th>
                         <td><asp:TextBox id="supportType" TextMode="multiline" Columns="30" Rows="5" runat="server" ReadOnly="True" /></td>
                     </tr>
                     <tr>
                         <th>Description:</th>
-                        <td colspan="3"><asp:Label ID="incidentDesc" runat="server" Text="TEMPTXT, REMOVE WHEN CODED"></asp:Label> </td>
+                        <td colspan="3"><asp:Label ID="incidentDesc" runat="server" Text=""></asp:Label> </td>
                     </tr>
+
                     <tr>
-                        <td colspan="4"></td>
+                        <th>Status Log :</th>
+                        <td><asp:TextBox id="statusLog" TextMode="multiline" Columns="30" Rows="5" runat="server" ReadOnly="True" Width="452px" /> </td>
                     </tr>
-                    <th>Status Log:</th>
-                    <td colspan="3">
-                        <%--<asp:TextBox id="statusLog" TextMode="multiline" Columns="30" Rows="5" runat="server" ReadOnly="True" Width="452px" />--%> 
-                        <%--<textarea rows="7" cols="90" disabled>
-                            [12/1/2017 00:00:00] Dispatched SCDF - FireFighting Crew
-                            [12/1/2017 00:00:05] SPF - Community Engagement
-                            [12/1/2017 00:05:08] FireFighting crew arrived location
-                            [12/1/2017 00:07:10] Black smoke raging and spreading
-                            [12/1/2017 00:08:34] SPF crew arrived location
-                            [12/1/2017 00:09:43] Firefighters used 3 water jets to penetrate the burning stadium
-                            [12/1/2017 00:10:00] The fire was brought under control
-                            [12/1/2017 00:15:00] Conducting search and rescue operations within the stadium
-                            [12/1/2017 00:30:00] No casualty found
-                        </textarea>--%>
-                    </td>
+ 
+            <tr><th>Update Status</th>
+            <td><asp:DropDownList ID="statusUpdate" runat="server">
+            <asp:ListItem Text="Unresolved" Value="Unresolved" />
+            <asp:ListItem Text="Pending" Value="Pending" />
+            <asp:ListItem Text="Resolved" Value="Resolved" />
+        </asp:DropDownList></td>
+                </tr>
          
                     <tr>
                         <th>Add Status:</th>
-                        <td colspan="3"><input type="text" name="firstname" size="90" />&nbsp;<button>Add Status</button></td>
+                        <td>
+                            <asp:TextBox ID="Status" runat="server"></asp:TextBox></td>
+                        <td><asp:Button ID="Button1" runat="server" Text="Update" OnClick="UpdateStatusOnClick" /></td>
                     </tr>
                 </table>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
         </div>
+
         <div class="modal-footer">
         </div>
     </div>
@@ -629,7 +676,12 @@ function myFacebookPost() {
             <h2>Create Incident Report</h2>
         </div>
         <div class="modal-body">
+
+            <asp:UpdatePanel ID="UpdateCreate" runat="server">              
+                <ContentTemplate>
             <%--<form id="CreateIncidentForm" runat="server">--%>
+                <asp:HiddenField ID="LatInfo" runat="server" ClientIDMode="Static" />
+                <asp:HiddenField ID="LngInfo" runat="server" ClientIDMode="Static" />
                 <table class="CreateIncident" width="100%">
                     <tr>
                         <th>Type of Incident:</th>
@@ -710,11 +762,13 @@ function myFacebookPost() {
 
             <%--</form>--%>
         </div>
+                            
+                </ContentTemplate>
+                </asp:UpdatePanel>   
         <div class="modal-footer">
         </div>
     </div>
 </div>
-</form>
 <div class="wrapMap" id="wrapmap">
 
     <div id="leftpanel" style="position:fixed;">
@@ -730,17 +784,14 @@ function myFacebookPost() {
             <div style="position: inherit;display: none;height:100%;overflow-y:scroll;" id="mySidenav">
 
                 <div id="livefeed">
-                        <div id="fbLiveFeed">
-                            <asp:Button ID="Button1" Text="Login to Facebook" onClick="myFacebookLogin()">Login to Facebook!</asp:Button>
-                            <asp:Button ID="Button2" Text="Post to Facebook" onClick="myFacebookPost()">Post to Facebook!</asp:Button>
-
-                        </div>
-
-                        <div id="twitterLiveFeed">
-
-
-                        </div>
-
+                    <%--<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FBuzzFeedFood%2Fvideos%2F1593650737314813%2F&show_text=0&width=400" width="200" height="200" style="display:block;border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+                    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FBuzzFeedFood%2Fvideos%2F1593650737314813%2F&show_text=0&width=400" width="200" height="200" style="display:block;border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+                    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FBuzzFeedFood%2Fvideos%2F1593650737314813%2F&show_text=0&width=400" width="200" height="200" style="display:block;border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+                    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FBuzzFeedFood%2Fvideos%2F1593650737314813%2F&show_text=0&width=400" width="200" height="200" style="display:block;border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+                    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FBuzzFeedFood%2Fvideos%2F1593650737314813%2F&show_text=0&width=400" width="200" height="200" style="display:block;border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+                    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FBuzzFeedFood%2Fvideos%2F1593650737314813%2F&show_text=0&width=400" width="200" height="200" style="display:block;border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+                    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FBuzzFeedFood%2Fvideos%2F1593650737314813%2F&show_text=0&width=400" width="200" height="200" style="display:block;border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+                    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FBuzzFeedFood%2Fvideos%2F1593650737314813%2F&show_text=0&width=400" width="200" height="200" style="display:block;border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>--%>
                 </div>
             </div>
         </div>
@@ -763,212 +814,70 @@ function myFacebookPost() {
         <div id="Incidents" style="margin: 10px;">
             <div id="tabs">
                 <ul class="nav nav-tabs">
-                    <li><a onclick="tab1();">Current Incidents CANNNNN</a></li>
+                    <li><a onclick="tab1();">Current Incidents</a></li>
                     <li><a onclick="tab2();">Resolved Incidents</a></li>
                 </ul>
-                <div id="tabs-1" style="width: 100%;">
-                    <table class="table table-striped table-hover " border="5">
-                        <thead>
-                            <tr>
-                                <th>
-                                    #
-                                </th>
-                                <th>
-                                    Incident Type
-                                </th>
-                                <th>
-                                    Description
-                                </th>
-                                <th>
-                                    Priority
-                                </th>
-                                <th>
-                                    Status
-                                </th>
-                                <th>
-                                    Location
-                                </th>
-                                <th>
-                                </th>
-                                <th>
-                                </th>
-                                <th>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    1
-                                </td>
-                                <td>
-                                    Large Fire
-                                </td>
-                                <td>
-                                    Factory on fire ggwp!
-                                </td>
-                                <td class="alert-warning">
-                                    Medium
-                                </td>
-                                <td></td>
-                                <td>
-                                    Yishun
-                                </td>
-                                <td>
-                                    <a id="ViewDetails">Click here to view.</a>
-                                </td>
-                                <td>
-                                    <img id="Update" src="../Images/update.png"/>
-                                </td>
-                                <td>
-                                    <img id="CreateIncident" src="../Images/create.png"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    2
-                                </td>
-                                <td>
-                                    Oil Spillage
-                                </td>
-                                <td>
-                                    Siao Liao!
-                                </td>
-                                <td class="alert-danger">
-                                    <strong>High</strong>
-                                </td>
-                                <td></td>
-                                <td>
-                                    Changi
-                                </td>
-                                <td>
-                                    <a id="ViewDetails">Click here to view.</a>
-                                </td>
-                                <td>
-                                    <img id="Update" src="../Images/update.png" />
-                                </td>
-                                <td>
-                                    <img id="CreateIncident" src="../Images/create.png" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    3
-                                </td>
-                                <td>
-                                    Haze
-                                </td>
-                                <td>
-                                    Everywhere!
-                                </td>
-                                <td class="alert-success">
-                                    Low
-                                </td>
-                                <td></td>
-                                <td>
-                                    Bedok
-                                </td>
-                                <td>
-                                    <a id="ViewDetails">Click here to view.</a>
-                                </td>
-                                <td>
-                                    <img id="Update" src="../Images/update.png" />
-                                </td>
-                                <td>
-                                    <img id="CreateIncident" src="../Images/create.png" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    4
-                                </td>
-                                <td>
-                                    Air Pollution
-                                </td>
-                                <td>
-                                    Around East Area
-                                </td>
-                                <td class="alert-danger">
-                                    <strong>High</strong>
-                                </td>
-                                <td></td>
-                                <td>
-                                    Ang Mo Kio
-                                </td>
-                                <td>
-                                    <a id="ViewDetails">Click here to view.</a>
-                                </td>
-                                <td>
-                                    <img id="Update" src="../Images/update.png" />
-                                </td>
-                                <td>
-                                    <img id="CreateIncident" src="../Images/create.png" />
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div id="tabs-2" style="display:none;width: 100%;">
-                    <table class="table table-striped table-hover " border="5">
-                        <thead>
-                            <tr>
-                                <th>
-                                    #
-                                </th>
-                                <th>
-                                    Incident Type
-                                </th>
-                                <th>
-                                    Description
-                                </th>
-                                <th>
-                                    Priority
-                                </th>
-                                <th>
-                                    Status
-                                </th>
-                                <th>
-                                    Location
-                                </th>
-                                <th>
-                                </th>
-                                <th>
-                                </th>
-                                <th>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    1
-                                </td>
-                                <td>
-                                    Large Fire
-                                </td>
-                                <td>
-                                    Factory on fire ggwp!
-                                </td>
-                                <td class="alert-warning">
-                                    Medium
-                                </td>
-                                <td></td>
-                                <td>
-                                    Yishun
-                                </td>
-                                <td>
-                                    <a id="ViewDetails">Click here to view.</a>
-                                </td>
-                                <td>
-                                    <img id="Update" src="../Images/update.png" />
-                                </td>
-                                <td>
-                                    <img id="CreateIncident" src="../Images/create.png" />
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+
+                    <div id="tabs-1" style="width: 100%; height: 883px;">
+                         <h2>Current Incident</h2> 
+                    <asp:UpdatePanel ID="UpdatePanel3" runat="server">              
+                <ContentTemplate>
+                <div class="gridViewTable">
+                    <asp:GridView ID="GridData" runat="server" AutoGenerateColumns="False" onrowcommand="ViewPendingIncident_RowCommand" 
+                        Width="100%" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="Black" RowStyle-BackColor="#dfd7ca" 
+                        AlternatingRowStyle-BackColor="Black" RowStyle-ForeColor="#3A3A3A" PageSize="10"> 
+            <Columns>
+                <asp:BoundField DataField="IncidentId" HeaderText="Id" />
+                <asp:BoundField DataField="dateTime" HeaderText="Date/Time" />
+                <asp:BoundField DataField="IncidentType" HeaderText = "IncidentType" />
+                <asp:BoundField DataField="Status" HeaderText="Status" />
+                <asp:BoundField DataField="Location" HeaderText="Location" />
+                <asp:TemplateField >
+                    <ItemTemplate>
+                        <asp:Button ID="VI" Text="View Incident" CommandName="Select" runat="server" return ="false"/>
+                    </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField >
+                    <ItemTemplate>
+                        <asp:Button ID="deleteRow" Text="Delete" CommandName="Delete" runat="server"/>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+                    </asp:GridView>
+                    </div>
+                    </ContentTemplate>
+                        </asp:UpdatePanel>
+                        </div>
+
+
+                <div id="tabs-2" style="display:none;width: 100%;">   
+                <h2>Resolved Incidents</h2>         
+                <asp:UpdatePanel ID="UpdatePanel2" runat="server">              
+                <ContentTemplate>
+                    <asp:GridView ID="GridData2" runat="server" AutoGenerateColumns="False" onrowcommand="ViewResolvedIncident_RowCommand"
+                         Width="100%"  HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="Black" RowStyle-BackColor="#dfd7ca" 
+                        AlternatingRowStyle-BackColor="Black" RowStyle-ForeColor="#3A3A3A" PageSize="10"> 
+            <Columns>
+                <asp:BoundField DataField="IncidentId" HeaderText="Id" />
+                <asp:BoundField DataField="dateTime" HeaderText="Date/Time" />
+                <asp:BoundField DataField="IncidentType" HeaderText = "IncidentType" />
+                <asp:BoundField DataField="Status" HeaderText="Status" />
+                <asp:BoundField DataField="Location" HeaderText="Location" />
+                <asp:TemplateField >
+                    <ItemTemplate>
+                        <asp:Button ID="VI" Text="View Incident" CommandName="Select" runat="server" return ="false"/> 
+                    </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField >
+                    <ItemTemplate>
+                        <asp:Button ID="deleteRow" Text="Delete" CommandName="Delete" runat="server" /> 
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+                    </asp:GridView>
+                 </ContentTemplate>
+                 </asp:UpdatePanel>
+                    </div>
             </div>
         </div>
     </div>
@@ -993,6 +902,7 @@ function myFacebookPost() {
     </div>
 
 </div>
+</form>
 
 
 

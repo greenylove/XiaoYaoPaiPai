@@ -11,27 +11,31 @@ namespace CMSEmergencySystem.Entities
         private string typeOfIncident;
         private string location;
         private string mainDispatch;
-        private string assistType;
         private string contactNo;
         private string postalCode;
         private string description;
-        private int DepartmentID;
         private int newIncidentID;
-        
+        private float latitude;
+        private float longitude;
+        private string dateTime;
+        private string status;
+        private string incidentDescription;
+        private string updateDescription;
+
         //Constructor 
         public IncidentItem(string reportPerson, string typeOfIncident, string location, string mainDispatch
-           , string assistType, string contactNo, string postalCode, string description, int departmentID, int newIncidentID)
+           , string contactNo, string postalCode, string description, int newIncidentID, float lat, float longi)
         {
             this.ReportPerson = reportPerson;
             this.TypeOfIncident = typeOfIncident;
             this.Location = location;
             this.MainDispatch = mainDispatch;
-            this.AssistType = assistType;
             this.ContactNo = contactNo;
             this.PostalCode = postalCode;
             this.Description = description;
-            this.DepartmentID1 = departmentID;
             this.NewIncidentID = newIncidentID;
+            this.Latitude = lat;
+            this.Longitude = longi;
         }
         //Getter setters for all variables
         public int NewIncidentID
@@ -44,19 +48,6 @@ namespace CMSEmergencySystem.Entities
             set
             {
                 newIncidentID = value;
-            }
-        }
-
-        public int DepartmentID1
-        {
-            get
-            {
-                return DepartmentID;
-            }
-
-            set
-            {
-                DepartmentID = value;
             }
         }
 
@@ -99,18 +90,6 @@ namespace CMSEmergencySystem.Entities
             }
         }
 
-        public string AssistType
-        {
-            get
-            {
-                return assistType;
-            }
-
-            set
-            {
-                assistType = value;
-            }
-        }
 
         public string MainDispatch
         {
@@ -164,16 +143,82 @@ namespace CMSEmergencySystem.Entities
             }
         }
 
-       
+        public float Latitude
+        {
+            get
+            {
+                return latitude;
+            }
 
-        
+            set
+            {
+                latitude = value;
+            }
+        }
 
-        
+        public float Longitude
+        {
+            get
+            {
+                return longitude;
+            }
 
+            set
+            {
+                longitude = value;
+            }
+        }
 
+        public string DateTime
+        {
+            get
+            {
+                return dateTime;
+            }
 
+            set
+            {
+                dateTime = value;
+            }
+        }
 
+        public string Status
+        {
+            get
+            {
+                return status;
+            }
 
+            set
+            {
+                status = value;
+            }
+        }
 
+        public string IncidentDescription
+        {
+            get
+            {
+                return incidentDescription;
+            }
+
+            set
+            {
+                incidentDescription = value;
+            }
+        }
+
+        public string UpdateDescription
+        {
+            get
+            {
+                return updateDescription;
+            }
+
+            set
+            {
+                updateDescription = value;
+            }
+        }
     }
 }

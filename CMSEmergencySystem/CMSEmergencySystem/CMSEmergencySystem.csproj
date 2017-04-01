@@ -191,6 +191,7 @@
     <Compile Include="Controllers\IncidentManager.cs" />
     <Compile Include="Controllers\NEAManager.cs" />
     <Compile Include="Controllers\NewsFeedManager.cs" />
+    <Compile Include="DAO\DataBaseHelper.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

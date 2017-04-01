@@ -258,3 +258,5 @@ C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySyst
 C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\Newtonsoft.Json.xml
 C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\Quartz.pdb
 C:\Users\SIUMIN-\Source\Repos\XiaoYaoPaiPai2\CMSEmergencySystem\CMSEmergencySystem\bin\Quartz.xml
+C:\Users\jaichyi\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Newtonsoft.Json.dll
+C:\Users\jaichyi\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Newtonsoft.Json.xml

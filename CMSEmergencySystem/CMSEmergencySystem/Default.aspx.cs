@@ -1,223 +1,333 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using CMSEmergencySystem.Controllers;
-
+using CMSEmergencySystem.DAO;
+using CMSEmergencySystem.Entities;
 namespace CMSEmergencySystem
 {
     public partial class Default : System.Web.UI.Page
     {
+        IncidentManager incidentManager;
+        AccountManager accountManager;
+        NEAManager neaManager;
+        NewsFeedManager newsFeedManager;
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            initAllManager();
             //FOR CREATE INCIDENT
-            ////DataBaseHelper myDB = new DataBaseHelper();
-            ////DataTable DT = new DataTable();
+            //DataBaseHelper myDB = new DataBaseHelper();
+            //DataTable DT = new DataTable();
 
+            if (!this.IsPostBack)
+            {
+                initIncidentList();
 
-            //if (!this.IsPostBack)
-            //{
-            //    DataBaseHelper myDB = new DataBaseHelper();
-            //    DataTable DT = new DataTable();
-            //    DT = myDB.getAllIncident();
-            //    GridData.DataSource = DT;
-            //    GridData.DataBind();
+                //    string incidentID = "";
+                //    incidentID = Request.QueryString["ID"];
 
-            //    ViewState["DS"] = DT;
-            //}
+                //    DataTable CategoryTable = new DataTable();
+                //    CategoryTable = myDB.getAllCategoryData();
+            } // end of if post back
+        } // end page load
 
-            ///*else
-            //{
-            //    DT = ViewState["DS"];
-            //}
-            //GridData.DataSource = DT;
-            //GridData.DataBind();*/
-
-            //FOR VIEW INCIDENT
-            //if (Page.IsPostBack == false)
-            //{
-            //    DataBaseHelper myDB = new DataBaseHelper();
-            //    string incidentID = "";
-            //    incidentID = Request.QueryString["ID"];
-
-            //    DataTable CategoryTable = new DataTable();
-            //    CategoryTable = myDB.getAllCategoryData();
-
-            //    DataTable IncidentTable;
-            //    DataRow IncidentRow;
-            //    DataTable IncidentCategory;
-            //    DataTable statusLogUpdate;
-
-            //    DateTime DateTimeConvert;
-            //    int IncidentIDConvert = 0;
-            //    int contactNumberConvert = 0;
-            //    int postalCodeConvert = 0;
-
-            //    IncidentTable = myDB.getOneIncident(incidentID);
-            //    IncidentRow = IncidentTable.Rows[0];
-            //    IncidentCategory = myDB.getOneSupportType(incidentID);
-            //    statusLogUpdate = myDB.getOneStatusLog(incidentID);
-
-            //    DateTimeConvert = Convert.ToDateTime(IncidentRow["dateTime"].ToString());
-            //    DateTimeDisplay.Text = DateTimeConvert.ToString();
-            //    incidentType.Text = (string)IncidentRow["incidentType"];
-            //    IncidentIDConvert = int.Parse(IncidentRow["IncidentID"].ToString());
-            //    IncidentID.Text = IncidentIDConvert.ToString();
-            //    reporterName.Text = (string)IncidentRow["reporterName"];
-            //    contactNumberConvert = int.Parse(IncidentRow["reportContact"].ToString());
-            //    contactNumber.Text = contactNumberConvert.ToString();
-            //    Location.Text = (string)IncidentRow["Location"];
-            //    postalCodeConvert = int.Parse(IncidentRow["postalCode"].ToString());
-            //    postalCode.Text = postalCodeConvert.ToString();
-            //    mainDispatch.Text = (string)IncidentRow["mainDispatch"];
-
-            //    for (int i = 0; i < statusLogUpdate.Rows.Count; i++)
-            //    {
-            //        DateTime datetime;
-            //        datetime = Convert.ToDateTime(statusLogUpdate.Rows[i]["dateTime"].ToString());
-            //        string messageLog = statusLogUpdate.Rows[i]["statusMessage"].ToString();
-            //        string result = "[" + datetime + "]" + messageLog;
-            //        statusLog.Text += (result + System.Environment.NewLine);
-
-            //    }
-
-            //    for (int i = 0; i < IncidentCategory.Rows.Count; i++)
-            //    {
-            //        string result = IncidentCategory.Rows[i]["departmentName"].ToString();
-            //        supportType.Text += (result + System.Environment.NewLine);
-            //    }
-
-            //    incidentDesc.Text = (string)IncidentRow["incidentDesc"];
-
-
-            //}
+        public void initAllManager()
+        {
+            accountManager = new AccountManager();
+            neaManager = new NEAManager();
+            newsFeedManager = new NewsFeedManager();
+            incidentManager = new IncidentManager();
         }
 
-        //FOR CREAT INCIDENT
+        public void initIncidentList()
+        {
+            DataTable DT = incidentManager.getAllPendingIncident();
+            DataTable DT2 = incidentManager.getAllResolvedIncident();
+            GridData.DataSource = DT;
+            GridData.DataBind();
+            GridData2.DataSource = DT2;
+            GridData2.DataBind();
+
+            ViewState["DS2"] = DT2;
+            ViewState["DS"] = DT;
+        }
+
+        /*else
+        {
+            DT = ViewState["DS"];
+        }
+        GridData.DataSource = DT;
+        GridData.DataBind();*/
+
+        //FOR CREATE INCIDENT
         protected void CreateIncidentButton(object sender, EventArgs e)
         {
-            //DataBaseHelper myDB = new DataBaseHelper();
-            //ConnectionStringSettings settings;
-            //settings = System.Configuration.ConfigurationManager.ConnectionStrings["Connection"];
-            //string connectionString = settings.ConnectionString;
-            //SqlConnection con = new SqlConnection(connectionString);
-            //SqlCommand cmd = new SqlCommand();
+            float Lat = float.Parse(LatInfo.Value);
+            float Long = float.Parse(LngInfo.Value);
+            int incidentID = incidentManager.createIncident(reportPersonTextBox.Text, typeOfIncidentDDL.Text,
+                                locationTextBox.Text, MainDispatchDDL.Text, contactNoTextBox.Text,
+                                postalCodeTextBox.Text, descriptionTextBox.Text, 0, Lat, Long);
 
-            //string reportPerson = reportPersonTextBox.Text;
-            //string typeOfIncident = typeOfIncidentDDL.Text;
-            //string location = locationTextBox.Text;
-            //string mainDispatch = MainDispatchDDL.Text;
-            //string assistType = assistTypeCheckBoxList.Text;
-            //string contactNo = contactNoTextBox.Text;
-            //string postalCode = postalCodeTextBox.Text;
-            //string description = descriptionTextBox.Text;
-            //int DepartmentID = 0;
-            //int newIncidentID = 0;
+            foreach (ListItem assistTypeCBL in assistTypeCheckBoxList.Items)
+                if (assistTypeCBL.Selected == true)
+                    incidentManager.addSupportType(incidentID, Convert.ToInt32(assistTypeCBL.Value));
 
-            IncidentManager.createIncident(reportPersonTextBox.Text, typeOfIncidentDDL.Text,
-                locationTextBox.Text, MainDispatchDDL.Text, assistTypeCheckBoxList.Text, contactNoTextBox.Text,
-                postalCodeTextBox.Text, descriptionTextBox.Text, 0, 0);
-            //con.Open();
-            //newIncidentID = myDB.Create_Incident(typeOfIncident, reportPerson, contactNo, location, postalCode, mainDispatch, description);
-            //con.Close();
-
-            //foreach (ListItem assistTypeCBL in assistTypeCheckBoxList.Items)
-            //{
-            //    if (assistTypeCBL.Selected == true)
-            //    {
-            //        con.Open();
-            //        DepartmentID = myDB.AddSupportType(newIncidentID, Convert.ToInt32(assistTypeCBL.Value));
-            //        con.Close();
-            //    }
-            //}
-
-
-
-
-            //Response.Redirect("EmergencyServiceSPF.aspx");
-
+            //update UI
+            updateUIIncident();
         } // end of class
 
-        /*protected void Testing(object sender, EventArgs e)
-    {
-        Button btn = (Button)sender;
-        GridViewRow gvr = (GridViewRow)btn.NamingContainer;
-        if(gvr.RowType == DataControlRowType.DataRow)
+        public void updateUIIncident()
         {
-              
-            int rowIndex = ((sender as Button).NamingContainer as GridViewRow).RowIndex;
-            DataRow row = ((DataTable)GridData.DataSource).Rows[rowIndex];
-            displayIncidentID.Text = row[0].ToString() + " " + row[2].ToString();
+            DataTable DT = incidentManager.getAllPendingIncident();
+            DataTable DT2 = incidentManager.getAllResolvedIncident();
+            GridData.DataSource = DT;
+            GridData.DataBind();
+            GridData2.DataSource = DT2;
+            GridData2.DataBind();
+            ViewState["DS"] = DT;
         }
-    }<asp:Button ID = "testing" runat = "server" Text = "BUtton" OnClick ="Testing" />*/
 
-        //public void ViewIncident_RowCommand(Object sender, GridViewCommandEventArgs e)
-        //{
-        //    if (e.CommandName == "Select")
-        //    {
-        //        int index = (((Button)e.CommandSource).NamingContainer as GridViewRow).RowIndex;
-        //        DataTable dt = (DataTable)ViewState["DS"];
-        //        DataRow row = dt.Rows[index];
-        //        //displayIncidentID.Text = row[0].ToString() + " " + row[2].ToString();
-        //        Response.Redirect("ViewIncidentPopUp.aspx?ID=" + row[0].ToString());
-        //    }
 
-        //    if (e.CommandName == "Delete")
-        //    {
-        //        DataBaseHelper myDB = new DataBaseHelper();
-        //        int IncidentID = 0;
-        //        int index = (((Button)e.CommandSource).NamingContainer as GridViewRow).RowIndex;
-        //        DataTable dt = (DataTable)ViewState["DS"];
-        //        DataRow row = dt.Rows[index];
-        //        IncidentID = Int32.Parse(row[0].ToString());
-        //        myDB.deleteOneIncident(IncidentID);
-        //        Response.Redirect("EmergencyServiceSPF.aspx");
-        //    }
-
-        //}
-
-        /*
-        protected void DeleteBtn_Click(object sender, EventArgs e)
+        public void ViewPendingIncident_RowCommand(Object sender, GridViewCommandEventArgs e)
         {
-            int IncidentID = 0;
-            DataBaseHelper myDB = new DataBaseHelper();
-            CheckBox checkBoxControl = new CheckBox();
-
-            foreach(GridViewRow row in GridData.Rows)
+            IncidentItem incidentItem;
+            if (e.CommandName == "Select")
             {
-                checkBoxControl = (CheckBox)row.Cells[0].FindControl("chkRecordId");
+                int index = (((Button)e.CommandSource).NamingContainer as GridViewRow).RowIndex;
+                //DataTable dt = incidentManager.getAllPendingIncident();
+                DataTable dt = (DataTable)ViewState["DS"];
+                DataRow row = dt.Rows[index];
 
-                if(checkBoxControl.Checked == true)
+
+                DataBaseHelper myDB = new DataBaseHelper();
+                int incidentID = Int32.Parse(row[0].ToString());
+
+                DataTable IncidentTable;
+                DataRow IncidentRow;
+                DataTable IncidentCategory;
+                DataTable statusLogUpdate;
+
+                DateTime DateTimeConvert;
+                int IncidentIDConvert = 0;
+                int contactNumberConvert = 0;
+                int postalCodeConvert = 0;
+
+                incidentItem = incidentManager.getIncidentByID(incidentID);
+                //IncidentRow = IncidentTable.Rows[0];
+                IncidentCategory = myDB.getOneSupportType(incidentID);
+                statusLogUpdate = myDB.getOneStatusLog(incidentID);
+
+                //DateTimeConvert = Convert.ToDateTime(IncidentRow["dateTime"].ToString());
+                DateTimeDisplay.Text = incidentItem.DateTime;
+                incidentType.Text = incidentItem.TypeOfIncident;
+                //IncidentIDConvert = int.Parse(IncidentRow["IncidentID"].ToString());
+                IncidentID.Text = incidentItem.NewIncidentID.ToString();
+                reporterName.Text = incidentItem.ReportPerson;
+                //contactNumberConvert = int.Parse(IncidentRow["reportContact"].ToString());
+                contactNumber.Text = incidentItem.ContactNo;
+                Location.Text = incidentItem.Location;
+                //postalCodeConvert = incidentItem.PostalCode;
+                postalCode.Text = postalCodeConvert.ToString();
+                mainDispatch.Text = incidentItem.MainDispatch;
+
+                for (int i = 0; i < statusLogUpdate.Rows.Count; i++)
                 {
-                    IncidentID = Int32.Parse(GridData.DataKeys[row.RowIndex].Value.ToString());
-                    myDB.deleteOneIncident(IncidentID);
+                    DateTime datetime;
+                    datetime = Convert.ToDateTime(statusLogUpdate.Rows[i]["dateTime"].ToString());
+                    string messageLog = statusLogUpdate.Rows[i]["statusMessage"].ToString();
+                    string result = "[" + datetime + "]" + messageLog;
+                    statusLog.Text += (result + System.Environment.NewLine);
+
                 }
+
+                for (int i = 0; i < IncidentCategory.Rows.Count; i++)
+                {
+                    string result = IncidentCategory.Rows[i]["departmentName"].ToString();
+                    supportType.Text += (result + System.Environment.NewLine);
+                }
+
+                incidentDesc.Text = incidentItem.Description;
+                ScriptManager.RegisterStartupScript(this, GetType(), "script", "displayModal();", true);
             }
 
-            Response.Redirect("EmergencyServiceSPF.aspx");
+            if (e.CommandName == "Delete")
+            {
+                DataBaseHelper myDB = new DataBaseHelper();
+                int IncidentID = 0;
+                int index = (((Button)e.CommandSource).NamingContainer as GridViewRow).RowIndex;
+                DataTable dt = (DataTable)ViewState["DS"];
+                DataRow row = dt.Rows[index];
+                IncidentID = Int32.Parse(row[0].ToString());
+                myDB.deleteOneIncident(IncidentID);
+                Response.Redirect("Default.aspx");
+            }
 
-        } // end of method
-        */
-
-        //FOR VIEW INCIDENT
-        //protected void Update_Click(object sender, EventArgs e)
-        //{
-        //    DataBaseHelper myDB = new DataBaseHelper();
-        //    int incidentID = 0;
-        //    string updateStatusLog = "";
-        //    string updateStatus = "";
-        //    updateStatusLog = Status.Text;
-        //    updateStatus = statusUpdate.Text;
-        //    incidentID = Int32.Parse(Request.QueryString["ID"]);
-        //    myDB.addStatusLog(incidentID, updateStatusLog);
-        //    myDB.updateIncidentStatus(incidentID, updateStatus);
+        }
 
 
+        public void ViewResolvedIncident_RowCommand(Object sender, GridViewCommandEventArgs e)
+        {
+            IncidentItem incidentItem;
+            if (e.CommandName == "Select")
+            {
+                int index = (((Button)e.CommandSource).NamingContainer as GridViewRow).RowIndex;
+                DataTable dt = (DataTable)ViewState["DS2"];
+                DataRow row = dt.Rows[index];
+                DataBaseHelper myDB = new DataBaseHelper();
+                int incidentID = Int32.Parse(row[0].ToString());
 
-        //    Response.Redirect("EmergencyServiceSPF.aspx");
+                DataTable IncidentTable;
+                DataRow IncidentRow;
+                DataTable IncidentCategory;
+                DataTable statusLogUpdate;
 
-        //}
-    }
-}
+                DateTime DateTimeConvert;
+                int IncidentIDConvert = 0;
+                int contactNumberConvert = 0;
+                int postalCodeConvert = 0;
+
+                incidentItem = incidentManager.getIncidentByID(incidentID);
+                //IncidentRow = IncidentTable.Rows[0];
+                IncidentCategory = myDB.getOneSupportType(incidentID);
+                statusLogUpdate = myDB.getOneStatusLog(incidentID);
+
+                //DateTimeConvert = Convert.ToDateTime(IncidentRow["dateTime"].ToString());
+                DateTimeDisplay.Text = incidentItem.DateTime;
+                incidentType.Text = incidentItem.TypeOfIncident;
+                //IncidentIDConvert = int.Parse(IncidentRow["IncidentID"].ToString());
+                IncidentID.Text = incidentItem.NewIncidentID.ToString();
+                reporterName.Text = incidentItem.ReportPerson;
+                //contactNumberConvert = int.Parse(IncidentRow["reportContact"].ToString());
+                contactNumber.Text = incidentItem.ContactNo;
+                Location.Text = incidentItem.Location;
+                //postalCodeConvert = incidentItem.PostalCode;
+                postalCode.Text = postalCodeConvert.ToString();
+                mainDispatch.Text = incidentItem.MainDispatch;
+
+                for (int i = 0; i < statusLogUpdate.Rows.Count; i++)
+                {
+                    DateTime datetime;
+                    datetime = Convert.ToDateTime(statusLogUpdate.Rows[i]["dateTime"].ToString());
+                    string messageLog = statusLogUpdate.Rows[i]["statusMessage"].ToString();
+                    string result = "[" + datetime + "]" + messageLog;
+                    statusLog.Text += (result + System.Environment.NewLine);
+
+                }
+
+                for (int i = 0; i < IncidentCategory.Rows.Count; i++)
+                {
+                    string result = IncidentCategory.Rows[i]["departmentName"].ToString();
+                    supportType.Text += (result + System.Environment.NewLine);
+                }
+
+                incidentDesc.Text = incidentItem.Description;
+                ScriptManager.RegisterStartupScript(this, GetType(), "script", "displayModal();", true);
+            }
+
+            if (e.CommandName == "Delete")
+            {
+                DataBaseHelper myDB = new DataBaseHelper();
+                int IncidentID = 0;
+                int index = (((Button)e.CommandSource).NamingContainer as GridViewRow).RowIndex;
+                DataTable dt = (DataTable)ViewState["DS2"];
+                DataRow row = dt.Rows[index];
+                IncidentID = Int32.Parse(row[0].ToString());
+                myDB.deleteOneIncident(IncidentID);
+                Response.Redirect("Default.aspx");
+            }
+        }
+        //////////////////////////////
+
+        //    /*
+        //    protected void DeleteBtn_Click(object sender, EventArgs e)
+        //    {
+        //        int IncidentID = 0;
+        //        DataBaseHelper myDB = new DataBaseHelper();
+        //        CheckBox checkBoxControl = new CheckBox();
+
+        //        foreach(GridViewRow row in GridData.Rows)
+        //        {
+        //            checkBoxControl = (CheckBox)row.Cells[0].FindControl("chkRecordId");
+
+        //            if(checkBoxControl.Checked == true)
+        //            {
+        //                IncidentID = Int32.Parse(GridData.DataKeys[row.RowIndex].Value.ToString());
+        //                myDB.deleteOneIncident(IncidentID);
+        //            }
+        //        }
+
+        //        Response.Redirect("EmergencyServiceSPF.aspx");
+
+        //    } // end of method
+        //    */
+        /////////////////////
+
+        //    FOR VIEW INCIDENT
+        protected void UpdateStatusOnClick(object sender, EventArgs e)
+        {
+            IncidentItem incidentItem;
+            DataBaseHelper myDB = new DataBaseHelper();
+            int incidentID = 0;
+            string updateStatusLog = "";
+            string updateStatus = "";
+            updateStatusLog = Status.Text;
+            updateStatus = statusUpdate.Text;
+            incidentID = Int32.Parse(IncidentID.Text);
+            myDB.addStatusLog(incidentID, updateStatusLog);
+            myDB.updateIncidentStatus(incidentID, updateStatus);
+
+            DataTable IncidentTable;
+            DataRow IncidentRow;
+            DataTable IncidentCategory;
+            DataTable statusLogUpdate;
+
+            DateTime DateTimeConvert;
+            int IncidentIDConvert = 0;
+            int contactNumberConvert = 0;
+            int postalCodeConvert = 0;
+
+            incidentItem = incidentManager.getIncidentByID(incidentID);
+            //IncidentRow = IncidentTable.Rows[0];
+            IncidentCategory = myDB.getOneSupportType(incidentID);
+            statusLogUpdate = myDB.getOneStatusLog(incidentID);
+
+            //DateTimeConvert = Convert.ToDateTime(IncidentRow["dateTime"].ToString());
+            DateTimeDisplay.Text = incidentItem.DateTime;
+            incidentType.Text = incidentItem.TypeOfIncident;
+            //IncidentIDConvert = int.Parse(IncidentRow["IncidentID"].ToString());
+            IncidentID.Text = incidentItem.NewIncidentID.ToString();
+            reporterName.Text = incidentItem.ReportPerson;
+            //contactNumberConvert = int.Parse(IncidentRow["reportContact"].ToString());
+            contactNumber.Text = incidentItem.ContactNo;
+            Location.Text = incidentItem.Location;
+            //postalCodeConvert = incidentItem.PostalCode;
+            postalCode.Text = postalCodeConvert.ToString();
+            mainDispatch.Text = incidentItem.MainDispatch;
+
+            for (int i = 0; i < statusLogUpdate.Rows.Count; i++)
+            {
+                DateTime datetime;
+                datetime = Convert.ToDateTime(statusLogUpdate.Rows[i]["dateTime"].ToString());
+                string messageLog = statusLogUpdate.Rows[i]["statusMessage"].ToString();
+                string result = "[" + datetime + "]" + messageLog;
+                statusLog.Text += (result + System.Environment.NewLine);
+
+            }
+
+            for (int i = 0; i < IncidentCategory.Rows.Count; i++)
+            {
+                string result = IncidentCategory.Rows[i]["departmentName"].ToString();
+                supportType.Text += (result + System.Environment.NewLine);
+            }
+
+            incidentDesc.Text = incidentItem.Description;
+
+        } // end of method.
+
+    }//end of class
+}//end of name space
+
