@@ -111,10 +111,7 @@ namespace CMSEmergencySystem
                 DataTable IncidentCategory;
                 DataTable statusLogUpdate;
 
-                DateTime DateTimeConvert;
-                int IncidentIDConvert = 0;
-                int contactNumberConvert = 0;
-                int postalCodeConvert = 0;
+         
 
                 incidentItem = incidentManager.getIncidentByID(incidentID);
                 //IncidentRow = IncidentTable.Rows[0];
@@ -131,8 +128,9 @@ namespace CMSEmergencySystem
                 contactNumber.Text = incidentItem.ContactNo;
                 Location.Text = incidentItem.Location;
                 //postalCodeConvert = incidentItem.PostalCode;
-                postalCode.Text = postalCodeConvert.ToString();
+                postalCode.Text = incidentItem.PostalCode;
                 mainDispatch.Text = incidentItem.MainDispatch;
+
 
                 for (int i = 0; i < statusLogUpdate.Rows.Count; i++)
                 {
