@@ -342,6 +342,7 @@ namespace CMSEmergencySystem
             IncidentItem i = new IncidentItem(reportPerson, typeOfIncident, location, mainDispatch, contactNo
             , postalCode, description, 0, 0);
             i.DateTime = convertDateTime;
+            i.NewIncidentID = newIncidentID;
 
             // i = loadItem(ds);
             return i;

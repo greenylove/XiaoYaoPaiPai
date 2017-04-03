@@ -301,6 +301,33 @@ namespace CMSEmergencySystem {
         protected global::System.Web.UI.UpdatePanel UpdatePanel3;
         
         /// <summary>
+        /// searchResult control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox searchResult;
+        
+        /// <summary>
+        /// sendQuery control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button sendQuery;
+        
+        /// <summary>
+        /// clearQuery control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button clearQuery;
+        
+        /// <summary>
         /// GridData control.
         /// </summary>
         /// <remarks>

@@ -40,6 +40,22 @@ namespace CMSEmergencySystem
             updateUIIncident();
         } // end of class
 
+        protected void sendQuery_Click(object sender, EventArgs e)
+        {
+            string searchQuery = searchResult.Text;
+            DataTable DT = incidentController.getSearchIncident(searchQuery);
+            GridData.DataSource = DT;
+            GridData.DataBind();
+            ViewState["DS"] = DT;
+        }
+
+        protected void clearQuery_Click(object sender, EventArgs e)
+        {
+            initIncidentList();
+        }
+
+
+
         public void updateUIIncident()
         {
             DataTable DT = incidentController.getAllPendingIncident();
@@ -56,6 +72,9 @@ namespace CMSEmergencySystem
             IncidentItem incidentItem;
             if (e.CommandName == "Select")
             {
+                DateTimeDisplay.Text = incidentType.Text = IncidentID.Text = reporterName.Text = contactNumber.Text = Location.Text = postalCode.Text =
+                mainDispatch.Text = statusLog.Text = incidentDesc.Text = supportType.Text = Status.Text = "";
+
                 int index = (((Button)e.CommandSource).NamingContainer as GridViewRow).RowIndex; //get index of row clicked
                 DataTable dt = (DataTable)ViewState["DS"]; //get data of current table
                 DataRow row = dt.Rows[index]; //get row object 
@@ -187,11 +206,14 @@ namespace CMSEmergencySystem
             DataTable IncidentCategory;
             DataTable statusLogUpdate;
 
-            int postalCodeConvert = 0;
+           
 
             incidentItem = incidentController.getIncidentByID(incidentID);
             IncidentCategory = myDB.getOneSupportType(incidentID);
             statusLogUpdate = myDB.getOneStatusLog(incidentID);
+
+            DateTimeDisplay.Text = incidentType.Text = IncidentID.Text = reporterName.Text = contactNumber.Text = Location.Text = postalCode.Text =
+               mainDispatch.Text = statusLog.Text = incidentDesc.Text = supportType.Text = Status.Text = "";
 
             DateTimeDisplay.Text = incidentItem.DateTime;
             incidentType.Text = incidentItem.TypeOfIncident;
@@ -199,7 +221,7 @@ namespace CMSEmergencySystem
             reporterName.Text = incidentItem.ReportPerson;
             contactNumber.Text = incidentItem.ContactNo;
             Location.Text = incidentItem.Location;
-            postalCode.Text = postalCodeConvert.ToString();
+            postalCode.Text = incidentItem.PostalCode;
             mainDispatch.Text = incidentItem.MainDispatch;
 
             for (int i = 0; i < statusLogUpdate.Rows.Count; i++)

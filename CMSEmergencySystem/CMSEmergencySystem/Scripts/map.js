@@ -51,8 +51,8 @@ CMSEmergencySystem.Map._ContextMenuOptions = {
     ]
 };
 CMSEmergencySystem.Map._IconMap = {
-    "Fire": "/Icons/Fire.png",
-    "Dengue": "/Icons/Dengue.png",
+    "Fire Outbreak": "/Icons/Fire.png",
+    "Dengue Outbreak": "/Icons/Dengue.png",
     "Earthquake": "/Icons/Earthquake.png"
 };
 CMSEmergencySystem.Map._Geocoder = new google.maps.Geocoder();

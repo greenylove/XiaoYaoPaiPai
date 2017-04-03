@@ -116,6 +116,9 @@
     </Content>
     <Content Include="Email\EmailData.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Icons\Dengue.png" />
+    <Content Include="Icons\Earthquake.png" />
+    <Content Include="Icons\Fire.png" />
     <Content Include="Images\dengue-icon.png" />
     <Content Include="IncidentServlet.aspx" />
     <Content Include="packages.config" />
@@ -249,9 +252,7 @@
       <DependentUpon>test.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Icons\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

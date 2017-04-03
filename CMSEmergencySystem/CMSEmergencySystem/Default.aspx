@@ -475,10 +475,16 @@ function myFacebookPost() {
                          <h2>Current Incident</h2> 
                     <asp:UpdatePanel ID="UpdatePanel3" runat="server">              
                 <ContentTemplate>
+
+                <h3>Search : </h3>
+                <asp:TextBox ID="searchResult" runat="server"></asp:TextBox>
+                <asp:Button ID="sendQuery" runat="server" Text="Search" OnClick="sendQuery_Click"/>
+                <asp:Button ID="clearQuery" runat="server" Text="Clear" OnClick="clearQuery_Click" />
+
                 <div class="gridViewTable">
                     <asp:GridView ID="GridData" runat="server" AutoGenerateColumns="False" onrowcommand="ViewPendingIncident_RowCommand" 
-                        Width="100%" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="Black" RowStyle-BackColor="#dfd7ca" 
-                        AlternatingRowStyle-BackColor="Black" RowStyle-ForeColor="#3A3A3A" PageSize="10"> 
+                         Width="100%" HeaderStyle-BackColor="#98e698" HeaderStyle-ForeColor="Black" RowStyle-BackColor="White" 
+                        AlternatingRowStyle-BackColor="White" RowStyle-ForeColor="#3A3A3A"> 
             <Columns>
                 <asp:BoundField DataField="IncidentId" HeaderText="Id" />
                 <asp:BoundField DataField="dateTime" HeaderText="Date/Time" />
@@ -508,8 +514,8 @@ function myFacebookPost() {
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">              
                 <ContentTemplate>
                     <asp:GridView ID="GridData2" runat="server" AutoGenerateColumns="False" onrowcommand="ViewResolvedIncident_RowCommand"
-                         Width="100%"  HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="Black" RowStyle-BackColor="#dfd7ca" 
-                        AlternatingRowStyle-BackColor="Black" RowStyle-ForeColor="#3A3A3A" PageSize="10"> 
+                         Width="100%" HeaderStyle-BackColor="#98e698" HeaderStyle-ForeColor="Black" RowStyle-BackColor="White" 
+                        AlternatingRowStyle-BackColor="White" RowStyle-ForeColor="#3A3A3A"> 
             <Columns>
                 <asp:BoundField DataField="IncidentId" HeaderText="Id" />
                 <asp:BoundField DataField="dateTime" HeaderText="Date/Time" />

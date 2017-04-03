@@ -61,5 +61,10 @@ namespace CMSEmergencySystem.Controllers
         {
             myDB.updateIncidentStatus(id, status);
         }
+        public DataTable getSearchIncident(string Query)
+        {
+            return myDB.getSearchIncident(Query);
+        }
+
     }
 }
