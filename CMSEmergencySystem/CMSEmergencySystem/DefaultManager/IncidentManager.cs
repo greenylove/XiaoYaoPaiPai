@@ -13,8 +13,8 @@ namespace CMSEmergencySystem
     {
         public void initIncidentList()
         {
-            DataTable DT = incidentManager.getAllPendingIncident();
-            DataTable DT2 = incidentManager.getAllResolvedIncident();
+            DataTable DT = incidentController.getAllPendingIncident();
+            DataTable DT2 = incidentController.getAllResolvedIncident();
             GridData.DataSource = DT;
             GridData.DataBind();
             GridData2.DataSource = DT2;
@@ -28,13 +28,13 @@ namespace CMSEmergencySystem
             float Lat = float.Parse(LatInfo.Value);
             float Long = float.Parse(LngInfo.Value);
             //pass form variable into incidentManager
-            int incidentID = incidentManager.createIncident(reportPersonTextBox.Text, typeOfIncidentDDL.Text,
+            int incidentID = incidentController.createIncident(reportPersonTextBox.Text, typeOfIncidentDDL.Text,
                                 locationTextBox.Text, MainDispatchDDL.Text, contactNoTextBox.Text,
                                 postalCodeTextBox.Text, descriptionTextBox.Text, Lat, Long);
 
             foreach (ListItem assistTypeCBL in assistTypeCheckBoxList.Items)
                 if (assistTypeCBL.Selected == true)
-                    incidentManager.addSupportType(incidentID, Convert.ToInt32(assistTypeCBL.Value));
+                    incidentController.addSupportType(incidentID, Convert.ToInt32(assistTypeCBL.Value));
 
             //update UI
             updateUIIncident();
@@ -42,8 +42,8 @@ namespace CMSEmergencySystem
 
         public void updateUIIncident()
         {
-            DataTable DT = incidentManager.getAllPendingIncident();
-            DataTable DT2 = incidentManager.getAllResolvedIncident();
+            DataTable DT = incidentController.getAllPendingIncident();
+            DataTable DT2 = incidentController.getAllResolvedIncident();
             GridData.DataSource = DT;
             GridData.DataBind();
             GridData2.DataSource = DT2;
@@ -65,9 +65,9 @@ namespace CMSEmergencySystem
                 DataTable IncidentCategory;
                 DataTable statusLogUpdate;
 
-                incidentItem = incidentManager.getIncidentByID(incidentID);
-                IncidentCategory = incidentManager.getSupportTypeByID(incidentID);
-                statusLogUpdate = incidentManager.getStatusLogByID(incidentID);
+                incidentItem = incidentController.getIncidentByID(incidentID);
+                IncidentCategory = incidentController.getSupportTypeByID(incidentID);
+                statusLogUpdate = incidentController.getStatusLogByID(incidentID);
 
                 DateTimeDisplay.Text = incidentItem.DateTime;
                 incidentType.Text = incidentItem.TypeOfIncident;
@@ -126,9 +126,9 @@ namespace CMSEmergencySystem
 
                 int postalCodeConvert = 0;
 
-                incidentItem = incidentManager.getIncidentByID(incidentID);
-                IncidentCategory = incidentManager.getSupportTypeByID(incidentID);
-                statusLogUpdate = incidentManager.getStatusLogByID(incidentID);
+                incidentItem = incidentController.getIncidentByID(incidentID);
+                IncidentCategory = incidentController.getSupportTypeByID(incidentID);
+                statusLogUpdate = incidentController.getStatusLogByID(incidentID);
 
                 DateTimeDisplay.Text = incidentItem.DateTime;
                 incidentType.Text = incidentItem.TypeOfIncident;
@@ -181,15 +181,15 @@ namespace CMSEmergencySystem
             updateStatusLog = Status.Text;
             updateStatus = statusUpdate.Text;
             incidentID = Int32.Parse(IncidentID.Text); // NEED TO CHANGE, THIS CODE IS NOT DOING ANYTHIG, GET INCIDENTID FROM SELECTED INDEX
-            incidentManager.addStatusLogByID(incidentID, updateStatusLog);
-            incidentManager.updateStatusByID(incidentID, updateStatus);
+            incidentController.addStatusLogByID(incidentID, updateStatusLog);
+            incidentController.updateStatusByID(incidentID, updateStatus);
 
             DataTable IncidentCategory;
             DataTable statusLogUpdate;
 
             int postalCodeConvert = 0;
 
-            incidentItem = incidentManager.getIncidentByID(incidentID);
+            incidentItem = incidentController.getIncidentByID(incidentID);
             IncidentCategory = myDB.getOneSupportType(incidentID);
             statusLogUpdate = myDB.getOneStatusLog(incidentID);
 

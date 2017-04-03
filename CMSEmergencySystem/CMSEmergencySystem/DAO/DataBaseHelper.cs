@@ -58,6 +58,38 @@ namespace CMSEmergencySystem
 
         } // end of login
 
+        public DataTable getSearchIncident(string Query)
+        {
+            SqlCommand Command = new SqlCommand();
+            SqlDataAdapter Adapter = new SqlDataAdapter();
+            DataSet ds = new DataSet();
+            
+            Command.Parameters.Add("@Query", SqlDbType.VarChar, 100);
+            Command.Parameters["@Query"].Value = Query;
+
+            string sqlText = "SELECT * FROM Database1.dbo.IncidentManager " +
+                             "WHERE IncidentID LIKE '%' + @Query + '%'" +
+                             " OR incidentType LIKE '%' + @Query + '%'" +
+                             " OR reporterName LIKE '%' + @Query + '%'" +
+                             " OR Location LIKE '%' + @Query + '%'" +
+                             " OR postalCode LIKE '%' + @Query + '%'" +
+                             " OR mainDispatch LIKE '%' + @Query + '%'";
+
+
+
+            settings = System.Configuration.ConfigurationManager.ConnectionStrings["Connection"];
+            string connectionString = settings.ConnectionString;
+            SqlConnection Connection = new SqlConnection(connectionString);
+
+            Command.CommandText = sqlText;
+            Command.Connection = Connection;
+            Adapter.SelectCommand = Command;
+
+            Connection.Open();
+            Adapter.Fill(ds, "searchResult");
+            Connection.Close();
+            return ds.Tables["searchResult"];
+        }
         public int addName(string Name, string DropDownList)
         {
 

@@ -348,3 +348,14 @@ C:\Users\jaichyi\Desktop\Currently Working On\CMSEmergencySystem\CMSEmergencySys
 C:\Users\jaichyi\Desktop\Currently Working On\CMSEmergencySystem\CMSEmergencySystem\bin\Newtonsoft.Json.xml
 C:\Users\jaichyi\Desktop\Currently Working On\CMSEmergencySystem\CMSEmergencySystem\bin\Quartz.pdb
 C:\Users\jaichyi\Desktop\Currently Working On\CMSEmergencySystem\CMSEmergencySystem\bin\Quartz.xml
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Common.Logging.Core.dll
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Common.Logging.dll
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Newtonsoft.Json.dll
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Quartz.dll
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Common.Logging.pdb
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Common.Logging.xml
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Common.Logging.Core.pdb
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Common.Logging.Core.xml
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Newtonsoft.Json.xml
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Quartz.pdb
+C:\Users\Low Zi Qing\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Quartz.xml
