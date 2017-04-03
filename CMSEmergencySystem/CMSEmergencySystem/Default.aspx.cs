@@ -10,14 +10,14 @@ namespace CMSEmergencySystem
 {
     public partial class Default : System.Web.UI.Page
     {
-        IncidentController incidentManager;
-        AccountController accountManager;
-        NEAController neaManager;
-        NewsFeedController newsFeedManager;
+        IncidentController incidentController;
+        AccountController accountController;
+        NEAController neaController;
+        NewsFeedController newsFeedController;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            initAllManager();
+            initAllController();
 
             if (!this.IsPostBack)
             {
@@ -31,12 +31,12 @@ namespace CMSEmergencySystem
             } // end of if post back
         } // end page load
 
-        public void initAllManager()
+        public void initAllController()
         {
-            accountManager = new AccountController();
-            neaManager = new NEAController();
-            newsFeedManager = new NewsFeedController();
-            incidentManager = new IncidentController();
+            accountController = new AccountController();
+            neaController = new NEAController();
+            newsFeedController = new NewsFeedController();
+            incidentController = new IncidentController();
         }
 
     }//end of class
