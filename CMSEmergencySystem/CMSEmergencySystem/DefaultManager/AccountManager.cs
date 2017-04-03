@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace CMSEmergencySystem.Controllers
+namespace CMSEmergencySystem
 {
-    public class AccountManager
+    public partial class Default : System.Web.UI.Page
     {
-
     }
 }

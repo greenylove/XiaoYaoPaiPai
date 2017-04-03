@@ -23,8 +23,13 @@ namespace CMSEmergencySystem.Entities
         private string updateDescription;
 
         //Constructor 
+        public IncidentItem()
+        {
+
+        }
+        //Constructor when creating incident
         public IncidentItem(string reportPerson, string typeOfIncident, string location, string mainDispatch
-           , string contactNo, string postalCode, string description, int newIncidentID, float lat, float longi)
+           , string contactNo, string postalCode, string description, float lat, float longi)
         {
             this.ReportPerson = reportPerson;
             this.TypeOfIncident = typeOfIncident;

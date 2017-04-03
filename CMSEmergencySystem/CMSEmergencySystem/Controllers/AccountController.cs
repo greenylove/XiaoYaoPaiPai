@@ -5,7 +5,8 @@ using System.Web;
 
 namespace CMSEmergencySystem.Controllers
 {
-    public class NEAManager
+    public class AccountController
     {
+
     }
 }

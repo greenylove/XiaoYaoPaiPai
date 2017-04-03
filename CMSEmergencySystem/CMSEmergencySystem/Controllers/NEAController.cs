@@ -5,7 +5,7 @@ using System.Web;
 
 namespace CMSEmergencySystem.Controllers
 {
-    public class NewsFeedManager
+    public class NEAController
     {
     }
 }

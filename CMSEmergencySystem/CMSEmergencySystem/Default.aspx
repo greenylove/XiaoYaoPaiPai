@@ -2,9 +2,23 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    
-<script>
 
+<script>
+// Only works after `FB.init` is called
+function myFacebookLogin() {
+    FB.login(function () { }, { scope: 'publish_actions' });
+
+}
+function myFacebookPost() {
+
+    FB.login(function () {
+        // Note: The call will only work if you accept the permission request
+        FB.api('/Crisis-Management-System-Xiao-Yao-Pai-406096709760870/posts', 'post', { message: 'Hello, world!' });
+    }, { scope: 'publish_actions' });
+
+}
+</script>
+<script>
         function w3_openleft() {
             document.getElementById("hiddenleftpanel").style.width = "auto";
             document.getElementById("mySidenav").style.width = "100%";
@@ -74,6 +88,8 @@
 
         btn1.onclick = function () {
             createModal.style.display = "block";
+            document.getElementById('LatInfo').value = window.defaultPlaceGResult.latitude;
+            document.getElementById('LngInfo').value = window.defaultPlaceGResult.longitude;
             return false;
         }
 
@@ -104,7 +120,6 @@
         document.getElementById('myModal').style.display = "block";
     }
 </script>
-
     <script>
     function ViewIncidentButtonTest() {
         // Get the modal
@@ -162,428 +177,66 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!--End implement JQuery tab panel-->
 <!--Api Key-->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-SUfpR6e3ZBZ9z06cdPOICWb46-0QEXk&libraries=places&extension=.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTdSKDpeyLxGmVqZSkMzxyX2X0341nbFQ&libraries=places&extension=.js"></script>
+<script src="/Scripts/map.js" type="text/javascript"></script>
 <script>
-    google.maps.event.addDomListener(window, 'load', init); /*Right click for context menu*/
-    var map;
+    google.maps.event.addDomListener(window, 'load', init);
+
     function init() {
-        //Build Context Menu using Javascript
-        function ContextMenu(map, options) {
-            options = options || {};
+        CMSEmergencySystem.Map.Initialize("map", "pac-input", "infowindow-content");
+        CMSEmergencySystem.Map.AddDefaultPlaceListener(onPlaceSelected);
+        CMSEmergencySystem.Map.AddPlaceSelectedListener(onPlaceSelected);
+        CMSEmergencySystem.Map.AddDefaultPlaceListener(cacheDefaultPlaceGResult);
+        document.getElementById('LatInfo').value = CMSEmergencySystem.Map._InfoWindowContent.children["lng"].textContent;
+        document.getElementById('LngInfo').value = CMSEmergencySystem.Map._InfoWindowContent.children["lng"].textContent;
+        var icon;
+        $.ajax("/IncidentServlet.aspx", {
+            success: function (data) {
+                var list = JSON.parse(data);
 
-            this.setMap(map);
-
-            this.classNames_ = options.classNames || {};
-            this.map_ = map;
-            this.mapDiv_ = map.getDiv();
-            this.menuItems_ = options.menuItems || [];
-            this.pixelOffset = options.pixelOffset || new google.maps.Point(10, -5);
-        }
-
-        ContextMenu.prototype = new google.maps.OverlayView();
-
-        ContextMenu.prototype.draw = function () {
-            if (this.isVisible_) {
-                var mapSize = new google.maps.Size(this.mapDiv_.offsetWidth, this.mapDiv_.offsetHeight);
-                var menuSize = new google.maps.Size(this.menu_.offsetWidth, this.menu_.offsetHeight);
-                var mousePosition = this.getProjection().fromLatLngToDivPixel(this.position_);
-
-                var left = mousePosition.x;
-                var top = mousePosition.y;
-
-                if (mousePosition.x > mapSize.width - menuSize.width - this.pixelOffset.x) {
-                    left = left - menuSize.width - this.pixelOffset.x;
-                } else {
-                    left += this.pixelOffset.x;
+                for (var i = 0; i < list.length; i++) {
+                    var incident = list[i];
+                    console.log("Retrieve var from incident");
+                    if (incident.Status == "Unresolved") {
+                        console.log("if statement");
+                        incident.formatted_address = incident.Location;
+                        CMSEmergencySystem.Map.AddMarker(new google.maps.LatLng(incident.Latitude, incident.Longitude), 
+                                incident.TypeOfIncident, incident, incident);
+                        /*
+                        new google.maps.Marker({
+                            position: new google.maps.LatLng(incident.latitude, incident.longitude),
+                            icon: '/Icons/' + incident.typeOfIncident + ".png",
+                            map: map,
+                            title: incident.location
+                        });
+                        */
+                        console.log("HELLO WORLD");
+                        console.log(incident.typeOfIncident);
+                        console.log(incident);
+                    }
                 }
-
-                if (mousePosition.y > mapSize.height - menuSize.height - this.pixelOffset.y) {
-                    top = top - menuSize.height - this.pixelOffset.y;
-                } else {
-                    top += this.pixelOffset.y;
-                }
-
-                this.menu_.style.left = left + 'px';
-                this.menu_.style.top = top + 'px';
-            }
-        };
-
-        ContextMenu.prototype.getVisible = function () {
-            return this.isVisible_;
-        };
-
-        ContextMenu.prototype.hide = function () {
-            if (this.isVisible_) {
-                this.menu_.style.display = 'none';
-                this.isVisible_ = false;
-            }
-        };
-
-        ContextMenu.prototype.onAdd = function () {
-            function createMenuItem(values) {
-                var menuItem = document.createElement('div');
-                menuItem.innerHTML = values.label;
-                if (values.className) {
-                    menuItem.className = values.className;
-                }
-                if (values.id) {
-                    menuItem.id = values.id;
-                }
-                menuItem.style.cssText = 'cursor:pointer; white-space:nowrap';
-                menuItem.onclick = function () {
-                    google.maps.event.trigger($this, 'menu_item_selected', $this.position_, values.eventName);
-                };
-                return menuItem;
-            }
-            function createMenuSeparator() {
-                var menuSeparator = document.createElement('div');
-                if ($this.classNames_.menuSeparator) {
-                    menuSeparator.className = $this.classNames_.menuSeparator;
-                }
-                return menuSeparator;
-            }
-            var $this = this;	//	used for closures
-
-            var menu = document.createElement('div');
-            if (this.classNames_.menu) {
-                menu.className = this.classNames_.menu;
-            }
-            menu.style.cssText = 'display:none; position:absolute';
-
-            for (var i = 0, j = this.menuItems_.length; i < j; i++) {
-                if (this.menuItems_[i].label && this.menuItems_[i].eventName) {
-                    menu.appendChild(createMenuItem(this.menuItems_[i]));
-                } else {
-                    menu.appendChild(createMenuSeparator());
-                }
-            }
-
-            delete this.classNames_;
-            delete this.menuItems_;
-
-            this.isVisible_ = false;
-            this.menu_ = menu;
-            this.position_ = new google.maps.LatLng(0, 0);
-
-            google.maps.event.addListener(this.map_, 'click', function (mouseEvent) {
-                $this.hide();
-            });
-
-            this.getPanes().floatPane.appendChild(menu);
-        };
-
-        ContextMenu.prototype.onRemove = function () {
-            this.menu_.parentNode.removeChild(this.menu_);
-            delete this.mapDiv_;
-            delete this.menu_;
-            delete this.position_;
-        };
-
-        ContextMenu.prototype.show = function (latLng) {
-            if (!this.isVisible_) {
-                this.menu_.style.display = 'block';
-                this.isVisible_ = true;
-            }
-            this.position_ = latLng;
-            this.draw();
-        };
-        //End context Menu using JavaScript
-
-        //Google Map
-        var mapOptions = {
-            center: new google.maps.LatLng(1.354489, 103.858536),
-            zoom: 10,
-            zoomControl: true,
-            zoomControlOptions: {
-                style: google.maps.ZoomControlStyle.DEFAULT,
             },
-            disableDoubleClickZoom: true,
-            mapTypeControl: true,
-            mapTypeControlOptions: {
-                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
-            },
-            scaleControl: true,
-            scrollwheel: true,
-            streetViewControl: true,
-            draggable: true,
-            overviewMapControl: true,
-            overviewMapControlOptions: {
-                opened: true,
-            },
-        }
-
-
-        var mapElement = document.getElementById('map');
-        var map = new google.maps.Map(mapElement, mapOptions);
-        var locations = [];
-
-
-
-        //	create the ContextMenuOptions object
-        var contextMenuOptions = {};
-        contextMenuOptions.classNames = { menu: 'context_menu', menuSeparator: 'context_menu_separator' };
-
-        //	create an array of ContextMenuItem objects
-        var menuItems = [];
-        menuItems.push({ className: 'context_menu_item', eventName: 'zoom_in_click', label: 'Zoom in' });
-        menuItems.push({ className: 'context_menu_item', eventName: 'zoom_out_click', label: 'Zoom out' });
-        //	a menuItem with no properties will be rendered as a separator
-        menuItems.push({});
-        menuItems.push({ className: 'context_menu_item', eventName: 'center_map_click', label: 'Center map here' });
-        menuItems.push({ className: 'context_menu_item', eventName: 'Add_info_marker', label: 'Add Info Marker' });
-        menuItems.push({ className: 'context_menu_item', eventName: 'Add_parking_marker', label: 'Add Parking Marker' });
-        menuItems.push({ className: 'context_menu_item', eventName: 'Add_library_marker', label: 'Add Library Marker' });
-        contextMenuOptions.menuItems = menuItems;
-
-        //	create the ContextMenu object
-        var contextMenu = new ContextMenu(map, contextMenuOptions);
-
-        //	display the ContextMenu on a Map right click
-        google.maps.event.addListener(map, 'rightclick', function (mouseEvent) {
-            contextMenu.show(mouseEvent.latLng);
+            error: function () { }
         });
+        //CMSEmergencySystem.Map.AddDefaultPlaceListener(cachePlace);
+    }
 
-        //	listen for the ContextMenu 'menu_item_selected' event
-        google.maps.event.addListener(contextMenu, 'menu_item_selected', function (latLng, eventName) {
-            //	latLng is the position of the ContextMenu
-            //	eventName is the eventName defined for the clicked ContextMenuItem in the ContextMenuOptions
-            switch (eventName) {
-                case 'zoom_in_click':
-                    map.setZoom(map.getZoom() + 1);
-                    break;
-                case 'zoom_out_click':
-                    map.setZoom(map.getZoom() - 1);
-                    break;
-                case 'center_map_click':
-                    map.panTo(latLng);
-                    break;
-                case 'Add_info_marker':
+    function cacheDefaultPlaceGResult(marker, geocodeResult) {
+        window.defaultPlaceGResult = geocodeResult;
+    }
 
-                    var marker = new google.maps.Marker({
-                        position: latLng,
-                        icon: 'https://maps.google.com/mapfiles/kml/shapes/info-i_maps.png',
-                        map: map
-                    });
-                    marker.setMap(map);
-                    marker.addListener('click', function () {
-                        infowindow.open(map, marker);
-                    });
-                    break;
-
-                case 'Add_parking_marker':
-
-                    var marker = new google.maps.Marker({
-                        position: latLng,
-                        icon: 'https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png',
-                        map: map
-                    });
-                    marker.setMap(map);
-                    marker.addListener('click', function () {
-                        infowindow.open(map, marker);
-                    });
-                    break;
-
-                case 'Add_library_marker':
-
-                    var marker = new google.maps.Marker({
-                        position: latLng,
-                        icon: 'https://maps.google.com/mapfiles/kml/shapes/library_maps.png',
-                        map: map
-                    });
-                    marker.setMap(map);
-                    marker.addListener('click', function () {
-                        infowindow.open(map, marker);
-                    });
-                    break;
-            }
-
-            /*
-        
-                            var infowindow = new google.maps.InfoWindow({
-                                content: "Fuck my life"
-                            });
-        
-                            var markertype = 'info'
-                            var myLatlng;
-                            var marker = new google.maps.Marker({
-                                position: latLng,
-                                type: markertype,
-                                icon: icons[markertype].icon,
-                                map: map,
-                                title: 'NTU'
-                            });
-                            marker.setMap(map);
-                            marker.addListener('click', function() {
-                                infowindow.open(map, marker);
-                            });
-                            break;*/
-
-
-
-
-        });
-
-        var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
-        var icons = {
-            parking: {
-                name: 'parking',
-                icon: iconBase + 'parking_lot_maps.png'
-            },
-            library: {
-                name: 'library',
-                icon: iconBase + 'library_maps.png'
-            },
-            info: {
-                name: 'info',
-                icon: iconBase + 'info-i_maps.png'
-            }
-        };
-
-
-        var legend = document.getElementById('legend');
-        for (var key in icons) {
-            var type = icons[key];
-            var name = type.name;
-            var icon = type.icon;
-            var div = document.createElement('div');
-            div.innerHTML = '<img src="' + icon + '"> ' + name;
-            legend.appendChild(div);
-        }
-
-        map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
-
-
-
-        //Google Search Map
-
-
-        // Create the search box and link it to the UI element.
-        var input = document.getElementById('pac-input');
-        var searchBox = new google.maps.places.SearchBox(input);
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-        // Bias the SearchBox results towards current map's viewport.
-        map.addListener('bounds_changed', function () {
-            searchBox.setBounds(map.getBounds());
-        });
-
-        var markers = [];
-        // Listen for the event fired when the user selects a prediction and retrieve
-        // more details for that place.
-        searchBox.addListener('places_changed', function () {
-            var places = searchBox.getPlaces();
-
-            if (places.length == 0) {
-                return;
-            }
-
-            // Clear out the old markers.
-            markers.forEach(function (marker) {
-                marker.setMap(null);
-            });
-            markers = [];
-
-            // For each place, get the icon, name and location.
-            var bounds = new google.maps.LatLngBounds();
-            places.forEach(function (place) {
-                if (!place.geometry) {
-                    console.log("Returned place contains no geometry");
-                    return;
-                }
-                var icon = {
-                    url: place.icon,
-                    size: new google.maps.Size(71, 71),
-                    origin: new google.maps.Point(0, 0),
-                    anchor: new google.maps.Point(17, 34),
-                    scaledSize: new google.maps.Size(25, 25)
-                };
-
-                /*// Create a marker for each place.
-                markers.push(new google.maps.Marker({
-                    map: map,
-                    icon: icon,
-                    title: place.name,
-                    position: place.geometry.location
-                }));*/
-
-                if (place.geometry.viewport) {
-                    // Only geocodes have viewport.
-                    bounds.union(place.geometry.viewport);
-                } else {
-                    bounds.extend(place.geometry.location);
-                }
-            });
-            map.fitBounds(bounds);
-        });
-
-
-        //Open Info Window
-
-        var autocomplete = new google.maps.places.Autocomplete(
-            input, { placeIdOnly: true });
-        autocomplete.bindTo('bounds', map);
-        autocomplete.setComponentRestrictions({ country: "SG" });
-
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-        var infowindow = new google.maps.InfoWindow();
-        var infowindowContent = document.getElementById('infowindow-content');
-        infowindow.setContent(infowindowContent);
-        var geocoder = new google.maps.Geocoder;
-        var marker = new google.maps.Marker({
-            map: map
-        });
-        marker.addListener('click', function () {
-            infowindow.open(map, marker);
-        });
-
-        autocomplete.addListener('place_changed', function () {
-            infowindow.close();
-            infowindow.open(map, marker);
-            var place = autocomplete.getPlace();
-            if (!place.place_id) {
-                return;
-            }
-            geocoder.geocode({ 'placeId': place.place_id }, function (results, status) {
-
-                if (status !== 'OK') {
-                    window.alert('Geocoder failed due to: ' + status);
-                    return;
-                }
-                map.setZoom(11);
-                map.setCenter(results[0].geometry.location);
-
-                console.log(results[0].geometry.location.lat());
-                console.log(results[0].geometry.location.lng());
-
-                // Set the position of the marker using the place ID and location.
-                marker.setPlace({
-                    placeId: place.place_id,
-                    location: results[0].geometry.location
-                });
-                marker.setVisible(true);
-                infowindowContent.children['place-name'].textContent = place.name;
-                infowindowContent.children['place-id'].textContent = place.place_id;
-                infowindowContent.children['place-address'].textContent = results[0].formatted_address;
-                infowindowContent.children['lat'].textContent = results[0].geometry.location.lat();
-                infowindowContent.children['lng'].textContent = results[0].geometry.location.lng();
-
-                document.getElementById('locationTextBox').value = infowindowContent.children['place-address'].textContent;
-                document.getElementById('LatInfo').value = infowindowContent.children['lat'].textContent;
-                document.getElementById('LngInfo').value = infowindowContent.children['lng'].textContent;
-
-                infowindow.open(map, marker);
-            });
-            
-        });
-
-        //End Open Info Window
-
-
-
-    };
-    
+    function onPlaceSelected(marker, geocodeResult) {
+        // Whenever a place is selected this listener will be called
+        // Retrieve the place from marker._Place
+        document.getElementById('locationTextBox').value = geocodeResult.formatted_address ? geocodeResult.formatted_address : "";
+    }
+    /*var place, gresult;
+    function cachePlace(marker, geocodeResult) {
+        place = marker._Place;
+        geocodeResult = gresult;
+    }*/
 </script>
+    
 <form id="IncidentForm" runat="server">
   <!-- The Modal -->
 <div id="myModal" class="modal">

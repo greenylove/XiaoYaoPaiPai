@@ -117,10 +117,12 @@
     <Content Include="Email\EmailData.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Images\dengue-icon.png" />
+    <Content Include="IncidentServlet.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\map.js" />
     <Content Include="Site.Master" />
     <None Include="job_scheduling_data_2_0.xsd">
       <SubType>Designer</SubType>
@@ -159,6 +161,9 @@
     <Compile Include="About.aspx.designer.cs">
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DefaultManager\AccountManager.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Account\ChangePassword.aspx.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -187,10 +192,10 @@
     <Compile Include="Account\Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\AccountManager.cs" />
-    <Compile Include="Controllers\IncidentManager.cs" />
-    <Compile Include="Controllers\NEAManager.cs" />
-    <Compile Include="Controllers\NewsFeedManager.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\IncidentController.cs" />
+    <Compile Include="Controllers\NEAController.cs" />
+    <Compile Include="Controllers\NewsFeedController.cs" />
     <Compile Include="DAO\DataBaseHelper.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -211,7 +216,23 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="DefaultManager\IncidentManager.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="IncidentServlet.aspx.cs">
+      <DependentUpon>IncidentServlet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="IncidentServlet.aspx.designer.cs">
+      <DependentUpon>IncidentServlet.aspx</DependentUpon>
+    </Compile>
     <Compile Include="JobSchedule\JobSchedule.cs" />
+    <Compile Include="DefaultManager\NEAManager.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DefaultManager\NewsFeedManager.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
@@ -228,7 +249,9 @@
       <DependentUpon>test.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Icons\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
