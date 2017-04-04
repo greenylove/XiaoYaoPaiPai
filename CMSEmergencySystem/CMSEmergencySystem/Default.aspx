@@ -17,6 +17,49 @@ function myFacebookPost() {
     }, { scope: 'publish_actions' });
 
 }
+
+function CheckedChanged() {
+    // clear all marker
+    // check what is checked
+    // if checked, reinsert marker
+    CMSEmergencySystem.Map.ClearMarker();
+
+    if (document.getElementById("showFire").checked == true) {
+        for (var i = 0; i < list.length; i++) {
+            var incident = list[i];
+            if (incident.Status == "Unresolved" && incident.TypeOfIncident == "Fire Outbreak") {
+                console.log(incident.TypeOfIncident);
+                incident.formatted_address = incident.Location;
+                CMSEmergencySystem.Map.AddMarker(new google.maps.LatLng(incident.Latitude, incident.Longitude),
+                        incident.TypeOfIncident, incident, incident);
+            }
+        }
+    }
+    if (document.getElementById("showDengue").checked == true) {
+        for (var i = 0; i < list.length; i++) {
+            var incident = list[i];
+            if (incident.Status == "Unresolved" && incident.TypeOfIncident == "Dengue Outbreak") {
+                console.log(incident.TypeOfIncident);
+                incident.formatted_address = incident.Location;
+                CMSEmergencySystem.Map.AddMarker(new google.maps.LatLng(incident.Latitude, incident.Longitude),
+                        incident.TypeOfIncident, incident, incident);
+            }
+        }
+    }
+    if (document.getElementById("showEarthquake").checked == true) {
+        for (var i = 0; i < list.length; i++) {
+            var incident = list[i];
+            if (incident.Status == "Unresolved" && incident.TypeOfIncident == "Earthquake") {
+                console.log(incident.TypeOfIncident);
+                incident.formatted_address = incident.Location;
+                CMSEmergencySystem.Map.AddMarker(new google.maps.LatLng(incident.Latitude, incident.Longitude),
+                        incident.TypeOfIncident, incident, incident);
+            }
+        }
+    }
+    
+}
+
 </script>
 <script>
         function w3_openleft() {
@@ -119,18 +162,15 @@ function myFacebookPost() {
     function displayModal() {
         document.getElementById('myModal').style.display = "block";
     }
+
+    function closeModal() {
+        document.getElementById('CreateIncidentDialogBox').style.display = "none";
+    }
+
 </script>
     <script>
     function ViewIncidentButtonTest() {
-        // Get the modal
-        // how sia
-        //gg
         var modal = document.getElementById('myModal');
-        //var createModal = document.getElementById('CreateIncidentDialogBox');
-
-       
-
-        //var btn1 = document.getElementById("CreateIncident");
 
         // Get the <span> element that closes the modal
         var spanTest = document.getElementsByClassName("close")[0];
@@ -142,19 +182,12 @@ function myFacebookPost() {
             return false;
         }
 
-        /*btn1.onclick = function () {
-            createModal.style.display = "block";
-            return false;
-        }*/
 
         // When the user clicks on <span> (x), close the modal
         spanTest.onclick = function () {
             modal.style.display = "none";
         }
 
-        //span1.onclick = function () {
-        //    createModal.style.display = "none";
-        //}
 
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function (event) {
@@ -162,11 +195,7 @@ function myFacebookPost() {
                 modal.style.display = "none";
             }
         }
-        //window.onclick = function (event) {
-        //    if (event.target == createModal) {
-        //        createModal.style.display = "none";
-        //    }
-        //}
+    
     }
     document.addEventListener('DOMContentLoaded', initialize, false);
 </script>
@@ -179,6 +208,7 @@ function myFacebookPost() {
 <!--Api Key-->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTdSKDpeyLxGmVqZSkMzxyX2X0341nbFQ&libraries=places&extension=.js"></script>
 <script src="/Scripts/map.js" type="text/javascript"></script>
+    var list;
 <script>
     google.maps.event.addDomListener(window, 'load', init);
 
@@ -192,29 +222,30 @@ function myFacebookPost() {
         var icon;
         $.ajax("/IncidentServlet.aspx", {
             success: function (data) {
-                var list = JSON.parse(data);
-
+                list = JSON.parse(data);
                 for (var i = 0; i < list.length; i++) {
                     var incident = list[i];
-                    console.log("Retrieve var from incident");
-                    if (incident.Status == "Unresolved") {
-                        console.log("if statement");
-                        incident.formatted_address = incident.Location;
+                    //console.log("Retrieve var from incident");
+                   if (incident.Status == "Unresolved") {
+                        //console.log("if statement");
+                       incident.formatted_address = incident.Location;
                         CMSEmergencySystem.Map.AddMarker(new google.maps.LatLng(incident.Latitude, incident.Longitude), 
                                 incident.TypeOfIncident, incident, incident);
-                        /*
-                        new google.maps.Marker({
+                        
+                        /*new google.maps.Marker({
                             position: new google.maps.LatLng(incident.latitude, incident.longitude),
                             icon: '/Icons/' + incident.typeOfIncident + ".png",
                             map: map,
                             title: incident.location
-                        });
-                        */
-                        console.log("HELLO WORLD");
-                        console.log(incident.typeOfIncident);
-                        console.log(incident);
+                        });*/
+                        
+                        //console.log("HELLO WORLD");
+                        //console.log(incident.typeOfIncident);
+                        //console.log(incident);
                     }
                 }
+                //alert("go pass through here");
+                //CMSEmergencySystem.Map.ClearMarker();
             },
             error: function () { }
         });
@@ -237,7 +268,7 @@ function myFacebookPost() {
     }*/
 </script>
     
-<form id="IncidentForm" runat="server">
+<form name="IncidentForm" id="IncidentForm" runat="server">
   <!-- The Modal -->
 <div id="myModal" class="modal">
 
@@ -332,7 +363,6 @@ function myFacebookPost() {
 
             <asp:UpdatePanel ID="UpdateCreate" runat="server">              
                 <ContentTemplate>
-            <%--<form id="CreateIncidentForm" runat="server">--%>
                 <asp:HiddenField ID="LatInfo" runat="server" ClientIDMode="Static" />
                 <asp:HiddenField ID="LngInfo" runat="server" ClientIDMode="Static" />
                 <table class="CreateIncident" width="100%">
@@ -413,7 +443,7 @@ function myFacebookPost() {
                     </tr>
                 </table>
 
-            <%--</form>--%>
+     
         </div>
                             
                 </ContentTemplate>
@@ -455,6 +485,19 @@ function myFacebookPost() {
         <input id="pac-input" class="controls" type="text" placeholder="Search Box" style="width: 300px;">
         <div id="map">
         </div>
+        
+        <table>
+        <tr>
+        <td> Fire Outbreaks : </td>
+        <td>
+            <input type="checkbox" id= "showFire"name="showfire" onclick="CheckedChanged();" checked/>
+            <input type="checkbox" id= "showDengue"name="dengue" onclick="CheckedChanged();" checked/>
+            <input type="checkbox" id= "showEarthquake"name="earthquake" onclick="CheckedChanged();" checked/>
+        </td>
+        <td><asp:Label ID="showFireDisplay" runat="server"></asp:Label></td>
+        </tr> 
+        </table>
+
         <div id="infowindow-content">
       <span id="place-name"  class="title"></span><br>
       Place ID <span id="place-id"></span><br>

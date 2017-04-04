@@ -35,9 +35,9 @@ namespace CMSEmergencySystem
             foreach (ListItem assistTypeCBL in assistTypeCheckBoxList.Items)
                 if (assistTypeCBL.Selected == true)
                     incidentController.addSupportType(incidentID, Convert.ToInt32(assistTypeCBL.Value));
-
             //update UI
             updateUIIncident();
+            ScriptManager.RegisterStartupScript(this, GetType(), "script", "closeModal();", true);
         } // end of class
 
         protected void sendQuery_Click(object sender, EventArgs e)
@@ -52,6 +52,11 @@ namespace CMSEmergencySystem
         protected void clearQuery_Click(object sender, EventArgs e)
         {
             initIncidentList();
+        }
+
+        protected void showFire_CheckedChanged(object sender, EventArgs e)
+        {
+            
         }
 
 
@@ -97,18 +102,15 @@ namespace CMSEmergencySystem
                 postalCode.Text = incidentItem.PostalCode;
                 mainDispatch.Text = incidentItem.MainDispatch;
 
-                for (int i = 0; i < statusLogUpdate.Rows.Count; i++)
-                {
+                for (int i = 0; i < statusLogUpdate.Rows.Count; i++){
                     DateTime datetime;
                     datetime = Convert.ToDateTime(statusLogUpdate.Rows[i]["dateTime"].ToString());
                     string messageLog = statusLogUpdate.Rows[i]["statusMessage"].ToString();
                     string result = "[" + datetime + "]" + messageLog;
                     statusLog.Text += (result + System.Environment.NewLine);
-
                 }
 
-                for (int i = 0; i < IncidentCategory.Rows.Count; i++)
-                {
+                for (int i = 0; i < IncidentCategory.Rows.Count; i++){
                     string result = IncidentCategory.Rows[i]["departmentName"].ToString();
                     supportType.Text += (result + System.Environment.NewLine);
                 }
@@ -117,8 +119,7 @@ namespace CMSEmergencySystem
                 ScriptManager.RegisterStartupScript(this, GetType(), "script", "displayModal();", true);
             }
             //TO BE REVISED
-            if (e.CommandName == "Delete")
-            {
+            if (e.CommandName == "Delete"){
                 DataBaseHelper myDB = new DataBaseHelper();
                 int IncidentID = 0;
                 int index = (((Button)e.CommandSource).NamingContainer as GridViewRow).RowIndex;

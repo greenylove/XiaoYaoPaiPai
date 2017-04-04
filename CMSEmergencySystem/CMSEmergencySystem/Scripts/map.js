@@ -29,6 +29,7 @@ CMSEmergencySystem.Map._MapOptions = {
         opened: true,
     }
 };
+//right click option
 CMSEmergencySystem.Map._ContextMenuOptions = {
     menu: 'context_menu',
     menuSeperator: 'context_menu_separator',
@@ -50,6 +51,7 @@ CMSEmergencySystem.Map._ContextMenuOptions = {
         }
     ]
 };
+
 CMSEmergencySystem.Map._IconMap = {
     "Fire Outbreak": "/Icons/Fire.png",
     "Dengue Outbreak": "/Icons/Dengue.png",
@@ -83,6 +85,7 @@ CMSEmergencySystem.Map.AddMarker = function (latlng, type, state, geocoderResult
         markerOpts["icon"] = CMSEmergencySystem.Map._IconMap[type];
 
     var marker = new google.maps.Marker(markerOpts);
+    
     CMSEmergencySystem.Map._GeocoderResultMap[state] = geocoderResult;
     marker._State = state;
 
@@ -263,7 +266,7 @@ CMSEmergencySystem.Map.BuildInfoWindow = function (infoWindowID) {
 };
 
 CMSEmergencySystem.Map.ClearMarker = function (marker) {
-    if (marker == null) {
+    if (marker != null) {
         // Remove marker
         marker.setMap(null);
 
