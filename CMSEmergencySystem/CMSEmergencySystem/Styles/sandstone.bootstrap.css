@@ -8475,7 +8475,7 @@ div.wrapper {
 }
 
 #livefeed {
-    width: 40%;
+    /*max-width: 40%;*/
     height: 100vh;
     display: block;
 }

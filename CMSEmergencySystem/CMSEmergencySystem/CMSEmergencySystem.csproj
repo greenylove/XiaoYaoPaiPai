@@ -120,6 +120,8 @@
     <Content Include="Icons\Earthquake.png" />
     <Content Include="Icons\Fire.png" />
     <Content Include="Images\dengue-icon.png" />
+    <Content Include="Images\facebookicon.png" />
+    <Content Include="Images\twittericon.png" />
     <Content Include="IncidentServlet.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -215,6 +217,8 @@
       <DependentUpon>EmailData.aspx</DependentUpon>
     </Compile>
     <Compile Include="Email\EmailJob.cs" />
+    <Compile Include="Entities\FacebookFeed.cs" />
+    <Compile Include="Entities\FacebookFeeds.cs" />
     <Compile Include="Entities\IncidentItem.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

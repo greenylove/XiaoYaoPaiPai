@@ -292,6 +292,24 @@ namespace CMSEmergencySystem {
         protected global::System.Web.UI.WebControls.Button submit;
         
         /// <summary>
+        /// fbLiveFeed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl fbLiveFeed;
+        
+        /// <summary>
+        /// twitterLiveFeed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl twitterLiveFeed;
+        
+        /// <summary>
         /// showFireDisplay control.
         /// </summary>
         /// <remarks>
@@ -299,15 +317,6 @@ namespace CMSEmergencySystem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label showFireDisplay;
-        
-        /// <summary>
-        /// UpdatePanel3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel3;
         
         /// <summary>
         /// searchResult control.
@@ -335,6 +344,15 @@ namespace CMSEmergencySystem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button clearQuery;
+        
+        /// <summary>
+        /// UpdatePanel3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel3;
         
         /// <summary>
         /// GridData control.

@@ -86,7 +86,7 @@ function CheckedChanged() {
             document.getElementById("myRightSidenav").style.display = "block";
             document.getElementById("openrightpanel").style.display = 'none';
             document.getElementById("closerightpanel").style.display = 'block';
-            document.getElementById("rightpanel").style.marginRight = document.getElementById("closerightpanel").offsetWidth + "px";
+            document.getElementById("rightpanel").style.marginRight = (document.getElementById("closerightpanel").offsetWidth)-50 + "px";
         }
         function w3_closeright() {
             document.getElementById("myRightSidenav").style.display = "none";
@@ -464,17 +464,33 @@ function CheckedChanged() {
         </div>
         <div id="hiddenleftpanel" class="leftpanel wrapper">
             <img id="closepanelicon" src="../Images/arrow-down-c.png" onclick="w3_closeleft()" />
-            <div style="position: inherit;display: none;height:100%;overflow-y:scroll;" id="mySidenav">
+            <div style="position: inherit;display: none;height:100%;" id="mySidenav">
 
                 <div id="livefeed">
-                    <%--<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FBuzzFeedFood%2Fvideos%2F1593650737314813%2F&show_text=0&width=400" width="200" height="200" style="display:block;border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
-                    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FBuzzFeedFood%2Fvideos%2F1593650737314813%2F&show_text=0&width=400" width="200" height="200" style="display:block;border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
-                    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FBuzzFeedFood%2Fvideos%2F1593650737314813%2F&show_text=0&width=400" width="200" height="200" style="display:block;border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
-                    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FBuzzFeedFood%2Fvideos%2F1593650737314813%2F&show_text=0&width=400" width="200" height="200" style="display:block;border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
-                    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FBuzzFeedFood%2Fvideos%2F1593650737314813%2F&show_text=0&width=400" width="200" height="200" style="display:block;border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
-                    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FBuzzFeedFood%2Fvideos%2F1593650737314813%2F&show_text=0&width=400" width="200" height="200" style="display:block;border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
-                    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FBuzzFeedFood%2Fvideos%2F1593650737314813%2F&show_text=0&width=400" width="200" height="200" style="display:block;border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
-                    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FBuzzFeedFood%2Fvideos%2F1593650737314813%2F&show_text=0&width=400" width="200" height="200" style="display:block;border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>--%>
+                    <div style="background-color: #3b5998;height: auto;">
+                            <img src="Images/facebookicon.png" style="height: 40px;width: auto;"/>
+                            FACEBOOK
+                        </div>
+                        <div class="LiveFeedCSS">
+                            <div id="fbLiveFeed" class="feed" runat="server">
+
+                            </div>
+                            <%--<div class="fb-page" data-href="http://www.facebook.com/CMSXiaoYaoPai" data-tabs="timeline" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="http://www.facebook.com/CMSXiaoYaoPai" class="fb-xfbml-parse-ignore"><a href="http://www.facebook.com/CMSXiaoYaoPai">Crisis Management System Xiao Yao Pai</a></blockquote></div>
+                            <script src="//www.powr.io/powr.js" external-type="html"></script> 
+ <div class="powr-social-feed" id="f140960d_1491094268"></div>--%>
+                            <!--<asp:Button ID="facebookBtn" Text="Login to Facebook" onClick="myFacebookLogin()">Login to Facebook!</asp:Button>
+                            <asp:Button ID="Button2" Text="Post to Facebook" onClick="myFacebookPost()">Post to Facebook!</asp:Button>-->
+
+                        </div>
+                    <div style="background-color: #1da1f2;height: auto;">
+                            <img src="Images/twittericon.png" style="height: 40px;width: auto;"/>
+                            TWITTER
+                        </div>
+                    <div class="LiveFeedCSS">
+                        <div id="twitterLiveFeed" class="feed" runat="server">
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -513,21 +529,20 @@ function CheckedChanged() {
                     <li><a onclick="tab1();">Current Incidents</a></li>
                     <li><a onclick="tab2();">Resolved Incidents</a></li>
                 </ul>
-
+                <!--<h3>Search : </h3>-->
+                <div style="padding:5px;border:1px solid #dfd7ca;">
+                <asp:TextBox ID="searchResult" runat="server" CssClass="form-control"></asp:TextBox>
+                <asp:Button ID="sendQuery" runat="server" Text="Search" OnClick="sendQuery_Click" CssClass="btn btn-primary"/>
+                <asp:Button ID="clearQuery" runat="server" Text="Clear" OnClick="clearQuery_Click" CssClass="btn btn-primary"/>
+                    </div>
                     <div id="tabs-1" style="width: 100%; height: 883px;">
-                         <h2>Current Incident</h2> 
+                         <!--<h2>Current Incident</h2> -->
                     <asp:UpdatePanel ID="UpdatePanel3" runat="server">              
                 <ContentTemplate>
 
-                <h3>Search : </h3>
-                <asp:TextBox ID="searchResult" runat="server"></asp:TextBox>
-                <asp:Button ID="sendQuery" runat="server" Text="Search" OnClick="sendQuery_Click"/>
-                <asp:Button ID="clearQuery" runat="server" Text="Clear" OnClick="clearQuery_Click" />
-
                 <div class="gridViewTable">
                     <asp:GridView ID="GridData" runat="server" AutoGenerateColumns="False" onrowcommand="ViewPendingIncident_RowCommand" 
-                         Width="100%" HeaderStyle-BackColor="#98e698" HeaderStyle-ForeColor="Black" RowStyle-BackColor="White" 
-                        AlternatingRowStyle-BackColor="White" RowStyle-ForeColor="#3A3A3A"> 
+                         Width="100%" CssClass="table table-striped table-hover"> 
             <Columns>
                 <asp:BoundField DataField="IncidentId" HeaderText="Id" />
                 <asp:BoundField DataField="dateTime" HeaderText="Date/Time" />
@@ -536,12 +551,12 @@ function CheckedChanged() {
                 <asp:BoundField DataField="Location" HeaderText="Location" />
                 <asp:TemplateField >
                     <ItemTemplate>
-                        <asp:Button ID="VI" Text="View Incident" CommandName="Select" runat="server" return ="false"/>
+                        <asp:Button ID="VI" Text="View Incident" CommandName="Select" runat="server" return ="false" CssClass="btn btn-default"/>
                     </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField >
                     <ItemTemplate>
-                        <asp:Button ID="deleteRow" Text="Delete" CommandName="Delete" runat="server"/>
+                        <asp:Button ID="deleteRow" Text="Delete" CommandName="Delete" runat="server" CssClass="btn btn-default"/>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
@@ -553,7 +568,7 @@ function CheckedChanged() {
 
 
                 <div id="tabs-2" style="display:none;width: 100%;">   
-                <h2>Resolved Incidents</h2>         
+                <!--<h2>Resolved Incidents</h2> -->        
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">              
                 <ContentTemplate>
                     <asp:GridView ID="GridData2" runat="server" AutoGenerateColumns="False" onrowcommand="ViewResolvedIncident_RowCommand"

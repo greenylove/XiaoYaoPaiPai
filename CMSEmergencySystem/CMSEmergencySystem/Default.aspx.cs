@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using CMSEmergencySystem.Controllers;
 using CMSEmergencySystem.Entities;
+using System.Threading;
+
 namespace CMSEmergencySystem
 {
     public partial class Default : System.Web.UI.Page
@@ -17,6 +19,13 @@ namespace CMSEmergencySystem
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Thread printer = new Thread(new ThreadStart(InvokeMethod));
+            printer.Start();
+
+            RefreshFBFeed();
+            RefreshTwitterFeed(url, query);
+
+
             initAllController();
 
             if (!this.IsPostBack)
