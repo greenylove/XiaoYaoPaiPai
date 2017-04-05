@@ -128,9 +128,17 @@
     </Content>
     <Content Include="Email\EmailData.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Icons\clear.png" />
+    <Content Include="Icons\cloudy.png" />
+    <Content Include="Icons\cloudywindy02.png" />
     <Content Include="Icons\Dengue.png" />
     <Content Include="Icons\Earthquake.png" />
     <Content Include="Icons\Fire.png" />
+    <Content Include="Icons\flurries.png" />
+    <Content Include="Icons\hazy.png" />
+    <Content Include="Icons\partlysunny.png" />
+    <Content Include="Icons\rain02.png" />
+    <Content Include="Icons\thunderstorms01.png" />
     <Content Include="Images\dengue-icon.png" />
     <Content Include="Images\facebookicon.png" />
     <Content Include="Images\twittericon.png" />

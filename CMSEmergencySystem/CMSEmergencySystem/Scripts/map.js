@@ -75,6 +75,90 @@ CMSEmergencySystem.Map._DefaultMarker = null;
 
 // Function declaration
 
+//Dengue Cluster KML Functions
+CMSEmergencySystem.Map.LoadDengue = function () {
+    var src = 'https://geo.data.gov.sg/dengue-cluster/2017/03/31/kml/dengue-cluster.zip'
+    var kmlLayer = new google.maps.KmlLayer(src, {
+        suppressInfoWindows: true,
+        preserveViewport: true,
+        map: null
+        //map: CMSEmergencySystem.Map._Map
+    });
+
+    return kmlLayer;
+}
+
+//NEA Marker Function
+CMSEmergencySystem.Map.WeatherAddMarker = function (location, forecast) {
+    var marker = new google.maps.Marker({
+        position: location,
+        map: CMSEmergencySystem.Map._Map
+    });
+
+    switch (forecast) {
+        case "HR":
+        case "HS":
+            //Heavy Rain
+            marker.setIcon('Icons/rain02.png');
+            break;
+        case "HT":
+        case "HG":
+        case "TL":
+            //Thundery Showers
+            marker.setIcon('Icons/thunderstorms01.png');
+            break;
+        case "LR":
+        case "LS":
+        case "PS":
+        case "RA":
+        case "SH":
+        case "SK":
+        case "SR":
+        case "DR":
+            //Light/Moderate Rain
+            marker.setIcon('Icons/flurries.png');
+            break;
+        case "CL":
+        case "OC":
+        case "PC":
+        case "PN":
+        case "WC":
+            //Cloudy/Partly Cloudy
+            marker.setIcon('Icons/cloudy.png');
+            break;
+        case "FW":
+        case "SU":
+            //Sunny
+            marker.setIcon('Icons/clear.png');
+            break;
+        case "WC":
+        case "WD":
+        case "WF":
+        case "WR":
+        case "WS":
+            //Windy
+            marker.setIcon('Icons/cloudywindy02.png');
+            break;
+        case "BR":
+        case "FG":
+        case "HZ":
+        case "LH":
+            //Hazy
+            marker.setIcon('Icons/hazy.png');
+            break;
+        case "FA":
+        case "FN":
+        case "FW":
+            //Fair
+            marker.setIcon('Icons/partlysunny.png');
+            break;
+        default:
+            break;
+    }
+    marker.setVisible(false);
+    return marker;
+}
+
 CMSEmergencySystem.Map.AddMarker = function (latlng, type, state, geocoderResult) {
     var markerOpts = {
         map: CMSEmergencySystem.Map._Map,

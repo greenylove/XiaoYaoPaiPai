@@ -37,7 +37,13 @@ function CheckedChanged() {
         else
             earthquake[i].setVisible(false);
     }
-
+    //NEA Markers
+    for (var w = 0; w < weatherList.length; w++) {
+        if (document.getElementById("weatherCheckBox").checked == true)
+            weatherList[w].setVisible(true);
+        else
+            weatherList[w].setVisible(false);
+    }
 }
 
 </script>
@@ -193,6 +199,8 @@ function CheckedChanged() {
     var fire = [];
     var earthquake = [];
     var dengue = [];
+    var weatherList = [];
+    var dengueLayer;
 
     google.maps.event.addDomListener(window, 'load', init);
 
@@ -203,6 +211,21 @@ function CheckedChanged() {
         CMSEmergencySystem.Map.AddDefaultPlaceListener(cacheDefaultPlaceGResult);
         document.getElementById('LatInfo').value = CMSEmergencySystem.Map._InfoWindowContent.children["lng"].textContent;
         document.getElementById('LngInfo').value = CMSEmergencySystem.Map._InfoWindowContent.children["lng"].textContent;
+
+        //Load Dengue KML
+        dengueLayer = CMSEmergencySystem.Map.LoadDengue();
+
+        //NEA Marker Function
+        <%
+        for(var i = 0; i < weather2hrArray.GetLength(0); i++)
+        {%>
+        var location = new google.maps.LatLng(parseFloat(<%=weather2hrArray[i, 1]%>), parseFloat(<%=weather2hrArray[i, 2]%>));
+        var forecast = "<%=weather2hrArray[i,3]%>";
+
+            var weatherMarker = CMSEmergencySystem.Map.WeatherAddMarker(location, forecast);
+            weatherList.push(weatherMarker);
+        <%}%>
+
         var icon;
         $.ajax("/IncidentServlet.aspx", {
             success: function (data) {
@@ -246,6 +269,16 @@ function CheckedChanged() {
         place = marker._Place;
         geocodeResult = gresult;
     }*/
+
+    //Dengue Toggle Function
+    function toggleDengue() {
+        if (dengueLayer.getMap() == null) {
+            dengueLayer.setMap(CMSEmergencySystem.Map._Map);
+        }
+        else {
+            dengueLayer.setMap(null);
+        }
+    }
 </script>
     
 <form name="IncidentForm" id="IncidentForm" runat="server">
@@ -490,6 +523,12 @@ function CheckedChanged() {
             <input type="checkbox" id= "showDengue"name="dengue" onclick="CheckedChanged();" checked/>
             <input type="checkbox" id= "showEarthquake"name="earthquake" onclick="CheckedChanged();" checked/>
         </td>
+            <td>
+                Weather: 
+                <input type="checkbox" id="weatherCheckBox" name="weatherCheckBox" onclick="CheckedChanged();"/>
+                Dengue:
+                <input type="checkbox" id="dengueCheckBox" name="dengueCheckBox" onclick="toggleDengue();"/>
+            </td>
         <td><asp:Label ID="showFireDisplay" runat="server"></asp:Label></td>
         </tr> 
         </table>

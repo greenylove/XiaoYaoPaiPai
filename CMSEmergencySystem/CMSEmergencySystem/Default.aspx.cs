@@ -25,6 +25,8 @@ namespace CMSEmergencySystem
             RefreshFBFeed();
             RefreshTwitterFeed(url, query);
 
+            //Load NEA API
+            loadNEA();
 
             initAllController();
 
