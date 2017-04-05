@@ -12,22 +12,20 @@ using System.Diagnostics;
 using System.Text;
 using CMSEmergencySystem.Controllers;
 using System.Data;
-using CMSEmergencySystem.Email;
+
 
 namespace CMSEmergencySystem.Controllers
 {
     public class EmailController:IJob
     {
-       
-            public class JobSchedule
+        public class JobSchedule
+        {
+
+            public static void Start()
             {
-                public static void Start()
-                {
-                    IJobDetail emailJob = JobBuilder.Create<Controllers.EmailController>()
-                          .WithIdentity("job1")
-                          .Build();
-
-
+                IJobDetail emailJob = JobBuilder.Create<Controllers.EmailController>()
+                      .WithIdentity("job1")
+                      .Build();
 
                 ITrigger trigger = TriggerBuilder.Create()
                     .WithDailyTimeIntervalSchedule
@@ -45,68 +43,64 @@ namespace CMSEmergencySystem.Controllers
                 IScheduler sc = sf.GetScheduler();
                 sc.ScheduleJob(emailJob, trigger);
                 sc.Start();
-                }
             }
 
-            public void Execute(IJobExecutionContext context)
-            {
-            GetExcelFile.DataTable();
-            
-            using (MailMessage mailMessage = new MailMessage())
-                {
-                    mailMessage.From =
-                    new MailAddress(ConfigurationManager.AppSettings["FromMail"]); // sender address in web config
-                    mailMessage.Subject = "CMS Report";
-                    //mailMessage.Body = "Your message ";
 
-                    //IncidentController controller = new IncidentController();
-
-
-                    //DataTable Datatable1 = controller.getAllResolvedIncident();
-                    //DataTable Datatable2 = controller.getAllPendingIncident();
-                    //GridData.DataSource = Datatable1;
-                    //GridData.DataBind();
-                    //GridData2.DataSource = Datatable2;
-                    //GridData2.DataBind();
-
-                    //ViewState["DS2"] = Datatable1;
-                    //ViewState["DS"] = Datatable2;
-
-
-
-
-
-
-
-
-                    mailMessage.Body = "View Incident Records <a href=\"http://localhost:26909/Email/EmailData.aspx\"> Click Here! </a>";
-
-
-
-
-                    mailMessage.IsBodyHtml = true;
-                    mailMessage.To.Add(new MailAddress("ngyaosheng92@gmail.com")); // send to who?
-                    SmtpClient smtp = new SmtpClient();
-                    smtp.Host = ConfigurationManager.AppSettings["Host"];
-                    System.Net.NetworkCredential NetworkCred = new System.Net.NetworkCredential();
-                    NetworkCred.UserName = ConfigurationManager.AppSettings["FromMail"];
-                    NetworkCred.Password = ConfigurationManager.AppSettings["Password"];
-                    smtp.UseDefaultCredentials = true;
-                    smtp.Credentials = NetworkCred;
-                    smtp.Port = Convert.ToInt32(ConfigurationManager.AppSettings["Port"]);
-                    smtp.EnableSsl = true;
-                
-                    smtp.Send(mailMessage);
-               
-               
-                    
-                }
-            }
         }
 
 
+        public void Execute(IJobExecutionContext context)
+        {
+            using (MailMessage mailMessage = new MailMessage())
+            {
+                mailMessage.From =
+                new MailAddress(ConfigurationManager.AppSettings["FromMail"]); // sender address in web config
+                mailMessage.Subject = "CMS Report";
+                //mailMessage.Body = "Your message ";
+
+                //IncidentController controller = new IncidentController();
 
 
+                //DataTable Datatable1 = controller.getAllResolvedIncident();
+                //DataTable Datatable2 = controller.getAllPendingIncident();
+                //GridData.DataSource = Datatable1;
+                //GridData.DataBind();
+                //GridData2.DataSource = Datatable2;
+                //GridData2.DataBind();
 
-    
+                //ViewState["DS2"] = Datatable1;
+                //ViewState["DS"] = Datatable2;
+
+
+                //string AppLocation = "";
+                //AppLocation = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase);
+                //AppLocation = AppLocation.Replace("file:\\", "");
+                //string file = AppLocation + "\\ExcelFiles\\DataFile.xlsx";
+
+
+                mailMessage.Body = "View Incident Records <a href=\"http://localhost:26909/Email/EmailData.aspx\"> Click Here! </a>";
+
+
+                //System.Net.Mail.Attachment attachment;
+                //attachment = new System.Net.Mail.Attachment(file); //Attaching File to Mail  
+                //mailMessage.Attachments.Add(attachment);
+
+
+                mailMessage.IsBodyHtml = true;
+                mailMessage.To.Add(new MailAddress("ngyaosheng92@gmail.com")); // send to who?
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = ConfigurationManager.AppSettings["Host"];
+                System.Net.NetworkCredential NetworkCred = new System.Net.NetworkCredential();
+                NetworkCred.UserName = ConfigurationManager.AppSettings["FromMail"];
+                NetworkCred.Password = ConfigurationManager.AppSettings["Password"];
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = NetworkCred;
+                smtp.Port = Convert.ToInt32(ConfigurationManager.AppSettings["Port"]);
+                smtp.EnableSsl = true;
+                smtp.Send(mailMessage);
+
+            }
+        }
+
+    }
 }
