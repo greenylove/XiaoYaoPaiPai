@@ -15,26 +15,19 @@ namespace CMSEmergencySystem.Email
 {
     public class GetExcelFile
     {
-
         public static void DataTable ()
         {
-       
             {
                 try
-                {
-
+                { 
                     DataBaseHelper myDB = new DataBaseHelper();
-                    DataTable DT = myDB.getAllIncident(); 
-                                    
-                    ExportDataSetToExcel(DT);
-
-                    
+                    DataTable DT = myDB.getAllIncident();  
+                    ExportDataSetToExcel(DT);                  
                 }
                 catch (Exception)
                 {
                     throw;
                 }
-               
             }
         }
 
@@ -48,23 +41,16 @@ namespace CMSEmergencySystem.Email
                 string file = AppLocation + "\\ExcelFiles\\DataFile.xlsx";
                 using (XLWorkbook wb = new XLWorkbook())
                 {
-                    
                     wb.Worksheets.Add((String)DT.Rows[1][5]);                                   
                     wb.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
                     wb.Style.Font.Bold = true;
-
-                
                     wb.SaveAs(file);
                 }
             }
             catch (Exception e)
             {
-
                 throw;
             }
         }
-
-
-
     }
 }

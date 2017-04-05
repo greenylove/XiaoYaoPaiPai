@@ -1,106 +1,128 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Quartz;
+using System.Web.UI;
 using System.IO;
+using System.Text;
+using System.Data;
 using System.Net;
 using System.Net.Mail;
-using System.Web.UI;
 using System.Configuration;
-using System.Diagnostics;
-using System.Text;
-using CMSEmergencySystem.Controllers;
-using System.Data;
-
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.text.html.simpleparser;
 
 namespace CMSEmergencySystem.Controllers
 {
-    public class EmailController:IJob
+    public class EmailController
     {
-        public class JobSchedule
+        public static void SendPDFEmail()
         {
-
-            public static void Start()
+            DataBaseHelper dbh = new DataBaseHelper();
+            DataTable dt = dbh.getAllPendingIncident();
+            using (StringWriter sw = new StringWriter())
             {
-                IJobDetail emailJob = JobBuilder.Create<Controllers.EmailController>()
-                      .WithIdentity("job1")
-                      .Build();
+                using (HtmlTextWriter hw = new HtmlTextWriter(sw))
+                {
+                    //string companyName = "ASPSnippets";
+                    string to = "Prime Minister's Office";
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("<table width='100%' cellspacing='0' cellpadding='2'>");
+                    sb.Append("<tr><td style='height: 100px' align='center' style='background-color: #BDC3C7' colspan = '2'><b>Crisis Management System</b></td></tr>");
+                    sb.Append("<tr><td colspan = '2'></td></tr>");
+                    sb.Append("<tr><td><b>Date:  </b>");
+                    sb.Append(DateTime.Now);
+                    sb.Append("</td></tr><tr><td><tr><td colspan = '2'><b>To:  </b>");
+                    sb.Append(to);
+                    sb.Append(" </td></tr><tr></tr>");
+                    sb.Append("<tr><td colspan = '2'><b>Current Crisis</b> ");
+                    //sb.Append(companyName);
+                    sb.Append("</td></tr>");
+                    sb.Append("</table>");
+                    sb.Append("<br />");
+                    sb.Append("<table border = '1'>");
+                    sb.Append("<tr>");
+                    foreach (DataColumn column in dt.Columns)
+                    {
+                        sb.Append("<th style = 'background-color: #BDC3C7;color:#000000'>");
+                        sb.Append(column.ColumnName);
+                        sb.Append("</th>");
+                    }
+                    sb.Append("</tr>");
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        sb.Append("<tr>");
+                        foreach (DataColumn column in dt.Columns)
+                        {
+                            sb.Append("<td>");
+                            sb.Append(row[column]);
+                            sb.Append("</td>");
+                        }
+                        sb.Append("</tr>");
+                    }
+                    sb.Append("</table>");
+                    StringReader sr = new StringReader(sb.ToString());
 
-                ITrigger trigger = TriggerBuilder.Create()
-                    .WithDailyTimeIntervalSchedule
-                      (s =>
-                         s.WithIntervalInSeconds(30)
-                        .OnEveryDay()
-                      )
-                     .ForJob(emailJob)
-                     .WithIdentity("trigger1")
-                     .StartNow()
-                     .WithCronSchedule("0 0/1 * * * ?") // Time : Every 30 Minutes job execute
-                     .Build();
+                    Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
+                    HTMLWorker htmlparser = new HTMLWorker(pdfDoc);
+                    using (MemoryStream memoryStream = new MemoryStream())
+                    {
+                        PdfWriter writer = PdfWriter.GetInstance(pdfDoc, memoryStream);
+                        pdfDoc.Open();
+                        htmlparser.Parse(sr);
+                        pdfDoc.Close();
+                        byte[] bytes = memoryStream.ToArray();
+                        memoryStream.Close();
 
-                ISchedulerFactory sf = new Quartz.Impl.StdSchedulerFactory();
-                IScheduler sc = sf.GetScheduler();
-                sc.ScheduleJob(emailJob, trigger);
-                sc.Start();
-            }
-
-
-        }
-
-
-        public void Execute(IJobExecutionContext context)
-        {
-            using (MailMessage mailMessage = new MailMessage())
-            {
-                mailMessage.From =
-                new MailAddress(ConfigurationManager.AppSettings["FromMail"]); // sender address in web config
-                mailMessage.Subject = "CMS Report";
-                //mailMessage.Body = "Your message ";
-
-                //IncidentController controller = new IncidentController();
-
-
-                //DataTable Datatable1 = controller.getAllResolvedIncident();
-                //DataTable Datatable2 = controller.getAllPendingIncident();
-                //GridData.DataSource = Datatable1;
-                //GridData.DataBind();
-                //GridData2.DataSource = Datatable2;
-                //GridData2.DataBind();
-
-                //ViewState["DS2"] = Datatable1;
-                //ViewState["DS"] = Datatable2;
-
-
-                //string AppLocation = "";
-                //AppLocation = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase);
-                //AppLocation = AppLocation.Replace("file:\\", "");
-                //string file = AppLocation + "\\ExcelFiles\\DataFile.xlsx";
-
-
-                mailMessage.Body = "View Incident Records <a href=\"http://localhost:26909/Email/EmailData.aspx\"> Click Here! </a>";
-
-
-                //System.Net.Mail.Attachment attachment;
-                //attachment = new System.Net.Mail.Attachment(file); //Attaching File to Mail  
-                //mailMessage.Attachments.Add(attachment);
-
-
-                mailMessage.IsBodyHtml = true;
-                mailMessage.To.Add(new MailAddress("ngyaosheng92@gmail.com")); // send to who?
-                SmtpClient smtp = new SmtpClient();
-                smtp.Host = ConfigurationManager.AppSettings["Host"];
-                System.Net.NetworkCredential NetworkCred = new System.Net.NetworkCredential();
-                NetworkCred.UserName = ConfigurationManager.AppSettings["FromMail"];
-                NetworkCred.Password = ConfigurationManager.AppSettings["Password"];
-                smtp.UseDefaultCredentials = true;
-                smtp.Credentials = NetworkCred;
-                smtp.Port = Convert.ToInt32(ConfigurationManager.AppSettings["Port"]);
-                smtp.EnableSsl = true;
-                smtp.Send(mailMessage);
-
+                        MailMessage mm = new MailMessage(ConfigurationManager.AppSettings["FromMail"], "limjaichyi@gmail.com");
+                        mm.Subject = "CMS  " + DateTime.Now;
+                        mm.Body = "This is an auto-generated email provided by CMS.";
+                        mm.Attachments.Add(new Attachment(new MemoryStream(bytes), "CMS  " + DateTime.Now + ".pdf"));
+                        mm.IsBodyHtml = true;
+                        SmtpClient smtp = new SmtpClient();
+                        smtp.Host = ConfigurationManager.AppSettings["Host"];
+                        // smtp.Host = "smtp.gmail.com";
+                        smtp.EnableSsl = true;
+                        NetworkCredential NetworkCred = new NetworkCredential();
+                        NetworkCred.UserName = ConfigurationManager.AppSettings["FromMail"];
+                        NetworkCred.Password = ConfigurationManager.AppSettings["Password"];
+                        //NetworkCred.UserName = "imtingg@gmail.com";
+                        //NetworkCred.Password = "proudGrumpylion95";
+                        smtp.UseDefaultCredentials = true;
+                        smtp.Credentials = NetworkCred;
+                        smtp.Port = 587;
+                        smtp.Send(mm);
+                    }
+                }
             }
         }
+        //public static void sendEmail()
+        //{
+        //    using (MailMessage mailMessage = new MailMessage())
+        //    {
+        //        mailMessage.From =
+        //        new MailAddress(ConfigurationManager.AppSettings["FromMail"]); // sender address in web config
+        //        mailMessage.Subject = "CMS Report";
 
+        //        mailMessage.Body = "View Incident Records <a href=\"http://localhost:26909/Email/EmailData.aspx\"> Click Here! </a>";
+
+        //        mailMessage.IsBodyHtml = true;
+        //        mailMessage.To.Add(new MailAddress("limjaichyi@gmail.com")); // send to who?
+        //        SmtpClient smtp = new SmtpClient();
+        //        smtp.Host = ConfigurationManager.AppSettings["Host"];
+        //        System.Net.NetworkCredential NetworkCred = new System.Net.NetworkCredential();
+        //        NetworkCred.UserName = ConfigurationManager.AppSettings["FromMail"];
+        //        NetworkCred.Password = ConfigurationManager.AppSettings["Password"];
+        //        smtp.UseDefaultCredentials = true;
+        //        smtp.Credentials = NetworkCred;
+        //        smtp.Port = Convert.ToInt32(ConfigurationManager.AppSettings["Port"]);
+        //        smtp.EnableSsl = true;
+        //        smtp.Send(mailMessage);
+        //    }
+        //}
     }
+
+
+
+
+
+
 }

@@ -6,6 +6,7 @@ using System.Web.Security;
 using System.Web.SessionState;
 using Quartz;
 using CMSEmergencySystem;
+using CMSEmergencySystem.Controllers;
 
 namespace CMSEmergencySystem
 {
@@ -14,12 +15,10 @@ namespace CMSEmergencySystem
 
         protected void Application_Start(object sender, EventArgs e)
         {
-
-            // CMSEmergencySystem.Email.GetExcelFile.DataTable();
-            CMSEmergencySystem.Controllers.EmailController.JobSchedule.Start();
-
-
-
+            //CMSEmergencySystem.Email.GetExcelFile.DataTable();
+            //Controllers.EmailController.JobSchedule.Start();
+            TimerTask tt = new TimerTask();
+            tt.initAllTimerTask();
         }
 
         protected void Session_Start(object sender, EventArgs e)
