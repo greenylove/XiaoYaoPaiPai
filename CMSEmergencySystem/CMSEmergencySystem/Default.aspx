@@ -19,45 +19,25 @@ function myFacebookPost() {
 }
 
 function CheckedChanged() {
-    // clear all marker
-    // check what is checked
-    // if checked, reinsert marker
-    CMSEmergencySystem.Map.ClearMarker();
+    for (var i = 0; i < fire.length; i++) {
+        if (document.getElementById("showFire").checked == true)
+            fire[i].setVisible(true);
+        else
+            fire[i].setVisible(false);
+    }
+    for (i = 0; i < dengue.length; i++) {
+        if (document.getElementById("showDengue").checked == true)
+            dengue[i].setVisible(true);
+        else
+            dengue[i].setVisible(false);
+    }
+    for (i = 0; i < earthquake.length; i++) {
+        if (document.getElementById("showEarthquake").checked == true)
+            earthquake[i].setVisible(true);
+        else
+            earthquake[i].setVisible(false);
+    }
 
-    if (document.getElementById("showFire").checked == true) {
-        for (var i = 0; i < list.length; i++) {
-            var incident = list[i];
-            if (incident.Status == "Unresolved" && incident.TypeOfIncident == "Fire Outbreak") {
-                console.log(incident.TypeOfIncident);
-                incident.formatted_address = incident.Location;
-                CMSEmergencySystem.Map.AddMarker(new google.maps.LatLng(incident.Latitude, incident.Longitude),
-                        incident.TypeOfIncident, incident, incident);
-            }
-        }
-    }
-    if (document.getElementById("showDengue").checked == true) {
-        for (var i = 0; i < list.length; i++) {
-            var incident = list[i];
-            if (incident.Status == "Unresolved" && incident.TypeOfIncident == "Dengue Outbreak") {
-                console.log(incident.TypeOfIncident);
-                incident.formatted_address = incident.Location;
-                CMSEmergencySystem.Map.AddMarker(new google.maps.LatLng(incident.Latitude, incident.Longitude),
-                        incident.TypeOfIncident, incident, incident);
-            }
-        }
-    }
-    if (document.getElementById("showEarthquake").checked == true) {
-        for (var i = 0; i < list.length; i++) {
-            var incident = list[i];
-            if (incident.Status == "Unresolved" && incident.TypeOfIncident == "Earthquake") {
-                console.log(incident.TypeOfIncident);
-                incident.formatted_address = incident.Location;
-                CMSEmergencySystem.Map.AddMarker(new google.maps.LatLng(incident.Latitude, incident.Longitude),
-                        incident.TypeOfIncident, incident, incident);
-            }
-        }
-    }
-    
 }
 
 </script>
@@ -210,6 +190,10 @@ function CheckedChanged() {
 <script src="/Scripts/map.js" type="text/javascript"></script>
     var list;
 <script>
+    var fire = [];
+    var earthquake = [];
+    var dengue = [];
+
     google.maps.event.addDomListener(window, 'load', init);
 
     function init() {
@@ -223,25 +207,21 @@ function CheckedChanged() {
         $.ajax("/IncidentServlet.aspx", {
             success: function (data) {
                 list = JSON.parse(data);
+                console.log(list);
                 for (var i = 0; i < list.length; i++) {
                     var incident = list[i];
                     //console.log("Retrieve var from incident");
-                   if (incident.Status == "Unresolved") {
+                    if (incident.Status == "Unresolved") {
                         //console.log("if statement");
-                       incident.formatted_address = incident.Location;
-                        CMSEmergencySystem.Map.AddMarker(new google.maps.LatLng(incident.Latitude, incident.Longitude), 
+                        incident.formatted_address = incident.Location;
+                        var marker = CMSEmergencySystem.Map.AddMarker(new google.maps.LatLng(incident.Latitude, incident.Longitude), 
                                 incident.TypeOfIncident, incident, incident);
-                        
-                        /*new google.maps.Marker({
-                            position: new google.maps.LatLng(incident.latitude, incident.longitude),
-                            icon: '/Icons/' + incident.typeOfIncident + ".png",
-                            map: map,
-                            title: incident.location
-                        });*/
-                        
-                        //console.log("HELLO WORLD");
-                        //console.log(incident.typeOfIncident);
-                        //console.log(incident);
+                        if (incident.TypeOfIncident == "Fire Outbreak")
+                            fire.push(marker);
+                        else if (incident.TypeOfIncident == "Earthquake")
+                            earthquake.push(marker);
+                        else if (incident.TypeOfIncident == "Dengue Outbreak")
+                            dengue.push(marker);
                     }
                 }
                 //alert("go pass through here");
