@@ -14,9 +14,10 @@ namespace CMSEmergencySystem
 
         protected void Application_Start(object sender, EventArgs e)
         {
-          
-                JobSchedule.JobSchedule.Start();
-            
+
+            //CMSEmergencySystem.Email.GetExcelFile.DataTable();
+            Controllers.EmailController.JobSchedule.Start();
+
 
 
         }

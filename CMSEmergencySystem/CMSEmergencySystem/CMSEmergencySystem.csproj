@@ -43,12 +43,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.87.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.87.1\lib\net40\ClosedXML.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Common.Logging, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <HintPath>..\packages\Common.Logging.3.3.1\lib\net40\Common.Logging.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Common.Logging.Core, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <HintPath>..\packages\Common.Logging.Core.3.3.1\lib\net40\Common.Logging.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -166,6 +174,7 @@
     <Compile Include="About.aspx.designer.cs">
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="DefaultManager\AccountManager.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -216,7 +225,7 @@
     <Compile Include="Email\EmailData.aspx.designer.cs">
       <DependentUpon>EmailData.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Email\EmailJob.cs" />
+    <Compile Include="Email\GetExcelFile.cs" />
     <Compile Include="Entities\FacebookFeed.cs" />
     <Compile Include="Entities\FacebookFeeds.cs" />
     <Compile Include="Entities\IncidentItem.cs" />
@@ -233,7 +242,6 @@
     <Compile Include="IncidentServlet.aspx.designer.cs">
       <DependentUpon>IncidentServlet.aspx</DependentUpon>
     </Compile>
-    <Compile Include="JobSchedule\JobSchedule.cs" />
     <Compile Include="DefaultManager\NEAManager.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
