@@ -462,3 +462,7 @@ C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bi
 C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Newtonsoft.Json.xml
 C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Quartz.pdb
 C:\Users\NYS\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Quartz.xml
+C:\Users\jaichyi\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\ClosedXML.dll
+C:\Users\jaichyi\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\DocumentFormat.OpenXml.dll
+C:\Users\jaichyi\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\ClosedXML.pdb
+C:\Users\jaichyi\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\ClosedXML.xml
