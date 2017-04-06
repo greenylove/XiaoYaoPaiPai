@@ -25,17 +25,23 @@ function CheckedChanged() {
         else
             fire[i].setVisible(false);
     }
-    for (i = 0; i < dengue.length; i++) {
-        if (document.getElementById("showDengue").checked == true)
-            dengue[i].setVisible(true);
+    for (i = 0; i < riot.length; i++) {
+        if (document.getElementById("showRiot").checked == true)
+            riot[i].setVisible(true);
         else
-            dengue[i].setVisible(false);
+            riot[i].setVisible(false);
     }
-    for (i = 0; i < earthquake.length; i++) {
-        if (document.getElementById("showEarthquake").checked == true)
-            earthquake[i].setVisible(true);
+    for (i = 0; i < caraccident.length; i++) {
+        if (document.getElementById("showCarAccident").checked == true)
+            caraccident[i].setVisible(true);
         else
-            earthquake[i].setVisible(false);
+            caraccident[i].setVisible(false);
+    }
+    for (i = 0; i < terrorist.length; i++) {
+        if (document.getElementById("showTerrorist").checked == true)
+            terrorist[i].setVisible(true);
+        else
+            terrorist[i].setVisible(false);
     }
     //NEA Markers
     for (var w = 0; w < weatherList.length; w++) {
@@ -197,8 +203,9 @@ function CheckedChanged() {
     var list;
 <script>
     var fire = [];
-    var earthquake = [];
-    var dengue = [];
+    var caraccident = [];
+    var riot = [];
+    var terrorist = [];
     var weatherList = [];
     var dengueLayer;
 
@@ -241,10 +248,12 @@ function CheckedChanged() {
                                 incident.TypeOfIncident, incident, incident);
                         if (incident.TypeOfIncident == "Fire Outbreak")
                             fire.push(marker);
-                        else if (incident.TypeOfIncident == "Earthquake")
-                            earthquake.push(marker);
-                        else if (incident.TypeOfIncident == "Dengue Outbreak")
-                            dengue.push(marker);
+                        else if (incident.TypeOfIncident == "Car Accident")
+                            caraccident.push(marker);
+                        else if (incident.TypeOfIncident == "Riot Outbreak")
+                            riot.push(marker);
+                        else if (incident.TypeOfIncident == "Terrorist")
+                            terrorist.push(marker);
                     }
                 }
                 //alert("go pass through here");
@@ -384,8 +393,9 @@ function CheckedChanged() {
                         <td colspan="3">
                             <asp:DropDownList ID="typeOfIncidentDDL" runat="server">
                                 <asp:ListItem Text="Fire Outbreak" Value="Fire Outbreak" />
-                                <asp:ListItem Text="Dengue Outbreak" Value="Dengue Outbreak" />
-                                <asp:ListItem Text="Earthquake" Value="Earthquake" />
+                                <asp:ListItem Text="Riot Outbreak" Value="Riot Outbreak" />
+                                <asp:ListItem Text="Car Accident" Value="Car Accident" />
+                                <asp:ListItem Text="Terrorist" Value="Terrorist" />
                             </asp:DropDownList></td>
                     </tr>
                     <tr>
@@ -520,8 +530,12 @@ function CheckedChanged() {
         <td> Fire Outbreaks : </td>
         <td>
             <input type="checkbox" id= "showFire"name="showfire" onclick="CheckedChanged();" checked/>
-            <input type="checkbox" id= "showDengue"name="dengue" onclick="CheckedChanged();" checked/>
-            <input type="checkbox" id= "showEarthquake"name="earthquake" onclick="CheckedChanged();" checked/>
+            Riot Outbreaks:
+            <input type="checkbox" id= "showRiot"name="riot" onclick="CheckedChanged();" checked/>
+            Car Accident:
+            <input type="checkbox" id= "showCarAccident"name="caraccident" onclick="CheckedChanged();" checked/>
+            Terrorist:
+            <input type="checkbox" id= "showTerrorist"name="terrorist" onclick="CheckedChanged();" checked/>
         </td>
             <td>
                 Weather: 

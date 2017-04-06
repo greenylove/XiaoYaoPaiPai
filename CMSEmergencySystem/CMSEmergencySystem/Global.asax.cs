@@ -18,7 +18,7 @@ namespace CMSEmergencySystem
             //CMSEmergencySystem.Email.GetExcelFile.DataTable();
             //Controllers.EmailController.JobSchedule.Start();
             TimerTask tt = new TimerTask();
-            tt.initAllTimerTask();
+            //tt.initAllTimerTask();
         }
 
         protected void Session_Start(object sender, EventArgs e)

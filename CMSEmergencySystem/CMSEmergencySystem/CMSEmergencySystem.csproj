@@ -128,6 +128,7 @@
     </Content>
     <Content Include="Email\EmailData.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Icons\CarAccident.png" />
     <Content Include="Icons\clear.png" />
     <Content Include="Icons\cloudy.png" />
     <Content Include="Icons\cloudywindy02.png" />
@@ -138,6 +139,8 @@
     <Content Include="Icons\hazy.png" />
     <Content Include="Icons\partlysunny.png" />
     <Content Include="Icons\rain02.png" />
+    <Content Include="Icons\Riot.png" />
+    <Content Include="Icons\Terrorist.png" />
     <Content Include="Icons\thunderstorms01.png" />
     <Content Include="Images\dengue-icon.png" />
     <Content Include="Images\facebookicon.png" />
