@@ -555,7 +555,17 @@ function CheckedChanged() {
       <span id="lng">Longtidue: </span><br>
       <span id="place-address"></span>
     </div>
-        <div id="legend"><h4>Legend</h4></div>
+        <div id="legend">
+            <h4>Legend</h4>
+            <p><img src = "/Icons/caraccident.png" style="width: 50px;height:40px;padding-right: 10px"/>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src = "/Icons/Fire.png"style="width: 50px;height:40px;padding-right: 10px"/>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src = "/Icons/riot.png"style="width: 50px;height:40px;padding-right: 10px"/>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src = "/Icons/terrorist.png"style="width: 50px;height:40px;padding-right: 10px"/>
+            </p>
+            <p> Accident &nbsp&nbsp&nbsp&nbsp&nbsp Fire &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Riot  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Terrorist</p>
+            <p>&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" id="accident"/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" id="fire" />
+             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" id="riot" />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" id="terrorist" /></p>
+        </div>
         <div id="Incidents" style="margin: 10px;">
             <div id="tabs">
                 <ul class="nav nav-tabs">

@@ -53,7 +53,8 @@
                     <AnonymousTemplate>
 
                     <ul class="nav navbar-nav navbar-right">
-                <!--<li><a href="/Account/Register" id="registerLink">Register</a></li>-->
+                <li><a href="/Account/Login.aspx" id="registerLink">Login</a></li>
+                <li><a href="/Account/Logout.aspx" id="Logout"> Logout </a></li>
 
                 <li><a href="~/Account/Login.aspx" id="HeadLoginStatus" runat="server">Log In</a></li>
             </ul>

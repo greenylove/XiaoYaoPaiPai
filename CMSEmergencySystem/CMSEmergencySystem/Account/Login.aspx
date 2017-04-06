@@ -1,48 +1,45 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="CMSEmergencySystem.Account.Login" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <form id="loginFrm" runat="server">
-    <h2>
-        Log In
-    </h2>
-    <p>
-        Please enter your username and password.
-    </p>
-    <asp:Login ID="LoginUser" runat="server" EnableViewState="false" RenderOuterTable="false">
-        <LayoutTemplate>
-            <span class="failureNotification">
-                <asp:Literal ID="FailureText" runat="server"></asp:Literal>
-            </span>
-            <asp:ValidationSummary ID="LoginUserValidationSummary" runat="server" CssClass="failureNotification" 
-                 ValidationGroup="LoginUserValidationGroup"/>
-            <div class="accountInfo">
-                <fieldset class="login">
-                    <legend>Account Information</legend>
-                    <p>
-                        <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">Username:</asp:Label>
-                        <asp:TextBox ID="UserName" runat="server" CssClass="textEntry"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName" 
-                             CssClass="failureNotification" ErrorMessage="User Name is required." ToolTip="User Name is required." 
-                             ValidationGroup="LoginUserValidationGroup">*</asp:RequiredFieldValidator>
-                    </p>
-                    <p>
-                        <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">Password:</asp:Label>
-                        <asp:TextBox ID="Password" runat="server" CssClass="passwordEntry" TextMode="Password"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password" 
-                             CssClass="failureNotification" ErrorMessage="Password is required." ToolTip="Password is required." 
-                             ValidationGroup="LoginUserValidationGroup">*</asp:RequiredFieldValidator>
-                    </p>
-                    <p>
-                        <asp:CheckBox ID="RememberMe" runat="server"/>
-                        <asp:Label ID="RememberMeLabel" runat="server" AssociatedControlID="RememberMe" CssClass="inline">Keep me logged in</asp:Label>
-                    </p>
-                </fieldset>
-                <p class="submitButton">
-                    <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text="Log In" ValidationGroup="LoginUserValidationGroup"/>
-                </p>
-            </div>
-        </LayoutTemplate>
-    </asp:Login>
+﻿<%@ Page Title="" Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="CMSEmergencySystem.Account.Login" %>
+
+<html>
+
+<script type="text/javascript">
+        function validate() {
+            if (document.getElementById("UserName").value == "" & document.getElementById("Password").value == "") {
+                alert("Name Field and Password Field cannot be blank");
+                document.getElementById("userName").focus();
+                return false;
+            }
+            if (document.getElementById("UserName").value == "") {
+                  alert("Name Field cannot be blank");
+                  document.getElementById("UserName").focus();
+                  return false;
+              }
+              else if (document.getElementById("Password").value == "") {
+                  alert("Password Field cannot be blank");
+                  document.getElementById("Password").focus();
+                  return false;
+              }
+              else {
+                  return true;
+              }
+         }
+</script>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <h2>WELCOME TO CRISIS MANAGEMENT SYSTEM (CMS)</h2>
+        <h3> Account Information</h3>
+    Username : 
+        <asp:TextBox ID="UserName" runat="server"></asp:TextBox> <br />
+
+    Password :
+        <asp:TextBox ID="Password" runat="server" TextMode="Password"></asp:TextBox> <br />
+
+    <asp:Button ID="LoginUser" runat="server" text="Login" OnClick="LoginUser_Click" OnClientClick="return validate();"/>
+        <br /><asp:Label ID="displayError" runat="server"></asp:Label>
+
+
+    </div>
     </form>
-</asp:Content>
+</body>
+</html>
