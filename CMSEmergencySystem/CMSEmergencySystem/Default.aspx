@@ -527,7 +527,7 @@ function CheckedChanged() {
         
         <table>
         <tr>
-        <td> Fire Outbreaks : </td>
+        <%--<td> Fire Outbreaks : </td>
         <td>
             <input type="checkbox" id= "showFire"name="showfire" onclick="CheckedChanged();" checked/>
             Riot Outbreaks:
@@ -536,7 +536,7 @@ function CheckedChanged() {
             <input type="checkbox" id= "showCarAccident"name="caraccident" onclick="CheckedChanged();" checked/>
             Terrorist:
             <input type="checkbox" id= "showTerrorist"name="terrorist" onclick="CheckedChanged();" checked/>
-        </td>
+        </td>--%>
             <td>
                 Weather: 
                 <input type="checkbox" id="weatherCheckBox" name="weatherCheckBox" onclick="CheckedChanged();"/>
@@ -563,8 +563,10 @@ function CheckedChanged() {
                 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src = "/Icons/terrorist.png"style="width: 50px;height:40px;padding-right: 10px"/>
             </p>
             <p> Accident &nbsp&nbsp&nbsp&nbsp&nbsp Fire &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Riot  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Terrorist</p>
-            <p>&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" id="accident"/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" id="fire" />
-             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" id="riot" />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" id="terrorist" /></p>
+            <p>&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" id= "showCarAccident"name="caraccident" onclick="CheckedChanged();" checked/>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" id= "showFire"name="showfire" onclick="CheckedChanged();" checked/>
+             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" id= "showRiot"name="riot" onclick="CheckedChanged();" checked/>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" id= "showTerrorist"name="terrorist" onclick="CheckedChanged();" checked/></p>
         </div>
         <div id="Incidents" style="margin: 10px;">
             <div id="tabs">
