@@ -161,10 +161,12 @@ CMSEmergencySystem.Map.WeatherAddMarker = function (location, forecast) {
 }
 
 CMSEmergencySystem.Map.AddMarker = function (latlng, type, state, geocoderResult) {
+    console.log("latlng: " + geocoderResult.NewIncidentID);
     var markerOpts = {
         map: CMSEmergencySystem.Map._Map,
         position: latlng
     };
+    ;
 
     if (type != "default")
         markerOpts["icon"] = CMSEmergencySystem.Map._IconMap[type];
@@ -175,7 +177,7 @@ CMSEmergencySystem.Map.AddMarker = function (latlng, type, state, geocoderResult
     marker._State = state;
 
     marker.addListener('click', CMSEmergencySystem.Map.OnMarkerSelected);
-    CMSEmergencySystem.Map._Markers.push(marker);
+    //CMSEmergencySystem.Map._Markers.push(marker);
 
     return marker;
 };
@@ -452,9 +454,9 @@ CMSEmergencySystem.Map.ReplaceMarker = function (marker, type) {
 
     return CMSEmergencySystem.Map.AddMarker(latlng, type, place);
 };
-
+var state
 CMSEmergencySystem.Map.ShowInfoWindow = function (marker) {
-    var state = marker._State;
+    state = marker._State;
     var gresult = CMSEmergencySystem.Map._GeocoderResultMap[state];
 
     // Set information window content

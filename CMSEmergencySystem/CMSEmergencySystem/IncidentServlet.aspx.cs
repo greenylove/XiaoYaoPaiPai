@@ -35,7 +35,9 @@ namespace CMSEmergencySystem
                     Location.Rows[i]["incidentDesc"].ToString(),
                     float.Parse(Location.Rows[i]["Latitude"].ToString()),
                     float.Parse(Location.Rows[i]["Longitude"].ToString()));
+                incident.NewIncidentID = Int32.Parse(Location.Rows[i]["IncidentID"].ToString());
                 incident.Status = Location.Rows[i]["Status"].ToString();
+               
                 IncidentObj.Add(incident);
             }
             return IncidentObj;

@@ -122,7 +122,24 @@ function CheckedChanged() {
         }*/
 
         btn1.onclick = function () {
-            createModal.style.display = "block";
+            if (document.getElementById('infowindow-content').children["CreateIncident"].textContent == "Create Incident") {
+                createModal.style.display = "block";
+            }
+            else if (document.getElementById('infowindow-content').children["CreateIncident"].textContent == "View Incident") {
+                //GridData.in
+                var table = document.getElementById("MainContent_GridData");
+                for (var i = 1; i < table.rows.length; i++) {
+                    if (state == table.rows[i].cells[0].innerHTML) {
+                        console.log("correct");
+                        document.getElementById("MainContent_GridData").rows[i].cells[5].children[0].click()
+                    }
+                }
+            }
+               console.log("MAP_ID: " + state);
+
+                console.log("TableID: "+table.rows[2].cells[0].innerHTML);
+                //console.log(document.getElementById("MainContent_GridData").children[0].);
+            
             document.getElementById('LatInfo').value = window.defaultPlaceGResult.latitude;
             document.getElementById('LngInfo').value = window.defaultPlaceGResult.longitude;
             return false;
@@ -218,7 +235,7 @@ function CheckedChanged() {
         CMSEmergencySystem.Map.AddDefaultPlaceListener(cacheDefaultPlaceGResult);
         document.getElementById('LatInfo').value = CMSEmergencySystem.Map._InfoWindowContent.children["lng"].textContent;
         document.getElementById('LngInfo').value = CMSEmergencySystem.Map._InfoWindowContent.children["lng"].textContent;
-
+        console.log(document.getElementById('LatInfo').value);
         //Load Dengue KML
         dengueLayer = CMSEmergencySystem.Map.LoadDengue();
 
@@ -244,8 +261,10 @@ function CheckedChanged() {
                     if (incident.Status == "Unresolved") {
                         //console.log("if statement");
                         incident.formatted_address = incident.Location;
+                        incident.latitude = incident.Latitude;
+                        incident.longitude = incident.Longitude;
                         var marker = CMSEmergencySystem.Map.AddMarker(new google.maps.LatLng(incident.Latitude, incident.Longitude), 
-                                incident.TypeOfIncident, incident, incident);
+                                incident.TypeOfIncident, incident.NewIncidentID, incident);
                         if (incident.TypeOfIncident == "Fire Outbreak")
                             fire.push(marker);
                         else if (incident.TypeOfIncident == "Car Accident")
@@ -272,7 +291,14 @@ function CheckedChanged() {
         // Whenever a place is selected this listener will be called
         // Retrieve the place from marker._Place
         document.getElementById('locationTextBox').value = geocodeResult.formatted_address ? geocodeResult.formatted_address : "";
+        if (fire.indexOf(marker) != -1 || caraccident.indexOf(marker) != -1 || riot.indexOf(marker) != -1 || terrorist.indexOf(marker) != -1) {
+            document.getElementById('infowindow-content').children["CreateIncident"].textContent = "View Incident"
+        }
+        else {
+            document.getElementById('infowindow-content').children["CreateIncident"].textContent = "Create Incident"
+        }
     }
+
     /*var place, gresult;
     function cachePlace(marker, geocodeResult) {
         place = marker._Place;
@@ -552,7 +578,7 @@ function CheckedChanged() {
       Place ID <span id="place-id"></span><br>
       <a id="CreateIncident">Create Incident</a><br>
       <span id="lat">Latitude: </span><br>
-      <span id="lng">Longtidue: </span><br>
+      <span id="lng">Longitude: </span><br>
       <span id="place-address"></span>
     </div>
         <div id="legend">
@@ -588,6 +614,7 @@ function CheckedChanged() {
                 <div class="gridViewTable">
                     <asp:GridView ID="GridData" runat="server" AutoGenerateColumns="False" onrowcommand="ViewPendingIncident_RowCommand" 
                          Width="100%" CssClass="table table-striped table-hover"> 
+           
             <Columns>
                 <asp:BoundField DataField="IncidentId" HeaderText="Id" />
                 <asp:BoundField DataField="dateTime" HeaderText="Date/Time" />
@@ -627,7 +654,7 @@ function CheckedChanged() {
                 <asp:BoundField DataField="Location" HeaderText="Location" />
                 <asp:TemplateField >
                     <ItemTemplate>
-                        <asp:Button ID="VI" Text="View Incident" CommandName="Select" runat="server" return ="false"/> 
+                        <asp:Button ID="VI" ClientIDMode="Static" Text="View Incident" CommandName="Select" runat="server" return ="false"/> 
                     </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField >
