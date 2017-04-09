@@ -90,90 +90,6 @@ namespace CMSEmergencySystem
             Connection.Close();
             return ds.Tables["searchResult"];
         }
-        public int addName(string Name, string DropDownList)
-        {
-
-            SqlCommand Command = new SqlCommand();
-            // DataSet ds = new DataSet();
-            SqlDataAdapter Adapter = new SqlDataAdapter();
-            string sqlText = "INSERT INTO Database1.dbo.USERTABLE (Name, DropDownList) OUTPUT INSERTED.ID VALUES(@Name, @DropDownList)";
-            int IncidentID = 0;
-
-            Command.Parameters.Add("@Name", SqlDbType.VarChar, 100);
-            Command.Parameters["@Name"].Value = Name;
-            Command.Parameters.Add("@DropDownList", SqlDbType.VarChar, 100);
-            Command.Parameters["@DropDownList"].Value = DropDownList;
-
-            Command.CommandText = sqlText;
-
-            settings = System.Configuration.ConfigurationManager.ConnectionStrings["Connection"];
-            string connectionString = settings.ConnectionString;
-            SqlConnection Connection = new SqlConnection(connectionString);
-
-            Command.Connection = Connection;
-            Adapter.SelectCommand = Command;
-
-
-            Connection.Open();
-            IncidentID = (int)Command.ExecuteScalar();
-            // Adapter.Fill(ds, "USERTABLE");
-            Connection.Close();
-
-            return IncidentID;
-
-        } // end of addName
-
-        public void AddHobbies(string Hobbies, int IncidentID)
-        {
-
-            SqlCommand Command = new SqlCommand();
-            DataSet ds = new DataSet();
-            SqlDataAdapter Adapter = new SqlDataAdapter();
-            string sqlText = "INSERT INTO Database1.dbo.ItemList (Hobbies, IncidentID) VALUES(@Hobbies, @IncidentID)";
-
-            Command.Parameters.Add("@IncidentID", SqlDbType.VarChar, 100);
-            Command.Parameters["@IncidentID"].Value = IncidentID;
-            Command.Parameters.Add("@Hobbies", SqlDbType.VarChar, 100);
-            Command.Parameters["@Hobbies"].Value = Hobbies;
-
-            settings = System.Configuration.ConfigurationManager.ConnectionStrings["Connection"];
-            string connectionString = settings.ConnectionString;
-            SqlConnection Connection = new SqlConnection(connectionString);
-
-            Command.CommandText = sqlText;
-            Command.Connection = Connection;
-            Adapter.SelectCommand = Command;
-
-            Connection.Open();
-            Command.ExecuteNonQuery();
-            Connection.Close();
-
-        } // end of insertHobbies
-
-        public void deleteHobbies(int IncidentID)
-        {
-
-            SqlCommand Command = new SqlCommand();
-            DataSet ds = new DataSet();
-            SqlDataAdapter Adapter = new SqlDataAdapter();
-            string sqlText = "DELETE FROM Database1.dbo.ItemList Where IncidentID = @IncidentID";
-
-            Command.Parameters.Add("@IncidentID", SqlDbType.VarChar, 100);
-            Command.Parameters["@IncidentID"].Value = IncidentID;
-
-            settings = System.Configuration.ConfigurationManager.ConnectionStrings["Connection"];
-            string connectionString = settings.ConnectionString;
-            SqlConnection Connection = new SqlConnection(connectionString);
-
-            Command.CommandText = sqlText;
-            Command.Connection = Connection;
-            Adapter.SelectCommand = Command;
-
-            Connection.Open();
-            Command.ExecuteNonQuery();
-            Connection.Close();
-
-        } // end of insertHobbies
 
         public DataTable getAllLocation()
         {
@@ -219,7 +135,7 @@ namespace CMSEmergencySystem
             Connection.Close();
             return Ds.Tables["allIncident"];
 
-        } // end of getAllPendingIncident
+        } // end of getAllIncident
 
         public DataTable getAllPendingIncident()
         {
@@ -266,7 +182,7 @@ namespace CMSEmergencySystem
             Connection.Close();
             return Ds.Tables["Id"];
 
-        } // end of getAllPendingIncident
+        } // end of getAllResolvedIncident
 
 
         public int updateIncidentStatus(int IncidentID, string Status)
@@ -296,7 +212,7 @@ namespace CMSEmergencySystem
 
             return numOfRecordAffected;
 
-        } // end of update presentation
+        } // end of updateIncidentStatus
 
 
         public IncidentItem getOneIncident(int IncidentID)

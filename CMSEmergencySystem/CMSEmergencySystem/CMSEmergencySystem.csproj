@@ -143,11 +143,13 @@
     <Content Include="Icons\Fire.png" />
     <Content Include="Icons\flurries.png" />
     <Content Include="Icons\hazy.png" />
+    <Content Include="Icons\mosquito.png" />
     <Content Include="Icons\partlysunny.png" />
     <Content Include="Icons\rain02.png" />
     <Content Include="Icons\Riot.png" />
     <Content Include="Icons\Terrorist.png" />
     <Content Include="Icons\thunderstorms01.png" />
+    <Content Include="Icons\weather.png" />
     <Content Include="Images\dengue-icon.png" />
     <Content Include="Images\facebookicon.png" />
     <Content Include="Images\twittericon.png" />

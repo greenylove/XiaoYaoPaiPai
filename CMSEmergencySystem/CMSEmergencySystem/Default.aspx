@@ -132,6 +132,8 @@ function CheckedChanged() {
         btn1.onclick = function () {
             if (document.getElementById('infowindow-content').children["CreateIncident"].textContent == "Create Incident") {
                 createModal.style.display = "block";
+                document.getElementById('LatInfo').value = window.defaultPlaceGResult.latitude;
+                document.getElementById('LngInfo').value = window.defaultPlaceGResult.longitude;
             }
             else if (document.getElementById('infowindow-content').children["CreateIncident"].textContent == "View Incident") {
                 //GridData.in
@@ -145,11 +147,11 @@ function CheckedChanged() {
             }
                console.log("MAP_ID: " + state);
 
-                console.log("TableID: "+table.rows[2].cells[0].innerHTML);
+                //console.log("TableID: "+table.rows[2].cells[0].innerHTML);
                 //console.log(document.getElementById("MainContent_GridData").children[0].);
             
-            document.getElementById('LatInfo').value = window.defaultPlaceGResult.latitude;
-            document.getElementById('LngInfo').value = window.defaultPlaceGResult.longitude;
+           // document.getElementById('LatInfo').value = window.defaultPlaceGResult.latitude;
+           // document.getElementById('LngInfo').value = window.defaultPlaceGResult.longitude;
             return false;
         }
 
@@ -241,7 +243,7 @@ function CheckedChanged() {
         CMSEmergencySystem.Map.AddDefaultPlaceListener(onPlaceSelected);
         CMSEmergencySystem.Map.AddPlaceSelectedListener(onPlaceSelected);
         CMSEmergencySystem.Map.AddDefaultPlaceListener(cacheDefaultPlaceGResult);
-        document.getElementById('LatInfo').value = CMSEmergencySystem.Map._InfoWindowContent.children["lng"].textContent;
+        document.getElementById('LatInfo').value = CMSEmergencySystem.Map._InfoWindowContent.children["lat"].textContent;
         document.getElementById('LngInfo').value = CMSEmergencySystem.Map._InfoWindowContent.children["lng"].textContent;
         console.log(document.getElementById('LatInfo').value);
         //Load Dengue KML
@@ -290,6 +292,8 @@ function CheckedChanged() {
         });
         //CMSEmergencySystem.Map.AddDefaultPlaceListener(cachePlace);
     }
+
+
 
     function cacheDefaultPlaceGResult(marker, geocodeResult) {
         window.defaultPlaceGResult = geocodeResult;
@@ -592,6 +596,9 @@ function CheckedChanged() {
                     <td><img src = "/Icons/Fire.png"style="width: 40px;height:40px;"/></td>
                     <td><img src = "/Icons/riot.png"style="width: 40px;height:40px;"/></td>
                     <td><img src = "/Icons/terrorist.png"style="width: 40px;height:40px;"/></td>
+                    <td><img src = "/Icons/weather.png"style="width: 40px;height:40px;"/></td>
+                    <td><img src = "/Icons/mosquito.png"style="width: 40px;height:40px;"/></td>
+
                 </tr>
                 <tr>
                     <td>Accident</td>
@@ -602,23 +609,10 @@ function CheckedChanged() {
                     <td>Dengue</td>
                 </tr>
 
-                <%--<div>
-                <p>Weather:<input type="checkbox" id="weatherCheckBox" name="weatherCheckBox" onclick="CheckedChanged();"/></p>
-                <p>Dengue:<input type="checkbox" id="dengueCheckBox" name="dengueCheckBox" onclick="toggleDengue();"/></p>
-        <asp:Label ID="showFireDisplay" runat="server"></asp:Label>        
-        </div>--%>
+             
             </table>
 
-            <%--<p><img src = "/Icons/caraccident.png" style="width: 50px;height:40px;padding-right: 10px"/>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src = "/Icons/Fire.png"style="width: 50px;height:40px;padding-right: 10px"/>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src = "/Icons/riot.png"style="width: 50px;height:40px;padding-right: 10px"/>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src = "/Icons/terrorist.png"style="width: 50px;height:40px;padding-right: 10px"/>
-            </p>
-            <p> Accident &nbsp&nbsp&nbsp&nbsp&nbsp Fire &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Riot  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Terrorist</p>
-            <p>&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" id= "showCarAccident"name="caraccident" onclick="CheckedChanged();" checked/>
-&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" id= "showFire"name="showfire" onclick="CheckedChanged();" checked/>
-             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" id= "showRiot"name="riot" onclick="CheckedChanged();" checked/>
-&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" id= "showTerrorist"name="terrorist" onclick="CheckedChanged();" checked/></p>--%>
+        
         </div>
         <div id="Incidents" style="margin: 10px;">
             <div id="tabs">
@@ -669,8 +663,7 @@ function CheckedChanged() {
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">              
                 <ContentTemplate>
                     <asp:GridView ID="GridData2" runat="server" AutoGenerateColumns="False" onrowcommand="ViewResolvedIncident_RowCommand"
-                         Width="100%" HeaderStyle-BackColor="#98e698" HeaderStyle-ForeColor="Black" RowStyle-BackColor="White" 
-                        AlternatingRowStyle-BackColor="White" RowStyle-ForeColor="#3A3A3A"> 
+                         Width="100%" CssClass="table table-striped table-hover"> 
             <Columns>
                 <asp:BoundField DataField="IncidentId" HeaderText="Id" />
                 <asp:BoundField DataField="dateTime" HeaderText="Date/Time" />
@@ -679,12 +672,12 @@ function CheckedChanged() {
                 <asp:BoundField DataField="Location" HeaderText="Location" />
                 <asp:TemplateField >
                     <ItemTemplate>
-                        <asp:Button ID="VI" ClientIDMode="Static" Text="View Incident" CommandName="Select" runat="server" return ="false"/> 
+                        <asp:Button ID="VI" ClientIDMode="Static" Text="View Incident" CommandName="Select" runat="server" return ="false" CssClass="btn btn-default"/> 
                     </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField >
                     <ItemTemplate>
-                        <asp:Button ID="deleteRow" Text="Delete" CommandName="Delete" runat="server" /> 
+                        <asp:Button ID="deleteRow" Text="Delete" CommandName="Delete" runat="server" CssClass="btn btn-default"/> 
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
