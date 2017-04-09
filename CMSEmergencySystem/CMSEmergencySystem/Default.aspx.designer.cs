@@ -292,6 +292,24 @@ namespace CMSEmergencySystem {
         protected global::System.Web.UI.WebControls.Button submit;
         
         /// <summary>
+        /// Buttonposttofb control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Buttonposttofb;
+        
+        /// <summary>
+        /// UpdatePanelFBLiveFeed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanelFBLiveFeed;
+        
+        /// <summary>
         /// fbLiveFeed control.
         /// </summary>
         /// <remarks>
@@ -301,6 +319,15 @@ namespace CMSEmergencySystem {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl fbLiveFeed;
         
         /// <summary>
+        /// UpdatePanel4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel4;
+        
+        /// <summary>
         /// twitterLiveFeed control.
         /// </summary>
         /// <remarks>
@@ -308,15 +335,6 @@ namespace CMSEmergencySystem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl twitterLiveFeed;
-        
-        /// <summary>
-        /// showFireDisplay control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label showFireDisplay;
         
         /// <summary>
         /// searchResult control.

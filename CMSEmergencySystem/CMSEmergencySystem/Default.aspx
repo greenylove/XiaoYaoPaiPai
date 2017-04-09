@@ -91,10 +91,18 @@ function CheckedChanged() {
         function tab1() {
             document.getElementById("tabs-2").style.display = "none";
             document.getElementById("tabs-1").style.display = "inline-block";
+            document.getElementById("tabs-3").style.display = "none";
         }
         function tab2() {
             document.getElementById("tabs-1").style.display = "none";
             document.getElementById("tabs-2").style.display = "inline-block";
+            document.getElementById("tabs-3").style.display = "none";
+        }
+
+        function tab3() {
+            document.getElementById("tabs-1").style.display = "none";
+            document.getElementById("tabs-2").style.display = "none";
+            document.getElementById("tabs-3").style.display = "inline-block";
         }
 </script>
 
@@ -324,7 +332,7 @@ function CheckedChanged() {
     <div class="modal-content">
         <div class="modal-header">
             <span class="close">&times;</span>
-            <h2>View Incident Report</h2>
+            <h3>View Incident Report</h3>
         </div>
         <div class="modal-body">
                  <asp:ScriptManager ID="ScriptManager1" runat="server">
@@ -334,45 +342,45 @@ function CheckedChanged() {
                  
                 <table class="CurrentIncident">
                     <tr>
-                        <th>Date/Time of Report:</th>
+                        <th>Date / Time of Report : </th>
                         <td><asp:Label ID="DateTimeDisplay" runat="server" Text=""></asp:Label></td>
                         <th colspan="3"></th>
                     </tr>
                     <tr>
-                        <th>Type of Incident:</th>
+                        <th>Type of Incident : </th>
                         <td><asp:Label ID="incidentType" runat="server" Text=""></asp:Label></td>
-                        <th>Incident ID:</th>
+                        <th>Incident ID : </th>
                         <td><asp:Label ID="IncidentID" runat="server" Text=""></asp:Label></td>
                     </tr>
                     <tr>
-                        <th>Reporting Person:</th>
+                        <th>Reporting Person : </th>
                         <td><asp:Label ID="reporterName" runat="server" Text=""></asp:Label></td>
-                        <th>Contact No:</th>
+                        <th>Contact No : </th>
                         <td><asp:Label ID="contactNumber" runat="server" Text=""></asp:Label></td>
                     </tr>
                     <tr>
-                        <th>Location:</th>
+                        <th>Location : </th>
                         <td><asp:Label ID="Location" runat="server" Text=""></asp:Label></td>
-                        <th>Postal Code:</th>
+                        <th>Postal Code : </th>
                         <td><asp:Label ID="postalCode" runat="server" Text=""></asp:Label></td>
                     </tr>
                     <tr>
-                        <th>Main Dispatch:</th>
+                        <th>Main Dispatch : </th>
                         <td><asp:Label ID="mainDispatch" runat="server" Text=""></asp:Label></td>
-                        <th>Assist Type:</th>
+                        <th>Assist Type : </th>
                         <td><asp:TextBox id="supportType" TextMode="multiline" Columns="30" Rows="5" runat="server" ReadOnly="True" /></td>
                     </tr>
                     <tr>
-                        <th>Description:</th>
+                        <th>Description : </th>
                         <td colspan="3"><asp:Label ID="incidentDesc" runat="server" Text=""></asp:Label> </td>
                     </tr>
 
                     <tr>
-                        <th>Status Log :</th>
-                        <td><asp:TextBox id="statusLog" TextMode="multiline" Columns="30" Rows="5" runat="server" ReadOnly="True" Width="452px" /> </td>
+                        <th>Status Log : </th>
+                        <td><asp:TextBox id="statusLog" TextMode="multiline" Columns="30" Rows="5" runat="server" ReadOnly="True" /> </td>
                     </tr>
  
-            <tr><th>Update Status</th>
+            <tr><th>Update Status : </th>
             <td><asp:DropDownList ID="statusUpdate" runat="server">
             <asp:ListItem Text="Unresolved" Value="Unresolved" />
             <asp:ListItem Text="Pending" Value="Pending" />
@@ -381,10 +389,10 @@ function CheckedChanged() {
                 </tr>
          
                     <tr>
-                        <th>Add Status:</th>
+                        <th>Add Status : </th>
                         <td>
                             <asp:TextBox ID="Status" runat="server"></asp:TextBox></td>
-                        <td><asp:Button ID="Button1" runat="server" Text="Update" OnClick="UpdateStatusOnClick" /></td>
+                        <td><asp:Button ID="Button1" runat="server" CssClass="btn btn-primary" Style="padding: 5px 10px;" Text="Update" OnClick="UpdateStatusOnClick" /></td>
                     </tr>
                 </table>
                     </ContentTemplate>
@@ -521,9 +529,14 @@ function CheckedChanged() {
                             FACEBOOK
                         </div>
                         <div class="LiveFeedCSS">
-                            <div id="fbLiveFeed" class="feed" runat="server">
+                            <!--<asp:Button ID="Buttonposttofb" runat="server" CssClass="btn btn-primary" Text="Post To Twitter" OnClick="UpdateStatustoTwitter" />-->
+                            <asp:UpdatePanel ID="UpdatePanelFBLiveFeed" class="feed" runat="server">
+                                <ContentTemplate>
+                                    <div id="fbLiveFeed" runat="server"></div>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
 
-                            </div>
+                            
                             <%--<div class="fb-page" data-href="http://www.facebook.com/CMSXiaoYaoPai" data-tabs="timeline" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="http://www.facebook.com/CMSXiaoYaoPai" class="fb-xfbml-parse-ignore"><a href="http://www.facebook.com/CMSXiaoYaoPai">Crisis Management System Xiao Yao Pai</a></blockquote></div>
                             <script src="//www.powr.io/powr.js" external-type="html"></script> 
  <div class="powr-social-feed" id="f140960d_1491094268"></div>--%>
@@ -536,9 +549,11 @@ function CheckedChanged() {
                             TWITTER
                         </div>
                     <div class="LiveFeedCSS">
-                        <div id="twitterLiveFeed" class="feed" runat="server">
-                        </div>
-
+                        <asp:UpdatePanel ID="UpdatePanel4" class="feed" runat="server">
+                                <ContentTemplate>
+                        <div id="twitterLiveFeed" runat="server"></div>
+                                </ContentTemplate>
+                        </asp:UpdatePanel>
                     </div>
                 </div>
             </div>
@@ -547,31 +562,11 @@ function CheckedChanged() {
 
 
     <div id="rightpanel">
-        <input id="pac-input" class="controls" type="text" placeholder="Search Box" style="width: 300px;">
+        <input id="pac-input" class="controls" type="text" placeholder="Search Box" style="top:10px;width: 300px;">
         <div id="map">
         </div>
         
-        <table>
-        <tr>
-        <%--<td> Fire Outbreaks : </td>
-        <td>
-            <input type="checkbox" id= "showFire"name="showfire" onclick="CheckedChanged();" checked/>
-            Riot Outbreaks:
-            <input type="checkbox" id= "showRiot"name="riot" onclick="CheckedChanged();" checked/>
-            Car Accident:
-            <input type="checkbox" id= "showCarAccident"name="caraccident" onclick="CheckedChanged();" checked/>
-            Terrorist:
-            <input type="checkbox" id= "showTerrorist"name="terrorist" onclick="CheckedChanged();" checked/>
-        </td>--%>
-            <td>
-                Weather: 
-                <input type="checkbox" id="weatherCheckBox" name="weatherCheckBox" onclick="CheckedChanged();"/>
-                Dengue:
-                <input type="checkbox" id="dengueCheckBox" name="dengueCheckBox" onclick="toggleDengue();"/>
-            </td>
-        <td><asp:Label ID="showFireDisplay" runat="server"></asp:Label></td>
-        </tr> 
-        </table>
+        
 
         <div id="infowindow-content">
       <span id="place-name"  class="title"></span><br>
@@ -583,7 +578,38 @@ function CheckedChanged() {
     </div>
         <div id="legend">
             <h4>Legend</h4>
-            <p><img src = "/Icons/caraccident.png" style="width: 50px;height:40px;padding-right: 10px"/>
+            <table style="text-align:center;">
+                <tr>
+                    <td><input type="checkbox" id= "showCarAccident"name="caraccident" onclick="CheckedChanged();" checked/></td>
+                    <td><input type="checkbox" id= "showFire"name="showfire" onclick="CheckedChanged();" checked/></td>
+                    <td><input type="checkbox" id= "showRiot"name="riot" onclick="CheckedChanged();" checked/></td>
+                    <td><input type="checkbox" id= "showTerrorist"name="terrorist" onclick="CheckedChanged();" checked/></td>
+                    <td><input type="checkbox" id="weatherCheckBox" name="weatherCheckBox" onclick="CheckedChanged();"/></td>
+                    <td><input type="checkbox" id="dengueCheckBox" name="dengueCheckBox" onclick="toggleDengue();"/></td>
+                </tr>
+                <tr>
+                    <td><img src = "/Icons/caraccident.png" style="width: 40px;height:40px;"/></td>
+                    <td><img src = "/Icons/Fire.png"style="width: 40px;height:40px;"/></td>
+                    <td><img src = "/Icons/riot.png"style="width: 40px;height:40px;"/></td>
+                    <td><img src = "/Icons/terrorist.png"style="width: 40px;height:40px;"/></td>
+                </tr>
+                <tr>
+                    <td>Accident</td>
+                    <td>Fire</td>
+                    <td>Riot</td>
+                    <td>Terrorist</td>
+                    <td>Weather</td>
+                    <td>Dengue</td>
+                </tr>
+
+                <%--<div>
+                <p>Weather:<input type="checkbox" id="weatherCheckBox" name="weatherCheckBox" onclick="CheckedChanged();"/></p>
+                <p>Dengue:<input type="checkbox" id="dengueCheckBox" name="dengueCheckBox" onclick="toggleDengue();"/></p>
+        <asp:Label ID="showFireDisplay" runat="server"></asp:Label>        
+        </div>--%>
+            </table>
+
+            <%--<p><img src = "/Icons/caraccident.png" style="width: 50px;height:40px;padding-right: 10px"/>
                 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src = "/Icons/Fire.png"style="width: 50px;height:40px;padding-right: 10px"/>
                 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src = "/Icons/riot.png"style="width: 50px;height:40px;padding-right: 10px"/>
                 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src = "/Icons/terrorist.png"style="width: 50px;height:40px;padding-right: 10px"/>
@@ -592,13 +618,14 @@ function CheckedChanged() {
             <p>&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" id= "showCarAccident"name="caraccident" onclick="CheckedChanged();" checked/>
 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" id= "showFire"name="showfire" onclick="CheckedChanged();" checked/>
              &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" id= "showRiot"name="riot" onclick="CheckedChanged();" checked/>
-&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" id= "showTerrorist"name="terrorist" onclick="CheckedChanged();" checked/></p>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" id= "showTerrorist"name="terrorist" onclick="CheckedChanged();" checked/></p>--%>
         </div>
         <div id="Incidents" style="margin: 10px;">
             <div id="tabs">
                 <ul class="nav nav-tabs">
                     <li><a onclick="tab1();">Current Incidents</a></li>
                     <li><a onclick="tab2();">Resolved Incidents</a></li>
+                    <li><a onclick="tab3();">NEA Data</a></li>
                 </ul>
                 <!--<h3>Search : </h3>-->
                 <div style="padding:5px;border:1px solid #dfd7ca;">
@@ -606,8 +633,7 @@ function CheckedChanged() {
                 <asp:Button ID="sendQuery" runat="server" Text="Search" OnClick="sendQuery_Click" CssClass="btn btn-primary"/>
                 <asp:Button ID="clearQuery" runat="server" Text="Clear" OnClick="clearQuery_Click" CssClass="btn btn-primary"/>
                     </div>
-                    <div id="tabs-1" style="width: 100%; height: 883px;">
-                         <!--<h2>Current Incident</h2> -->
+                    <div id="tabs-1" style="width: 100%;">
                     <asp:UpdatePanel ID="UpdatePanel3" runat="server">              
                 <ContentTemplate>
 
@@ -640,7 +666,6 @@ function CheckedChanged() {
 
 
                 <div id="tabs-2" style="display:none;width: 100%;">   
-                <!--<h2>Resolved Incidents</h2> -->        
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">              
                 <ContentTemplate>
                     <asp:GridView ID="GridData2" runat="server" AutoGenerateColumns="False" onrowcommand="ViewResolvedIncident_RowCommand"
@@ -666,6 +691,9 @@ function CheckedChanged() {
                     </asp:GridView>
                  </ContentTemplate>
                  </asp:UpdatePanel>
+                    </div>
+
+                <div id="tabs-3" style="display:none;width: 100%;">   
                     </div>
             </div>
         </div>

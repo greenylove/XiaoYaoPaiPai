@@ -13,7 +13,6 @@
 div.wrapper
 {
     position: relative;
-    top: 40px;
 }
 .wrapMap
 {
@@ -120,4 +119,308 @@ div.wrapper
 .form-control{
     width: 20%;
     display: inline-block;
+}
+
+
+#legend {
+    background: #fff;
+    padding: 10px;
+    margin: 10px;
+    border: 3px solid #000;
+}
+
+    #legend h4 {
+        margin-top: 0;
+    }
+
+    #legend img {
+        vertical-align: middle;
+        width: 36%;
+        margin: 0 15px;
+    }
+
+
+    /*Customized CSS*/
+.leftpanel {
+    width: 3%;
+    min-width: 50px !important;
+    height: 100vh !important;
+}
+
+    .leftpanel > img {
+        max-width: 45px;
+        padding: 5px;
+    }
+
+.rightpanel {
+    width: 3%;
+    min-width: 50px !important;
+    height: 100vh !important;
+}
+
+    .rightpanel > img {
+        max-width: 45px;
+        padding: 5px;
+    }
+
+#hiddenleftpanel {
+    position: relative;
+    display: none;
+}
+
+#notepad > textarea {
+    height: 100vh;
+    color: #000000;
+}
+
+div.wrapper {
+    float: left;
+    height: 100%;
+    background-color: #93c54b;
+    border-bottom: 1px solid #93c54b;
+    box-shadow: inset 0 1px 1px #93c54b, 0 1px 1px #93c54b;
+    color: rgb(255,255,255);
+}
+
+#livefeed {
+    height: 100vh;
+    display: block;
+}
+
+#map {
+    width: 100%;
+    height: 300px;
+    margin: 10px;
+}
+
+#rightpanel {
+    display: inline-block;
+    width: 70%;
+    height: 100vh;
+}
+
+#mySidenav::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+#mySidenav::-webkit-scrollbar {
+    width: 10px;
+    background-color: #F5F5F5;
+}
+
+#mySidenav::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
+
+.table > tbody > tr > td > img {
+    max-height: 25px;
+    width: auto;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 10000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    margin-top: 70px;
+    padding: 0;
+    border: 1px solid #888;
+    width: 70%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0;
+    }
+
+    to {
+        top: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0;
+    }
+
+    to {
+        top: 0;
+        opacity: 1;
+    }
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+.close1 {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+    .close1:hover,
+    .close1:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #6f866f;
+    color: white;
+}
+
+.modal-body {
+    padding: 10px 15px;
+}
+
+.modal-footer {
+    padding: 10px 15px;
+    background-color: #6f866f;
+    color: white;
+}
+
+
+
+/*Customized CSS*/
+    #loginbox {
+    margin-top: 30px;
+}
+
+#loginbox > div:first-child {        
+    padding-bottom: 10px;    
+}
+
+.iconmelon {
+    display: block;
+    margin: auto;
+}
+
+#form > div {
+    margin-bottom: 25px;
+}
+
+#form > div:last-child {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.panel {    
+    background-color: transparent;
+}
+
+.panel-body {
+    padding-top: 30px;
+    background-color: rgba(2555,255,255,.3);
+}
+
+.iconmelon,
+.im {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  display: block;
+  fill: #525151;
+}
+
+.iconmelon:after,
+.im:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.pac-card {
+        margin: 10px 10px 0 0;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        background-color: #fff;
+        font-family: Roboto;
+      }
+
+      #pac-container {
+        padding-bottom: 12px;
+        margin-right: 12px;
+      }
+
+      .pac-controls {
+        display: inline-block;
+        padding: 5px 11px;
+      }
+
+      .pac-controls label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+      }
+
+      #pac-input {
+        background-color: #fff;
+        font-family: sans-serif;
+        font-size: 15px;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 400px;
+      }
+
+      #pac-input:focus {
+        border-color: #4d90fe;
+      }
+
+
+       #infowindow-content {
+        display: none;
+      }
+      #map #infowindow-content {
+        display: inline;
+      }
+
+.CurrentIncident > tbody > tr > th{
+    padding-right: 10px;
 }

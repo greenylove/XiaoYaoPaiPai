@@ -206,15 +206,13 @@ namespace CMSEmergencySystem
 
             DataTable IncidentCategory;
             DataTable statusLogUpdate;
-
-           
-
+            
             incidentItem = incidentController.getIncidentByID(incidentID);
             IncidentCategory = myDB.getOneSupportType(incidentID);
             statusLogUpdate = myDB.getOneStatusLog(incidentID);
 
             DateTimeDisplay.Text = incidentType.Text = IncidentID.Text = reporterName.Text = contactNumber.Text = Location.Text = postalCode.Text =
-               mainDispatch.Text = statusLog.Text = incidentDesc.Text = supportType.Text = Status.Text = "";
+            mainDispatch.Text = statusLog.Text = incidentDesc.Text = supportType.Text = Status.Text = "";
 
             DateTimeDisplay.Text = incidentItem.DateTime;
             incidentType.Text = incidentItem.TypeOfIncident;
