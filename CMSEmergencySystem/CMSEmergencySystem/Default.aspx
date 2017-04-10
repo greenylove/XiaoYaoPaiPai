@@ -686,7 +686,20 @@ function CheckedChanged() {
                  </asp:UpdatePanel>
                     </div>
 
-                <div id="tabs-3" style="display:none;width: 100%;">   
+                <div id="tabs-3" style="display:none;width: 100%;">  
+                    <table>
+                        <tr>
+                            <td>
+                                 <asp:Label id="forecastLabel" runat="server" text="testtest"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                 <asp:Label id="psiLabel" runat="server" text="testtest"/>
+                            </td>
+                        </tr>
+                    </table>
                     </div>
             </div>
         </div>
