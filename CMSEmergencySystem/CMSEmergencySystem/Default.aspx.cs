@@ -27,9 +27,9 @@ namespace CMSEmergencySystem
 
             //Load NEA API
             loadNEA();
-
+            displayNEAInfo(); 
             initAllController();
-
+            
             if (!this.IsPostBack)
             {
                 initIncidentList();

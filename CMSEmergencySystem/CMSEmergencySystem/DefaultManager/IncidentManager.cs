@@ -25,8 +25,9 @@ namespace CMSEmergencySystem
         }
         protected void CreateIncidentButton(object sender, EventArgs e)
         {
-            float Lat = float.Parse(LatInfo.Value);
-            float Long = float.Parse(LngInfo.Value);
+           
+           float Lat = float.Parse(LatInfo.Value);
+           float Long = float.Parse(LngInfo.Value);
             //pass form variable into incidentManager
             int incidentID = incidentController.createIncident(reportPersonTextBox.Text, typeOfIncidentDDL.Text,
                                 locationTextBox.Text, MainDispatchDDL.Text, contactNoTextBox.Text,
@@ -38,6 +39,8 @@ namespace CMSEmergencySystem
             //update UI
             updateUIIncident();
             ScriptManager.RegisterStartupScript(this, GetType(), "script", "closeModal();", true);
+            Response.Redirect("Default.aspx");
+            //ScriptManager.RegisterStartupScript(this, GetType(), "script", "test();", true);
         } // end of class
 
         protected void sendQuery_Click(object sender, EventArgs e)
@@ -201,9 +204,11 @@ namespace CMSEmergencySystem
             updateStatusLog = Status.Text;
             updateStatus = statusUpdate.Text;
             incidentID = Int32.Parse(IncidentID.Text); // NEED TO CHANGE, THIS CODE IS NOT DOING ANYTHIG, GET INCIDENTID FROM SELECTED INDEX
-            incidentController.addStatusLogByID(incidentID, updateStatusLog);
             incidentController.updateStatusByID(incidentID, updateStatus);
-
+            if (updateStatusLog != ""){
+                incidentController.addStatusLogByID(incidentID, updateStatusLog);
+            }
+                   
             DataTable IncidentCategory;
             DataTable statusLogUpdate;
             
@@ -223,14 +228,16 @@ namespace CMSEmergencySystem
             postalCode.Text = incidentItem.PostalCode;
             mainDispatch.Text = incidentItem.MainDispatch;
 
-            for (int i = 0; i < statusLogUpdate.Rows.Count; i++)
-            {
-                DateTime datetime;
-                datetime = Convert.ToDateTime(statusLogUpdate.Rows[i]["dateTime"].ToString());
-                string messageLog = statusLogUpdate.Rows[i]["statusMessage"].ToString();
-                string result = "[" + datetime + "]" + messageLog;
-                statusLog.Text += (result + System.Environment.NewLine);
-            }
+           
+                for (int i = 0; i < statusLogUpdate.Rows.Count; i++)
+                {
+                    DateTime datetime;
+                    datetime = Convert.ToDateTime(statusLogUpdate.Rows[i]["dateTime"].ToString());
+                    string messageLog = statusLogUpdate.Rows[i]["statusMessage"].ToString();
+                    string result = "[" + datetime + "]" + messageLog;
+                    statusLog.Text += (result + System.Environment.NewLine);
+                }
+            
 
             for (int i = 0; i < IncidentCategory.Rows.Count; i++)
             {
@@ -239,7 +246,7 @@ namespace CMSEmergencySystem
             }
 
             incidentDesc.Text = incidentItem.Description;
-
+            updateUIIncident();
         } // end of updateButton.
 
     }// end of class
