@@ -161,7 +161,7 @@ CMSEmergencySystem.Map.WeatherAddMarker = function (location, forecast) {
 }
 
 CMSEmergencySystem.Map.AddMarker = function (latlng, type, state, geocoderResult) {
-    console.log("latlng: " + geocoderResult.NewIncidentID);
+    //console.log("latlng: " + geocoderResult.NewIncidentID);
     var markerOpts = {
         map: CMSEmergencySystem.Map._Map,
         position: latlng

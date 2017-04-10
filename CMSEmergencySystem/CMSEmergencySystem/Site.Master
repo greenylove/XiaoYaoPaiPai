@@ -55,8 +55,6 @@
                     <ul class="nav navbar-nav navbar-right">
                 <li><a href="/Account/Login.aspx" id="registerLink">Login</a></li>
                 <li><a href="/Account/Logout.aspx" id="Logout">Logout </a></li>
-
-                <li><a href="~/Account/Login.aspx" id="HeadLoginStatus" runat="server">Log In</a></li>
             </ul>
                          
                     </AnonymousTemplate>
@@ -64,8 +62,7 @@
                         Welcome <span class="bold">
                             <asp:LoginName ID="HeadLoginName" runat="server" />
                         </span>! [
-                        <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out"
-                            LogoutPageUrl="~/" />
+                        <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/" />
                         ]
                     </LoggedInTemplate>
                 </asp:LoginView>

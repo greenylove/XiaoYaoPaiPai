@@ -23,6 +23,11 @@ namespace CMSEmergencySystem.Controllers
             IncidentItem i = new IncidentItem(reportPerson, typeOfIncident, location, mainDispatch,
                  contactNo, postalCode, description, latitude, longitude);
 
+            string message = "A " + typeOfIncident + " has occured at " + location + " at " + DateTime.Now.ToString();
+            
+            new NewsFeedController().UpdateStatustoFB(message);
+            new NewsFeedController().UpdateStatustoTwitter(message);
+            
             //pass object to DAO, DAO deconstruct object and store to DB
             int newIncidentID = myDB.Create_Incident(i);
             return newIncidentID;

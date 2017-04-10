@@ -407,6 +407,7 @@ div.wrapper {
         padding: 0 11px 0 13px;
         text-overflow: ellipsis;
         width: 400px;
+        top: 10px!important;
       }
 
       #pac-input:focus {
@@ -423,4 +424,13 @@ div.wrapper {
 
 .CurrentIncident > tbody > tr > th{
     padding-right: 10px;
+}
+
+.CreateIncident > tbody > tr > th{
+    padding-right: 10px;
+}
+
+.CreateIncident > tbody > tr > td{
+    padding-right: 20px;
+    padding-bottom: 10px;
 }
