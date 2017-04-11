@@ -61,7 +61,7 @@ namespace CMSEmergencySystem.Controllers
                     sb.Append("</table>");
                     StringReader sr = new StringReader(sb.ToString());
 
-                    Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
+                    Document pdfDoc = new Document(PageSize.A3.Rotate(), 10f, 10f, 100f, 0f);
                     HTMLWorker htmlparser = new HTMLWorker(pdfDoc);
                     using (MemoryStream memoryStream = new MemoryStream())
                     {
