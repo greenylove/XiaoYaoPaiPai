@@ -10,7 +10,7 @@
 namespace CMSEmergencySystem {
     
     
-    public partial class Default {
+    public partial class EmergencyServices {
         
         /// <summary>
         /// IncidentForm control.
@@ -139,13 +139,13 @@ namespace CMSEmergencySystem {
         protected global::System.Web.UI.WebControls.TextBox statusLog;
         
         /// <summary>
-        /// statusUpdate control.
+        /// Status control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList statusUpdate;
+        protected global::System.Web.UI.WebControls.TextBox Status;
         
         /// <summary>
         /// Button1 control.

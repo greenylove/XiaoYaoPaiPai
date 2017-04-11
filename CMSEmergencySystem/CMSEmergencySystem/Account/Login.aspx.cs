@@ -40,13 +40,10 @@ namespace CMSEmergencySystem.Account
                 }
                 if (userRole == 2)
                 {
-                    // CredentialDB check the user's departmentID.
-                    // Response.Redirect();
+                    Session["UserName"] = userName;
+                    Response.Redirect("~/EmergencyServices.aspx");
                 }
-                if (userRole == 3)
-                {
-                    // Response.Redirect();
-                }
+           
 
             }
             else

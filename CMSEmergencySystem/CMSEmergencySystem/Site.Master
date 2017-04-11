@@ -5,7 +5,6 @@
 <html>
 <head runat="server">
     <title></title>
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
     <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Styles/sandstone.bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="~/Styles/sandstone.bootstrap.min.css" rel="stylesheet" type="text/css" />

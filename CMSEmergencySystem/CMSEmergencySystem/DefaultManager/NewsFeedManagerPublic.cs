@@ -14,7 +14,7 @@ using System.Globalization;
 
 namespace CMSEmergencySystem
 {
-    public partial class Default : System.Web.UI.Page
+    public partial class Public : System.Web.UI.Page
     {
         protected String FBAccessToken = "1677399102562906|QVDAamqpPwvP_LhYi5TsZaRP3Zs";
         protected FacebookFeeds feeds;

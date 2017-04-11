@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="CMSEmergencySystem.Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EmergencyServices.aspx.cs" Inherits="CMSEmergencySystem.EmergencyServices" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -121,12 +121,8 @@
             }*/
 
             btn1.onclick = function () {
-                if (document.getElementById('infowindow-content').children["CreateIncident"].textContent == "Create Incident") {
-                    createModal.style.display = "block";
-                    document.getElementById('LatInfo').value = window.defaultPlaceGResult.latitude;
-                    document.getElementById('LngInfo').value = window.defaultPlaceGResult.longitude;
-                }
-                else if (document.getElementById('infowindow-content').children["CreateIncident"].textContent == "View Incident") {
+             
+                if (document.getElementById('infowindow-content').children["CreateIncident"].textContent == "View Incident") {
                     //GridData.in
                     var table = document.getElementById("MainContent_GridData");
                     for (var i = 1; i < table.rows.length; i++) {
@@ -174,7 +170,6 @@
 
         function closeModal() {
             document.getElementById('CreateIncidentDialogBox').style.display = "none";
-            document.getElementById('myModal').style.display = "none";
         }
 
     </script>
@@ -350,12 +345,7 @@
             error: function () { }
         });
 
-
-
-
         }
-
-
 
     function cacheDefaultPlaceGResult(marker, geocodeResult) {
         window.defaultPlaceGResult = geocodeResult;
@@ -366,18 +356,13 @@
         // Retrieve the place from marker._Place
         document.getElementById('locationTextBox').value = geocodeResult.formatted_address ? geocodeResult.formatted_address : "";
         if (fire.indexOf(marker) != -1 || caraccident.indexOf(marker) != -1 || riot.indexOf(marker) != -1 || terrorist.indexOf(marker) != -1) {
-            document.getElementById('infowindow-content').children["CreateIncident"].textContent = "View Incident"
+            document.getElementById('infowindow-content').children["CreateIncident"].textContent = "View Incident";
         }
         else {
-            document.getElementById('infowindow-content').children["CreateIncident"].textContent = "Create Incident"
+            document.getElementById('infowindow-content').children["CreateIncident"].textContent = "";
         }
-    }
 
-    /*var place, gresult;
-    function cachePlace(marker, geocodeResult) {
-        place = marker._Place;
-        geocodeResult = gresult;
-    }*/
+    }
 
     //Dengue Toggle Function
     function toggleDengue() {
@@ -460,17 +445,9 @@
                                 </tr>
 
                                 <tr>
-                                    <th>Update Status : </th>
+                                    <th>Add Status Log : </th>
                                     <td>
-                                        <asp:DropDownList ID="statusUpdate" runat="server">
-                                            <asp:ListItem Text="Unresolved" Value="Unresolved" />
-                                        
-                                            <asp:ListItem Text="Resolved" Value="Resolved" />
-                                        </asp:DropDownList></td>
-                                </tr>
-
-                                <tr>
-                                                                  
+                                        <asp:TextBox ID="Status" runat="server"></asp:TextBox></td>
                                     <td>
                                         <asp:Button ID="Button1" runat="server" CssClass="btn btn-primary" Style="padding: 5px 10px;" Text="Update" OnClick="UpdateStatusOnClick" /></td>
                                 </tr>
@@ -725,7 +702,7 @@
                                                             <asp:Button ID="VI" Text="View Incident" CommandName="Select" runat="server" return="false" CssClass="btn btn-default" />
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
-                                                  
+                                        
                                                 </Columns>
                                             </asp:GridView>
                                         </div>
@@ -749,7 +726,7 @@
                                                         <asp:Button ID="VI" ClientIDMode="Static" Text="View Incident" CommandName="Select" runat="server" return="false" CssClass="btn btn-default" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                               
+                                              
                                             </Columns>
                                         </asp:GridView>
                                     </ContentTemplate>

@@ -132,9 +132,12 @@
     <Content Include="App_Data\Database1_log.ldf">
       <DependentUpon>Database1.mdf</DependentUpon>
     </Content>
+    <Content Include="BombShelterServlet.aspx" />
     <Content Include="Email\EmailData.aspx" />
-    <Content Include="favicon.png" />
+    <Content Include="EmergencyServices.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Icons\bombshelter.png" />
+    <Content Include="Icons\bombshelterBig.png" />
     <Content Include="Icons\CarAccident.png" />
     <Content Include="Icons\clear.png" />
     <Content Include="Icons\cloudy.png" />
@@ -159,6 +162,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Public.aspx" />
     <Content Include="Scripts\map.js" />
     <Content Include="Site.Master" />
     <None Include="job_scheduling_data_2_0.xsd">
@@ -205,6 +209,13 @@
     <Compile Include="Account\Logout.aspx.designer.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>
+    <Compile Include="BombShelterServlet.aspx.cs">
+      <DependentUpon>BombShelterServlet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BombShelterServlet.aspx.designer.cs">
+      <DependentUpon>BombShelterServlet.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\TimerTask.cs" />
     <Compile Include="DefaultManager\AccountManager.cs">
@@ -250,6 +261,21 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DefaultManager\IncidentManagerEmergencyServices.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DefaultManager\NEAManagerEmergencyServices.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DefaultManager\NEAManagerPublic.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DefaultManager\NewsFeedManagerEmergencyService.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DefaultManager\NewsFeedManagerPublic.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Email\EmailData.aspx.cs">
       <DependentUpon>EmailData.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -258,6 +284,14 @@
       <DependentUpon>EmailData.aspx</DependentUpon>
     </Compile>
     <Compile Include="Email\GetExcelFile.cs" />
+    <Compile Include="EmergencyServices.aspx.cs">
+      <DependentUpon>EmergencyServices.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmergencyServices.aspx.designer.cs">
+      <DependentUpon>EmergencyServices.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\BombShelterItem.cs" />
     <Compile Include="Entities\FacebookFeed.cs" />
     <Compile Include="Entities\FacebookFeeds.cs" />
     <Compile Include="Entities\IncidentItem.cs" />
@@ -281,6 +315,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Public.aspx.cs">
+      <DependentUpon>Public.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Public.aspx.designer.cs">
+      <DependentUpon>Public.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

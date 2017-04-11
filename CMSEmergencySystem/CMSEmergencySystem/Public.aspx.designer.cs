@@ -10,7 +10,7 @@
 namespace CMSEmergencySystem {
     
     
-    public partial class Default {
+    public partial class Public {
         
         /// <summary>
         /// IncidentForm control.
@@ -146,6 +146,15 @@ namespace CMSEmergencySystem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList statusUpdate;
+        
+        /// <summary>
+        /// Status control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Status;
         
         /// <summary>
         /// Button1 control.
@@ -319,42 +328,6 @@ namespace CMSEmergencySystem {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl twitterLiveFeed;
         
         /// <summary>
-        /// searchQuery control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel searchQuery;
-        
-        /// <summary>
-        /// searchResult control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox searchResult;
-        
-        /// <summary>
-        /// sendQuery control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button sendQuery;
-        
-        /// <summary>
-        /// clearQuery control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button clearQuery;
-        
-        /// <summary>
         /// UpdatePanel3 control.
         /// </summary>
         /// <remarks>
@@ -364,15 +337,6 @@ namespace CMSEmergencySystem {
         protected global::System.Web.UI.UpdatePanel UpdatePanel3;
         
         /// <summary>
-        /// GridData control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridData;
-        
-        /// <summary>
         /// UpdatePanel2 control.
         /// </summary>
         /// <remarks>
@@ -380,15 +344,6 @@ namespace CMSEmergencySystem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel2;
-        
-        /// <summary>
-        /// GridData2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridData2;
         
         /// <summary>
         /// forecastLabel control.

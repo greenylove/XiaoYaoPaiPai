@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="CMSEmergencySystem.Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Public.aspx.cs" Inherits="CMSEmergencySystem.Public" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -56,8 +56,8 @@
             document.getElementById("hiddenleftpanel").style.display = 'block';
             document.getElementById("rightpanel").style.marginLeft = document.getElementById("hiddenleftpanel").offsetWidth + "px";
             document.getElementById("rightpanel").style.marginRight = "0px";
-
         }
+
         function w3_closeleft() {
             document.getElementById("mySidenav").style.display = "none";
             document.getElementById("hiddenleftpanel").style.display = "none";
@@ -96,7 +96,7 @@
         function tab3() {
             document.getElementById("tabs-1").style.display = "none";
             document.getElementById("tabs-2").style.display = "none";
-            document.getElementById("tabs-3").style.display = "inline-block";
+           
         }
     </script>
 
@@ -114,12 +114,7 @@
             var span = document.getElementsByClassName("close")[0];
             var span1 = document.getElementsByClassName("close1")[0];
 
-            // When the user clicks the button, open the modal
-            /*btn.onclick = function () {
-                modal.style.display = "block";
-                return false;
-            }*/
-
+            document.getElementById("tabs-3").style.display = "inline-block";
             btn1.onclick = function () {
                 if (document.getElementById('infowindow-content').children["CreateIncident"].textContent == "Create Incident") {
                     createModal.style.display = "block";
@@ -136,12 +131,6 @@
                     }
                 }
                 console.log("MAP_ID: " + state);
-
-                //console.log("TableID: "+table.rows[2].cells[0].innerHTML);
-                //console.log(document.getElementById("MainContent_GridData").children[0].);
-
-                // document.getElementById('LatInfo').value = window.defaultPlaceGResult.latitude;
-                // document.getElementById('LngInfo').value = window.defaultPlaceGResult.longitude;
                 return false;
             }
 
@@ -174,7 +163,6 @@
 
         function closeModal() {
             document.getElementById('CreateIncidentDialogBox').style.display = "none";
-            document.getElementById('myModal').style.display = "none";
         }
 
     </script>
@@ -184,7 +172,6 @@
 
             // Get the <span> element that closes the modal
             var spanTest = document.getElementsByClassName("close")[0];
-            //var span1 = document.getElementsByClassName("close1")[0];
 
             // When the user clicks the button, open the modal
             viewIncidentTest.onclick = function () {
@@ -192,12 +179,10 @@
                 return false;
             }
 
-
             // When the user clicks on <span> (x), close the modal
             spanTest.onclick = function () {
                 modal.style.display = "none";
             }
-
 
             // When the user clicks anywhere outside of the modal, close it
             window.onclick = function (event) {
@@ -205,47 +190,8 @@
                     modal.style.display = "none";
                 }
             }
-
         }
         document.addEventListener('DOMContentLoaded', initialize, false);
-    </script>
-
-    <script>
-        function userValid() {
-            var ReportPerson, ContactNo, Postal, Description;
- 
-            ReportPerson = document.getElementById("MainContent_reportPersonTextBox").value;
-            ContactNo = document.getElementById("MainContent_contactNoTextBox").value;
-            Postal = document.getElementById("MainContent_postalCodeTextBox").value;
-            Description = document.getElementById("MainContent_descriptionTextBox").value;
-            //emailExp = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([com\co\.\in])+$/; // to validate email id
- 
-            if (ReportPerson == '' && ContactNo == '' && Postal == '' && Description == '') {
-                alert("Enter All Fields");
-                return false;
-            }
-
-            if (ReportPerson == '') {
-                alert("Please Enter Reporter Name");
-                return false;
-            }
-            if (ContactNo == '') {
-                alert("Please Enter Contact No");
-                return false;
-            }
-            if (Postal == '')
-            {
-                alert("Please Enter Postal");
-                return false;
-            }
-            if (Description == '')
-            {
-                alert("Please Enter Description");
-                return false;
-            }
-            return true;
-        }
-
     </script>
 
     <title>CMS Emergency System</title>
@@ -464,15 +410,17 @@
                                     <td>
                                         <asp:DropDownList ID="statusUpdate" runat="server">
                                             <asp:ListItem Text="Unresolved" Value="Unresolved" />
-                                        
+                                            <asp:ListItem Text="Pending" Value="Pending" />
                                             <asp:ListItem Text="Resolved" Value="Resolved" />
                                         </asp:DropDownList></td>
                                 </tr>
 
                                 <tr>
-                                                                  
+                                    <th>Add Status : </th>
                                     <td>
-                                        <asp:Button ID="Button1" runat="server" CssClass="btn btn-primary" Style="padding: 5px 10px;" Text="Update" OnClick="UpdateStatusOnClick" /></td>
+                                        <asp:TextBox ID="Status" runat="server"></asp:TextBox></td>
+                                    <td>
+                                        <asp:Button ID="Button1" runat="server" CssClass="btn btn-primary" Style="padding: 5px 10px;" Text="Update"  /></td>
                                 </tr>
                             </table>
                         </ContentTemplate>
@@ -579,7 +527,7 @@
                                 <tr>
                                     <th>Description : </th>
                                     <td><asp:TextBox style="width:100%;" ID="descriptionTextBox" runat="server"></asp:TextBox></td>
-                                    <td><asp:Button ID="submit" style="padding: 5px 10px;" Text="Create Incident" runat="server"  CssClass="btn btn-primary"  OnClick="CreateIncidentButton" OnClientClick="return userValid();"/></td>
+                                    <td><asp:Button ID="submit" style="padding: 5px 10px;" Text="Create Incident" runat="server"  CssClass="btn btn-primary" /></td>
                                 </tr>
                             </table>
                             </div>
@@ -641,7 +589,7 @@
                         <span id="lat"></span><br />
                         <span id="lng"></span><br />
                         <span id="place-address"></span><br />
-                        <a id="CreateIncident" style="font-weight: bold;text-decoration: underline;">Create Incident</a>
+                        
                     </div>
                     <div id="legend">
                         <h4>Legend</h4>
@@ -692,43 +640,16 @@
                     <div id="Incidents" style="margin: 10px;">
                         <div id="tabs">
                             <ul class="nav nav-tabs">
-                                <li><a onclick="tab1();">Current Incidents</a></li>
-                                <li><a onclick="tab2();">Resolved Incidents</a></li>
+                              
                                 <li><a onclick="tab3();">NEA Data</a></li>
                             </ul>
                             
-                            <asp:UpdatePanel ID="searchQuery" runat="server">  
-                                <ContentTemplate>
-                            <div style="padding: 5px; border: 1px solid #dfd7ca;">
-                                <asp:TextBox ID="searchResult" runat="server" CssClass="form-control"></asp:TextBox>
-                                <asp:Button ID="sendQuery" runat="server" Text="Search" OnClick="sendQuery_Click" CssClass="btn btn-primary" />
-                                <asp:Button ID="clearQuery" runat="server" Text="Clear" OnClick="clearQuery_Click" CssClass="btn btn-primary" />
-                            </div>
-                                   </ContentTemplate>
-                                </asp:UpdatePanel>
-                                  
+                          
 
                             <div id="tabs-1" style="width: 100%;">
                                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                                     <ContentTemplate>
-                                        <div class="gridViewTable">
-                                            <asp:GridView ID="GridData" runat="server" AutoGenerateColumns="False" OnRowCommand="ViewPendingIncident_RowCommand"
-                                                Width="100%" CssClass="table table-striped table-hover">
-                                                <Columns>
-                                                    <asp:BoundField DataField="IncidentId" HeaderText="Id" />
-                                                    <asp:BoundField DataField="dateTime" HeaderText="Date/Time" />
-                                                    <asp:BoundField DataField="IncidentType" HeaderText="IncidentType" />
-                                                    <asp:BoundField DataField="Status" HeaderText="Status" />
-                                                    <asp:BoundField DataField="Location" HeaderText="Location" />
-                                                    <asp:TemplateField>
-                                                        <ItemTemplate>
-                                                            <asp:Button ID="VI" Text="View Incident" CommandName="Select" runat="server" return="false" CssClass="btn btn-default" />
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                  
-                                                </Columns>
-                                            </asp:GridView>
-                                        </div>
+                                       
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
@@ -736,22 +657,7 @@
                             <div id="tabs-2" style="display: none; width: 100%;">
                                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                                     <ContentTemplate>
-                                        <asp:GridView ID="GridData2" runat="server" AutoGenerateColumns="False" OnRowCommand="ViewResolvedIncident_RowCommand"
-                                            Width="100%" CssClass="table table-striped table-hover">
-                                            <Columns>
-                                                <asp:BoundField DataField="IncidentId" HeaderText="Id" />
-                                                <asp:BoundField DataField="dateTime" HeaderText="Date/Time" />
-                                                <asp:BoundField DataField="IncidentType" HeaderText="IncidentType" />
-                                                <asp:BoundField DataField="Status" HeaderText="Status" />
-                                                <asp:BoundField DataField="Location" HeaderText="Location" />
-                                                <asp:TemplateField>
-                                                    <ItemTemplate>
-                                                        <asp:Button ID="VI" ClientIDMode="Static" Text="View Incident" CommandName="Select" runat="server" return="false" CssClass="btn btn-default" />
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                               
-                                            </Columns>
-                                        </asp:GridView>
+                                     
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>

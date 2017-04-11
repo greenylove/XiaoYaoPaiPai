@@ -25,25 +25,21 @@ namespace CMSEmergencySystem
         }
         protected void CreateIncidentButton(object sender, EventArgs e)
         {
-           
-           float Lat = float.Parse(LatInfo.Value);
-           float Long = float.Parse(LngInfo.Value);
+            clearTextBox();
+            float Lat = float.Parse(LatInfo.Value);
+            float Long = float.Parse(LngInfo.Value);
             //pass form variable into incidentManager
-            IncidentItem incident = incidentController.createIncident(reportPersonTextBox.Text, typeOfIncidentDDL.Text,
+            int incidentID = incidentController.createIncident(reportPersonTextBox.Text, typeOfIncidentDDL.Text,
                                 locationTextBox.Text, MainDispatchDDL.Text, contactNoTextBox.Text,
                                 postalCodeTextBox.Text, descriptionTextBox.Text, Lat, Long);
 
             foreach (ListItem assistTypeCBL in assistTypeCheckBoxList.Items)
                 if (assistTypeCBL.Selected == true)
-                    incidentController.addSupportType(incident.NewIncidentID, Convert.ToInt32(assistTypeCBL.Value));
+                    incidentController.addSupportType(incidentID, Convert.ToInt32(assistTypeCBL.Value));
             //update UI
             updateUIIncident();
-            //pass json string to javascript
-            System.Web.Script.Serialization.JavaScriptSerializer oSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
-            string sIncident = oSerializer.Serialize(incident); //converts object to json string
-            ScriptManager.RegisterStartupScript(this, GetType(), "script", "replaceDefaultMarker(" + sIncident + ");", true);
-            //Response.Redirect("Default.aspx");
-            //ScriptManager.RegisterStartupScript(this, GetType(), "script", "test();", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "script", "closeModal();", true);
+
         } // end of class
 
         protected void sendQuery_Click(object sender, EventArgs e)
@@ -59,13 +55,7 @@ namespace CMSEmergencySystem
         {
             initIncidentList();
         }
-
-        protected void showFire_CheckedChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-
+ 
 
         public void updateUIIncident()
         {
@@ -78,14 +68,18 @@ namespace CMSEmergencySystem
             ViewState["DS"] = DT;
         }
 
+        public void clearTextBox()
+        {
+            DateTimeDisplay.Text = incidentType.Text = IncidentID.Text = reporterName.Text = contactNumber.Text = Location.Text = postalCode.Text =
+            mainDispatch.Text = statusLog.Text = incidentDesc.Text = supportType.Text = "";
+        }
+
         public void ViewPendingIncident_RowCommand(Object sender, GridViewCommandEventArgs e)
         {
             IncidentItem incidentItem;
             if (e.CommandName == "Select")
             {
-                DateTimeDisplay.Text = incidentType.Text = IncidentID.Text = reporterName.Text = contactNumber.Text = Location.Text = postalCode.Text =
-                mainDispatch.Text = statusLog.Text = incidentDesc.Text = supportType.Text = Status.Text = "";
-
+                clearTextBox();
                 int index = (((Button)e.CommandSource).NamingContainer as GridViewRow).RowIndex; //get index of row clicked
                 DataTable dt = (DataTable)ViewState["DS"]; //get data of current table
                 DataRow row = dt.Rows[index]; //get row object 
@@ -125,16 +119,7 @@ namespace CMSEmergencySystem
                 ScriptManager.RegisterStartupScript(this, GetType(), "script", "displayModal();", true);
             }
             //TO BE REVISED
-            if (e.CommandName == "Delete"){
-                DataBaseHelper myDB = new DataBaseHelper();
-                int IncidentID = 0;
-                int index = (((Button)e.CommandSource).NamingContainer as GridViewRow).RowIndex;
-                DataTable dt = (DataTable)ViewState["DS"];
-                DataRow row = dt.Rows[index];
-                IncidentID = Int32.Parse(row[0].ToString());
-                myDB.deleteOneIncident(IncidentID);
-                Response.Redirect("Default.aspx");
-            }
+          
 
         } // end of ViewPending
         public void ViewResolvedIncident_RowCommand(Object sender, GridViewCommandEventArgs e)
@@ -165,8 +150,7 @@ namespace CMSEmergencySystem
                 postalCode.Text = postalCodeConvert.ToString();
                 mainDispatch.Text = incidentItem.MainDispatch;
 
-                for (int i = 0; i < statusLogUpdate.Rows.Count; i++)
-                {
+                for (int i = 0; i < statusLogUpdate.Rows.Count; i++){
                     DateTime datetime;
                     datetime = Convert.ToDateTime(statusLogUpdate.Rows[i]["dateTime"].ToString());
                     string messageLog = statusLogUpdate.Rows[i]["statusMessage"].ToString();
@@ -174,8 +158,7 @@ namespace CMSEmergencySystem
                     statusLog.Text += (result + System.Environment.NewLine);
                 }
 
-                for (int i = 0; i < IncidentCategory.Rows.Count; i++)
-                {
+                for (int i = 0; i < IncidentCategory.Rows.Count; i++){
                     string result = IncidentCategory.Rows[i]["departmentName"].ToString();
                     supportType.Text += (result + System.Environment.NewLine);
                 }
@@ -184,43 +167,29 @@ namespace CMSEmergencySystem
                 ScriptManager.RegisterStartupScript(this, GetType(), "script", "displayModal();", true);
             }
             // TO BE REVISED
-            if (e.CommandName == "Delete")
-            {
-                DataBaseHelper myDB = new DataBaseHelper();
-                int IncidentID = 0;
-                int index = (((Button)e.CommandSource).NamingContainer as GridViewRow).RowIndex;
-                DataTable dt = (DataTable)ViewState["DS2"];
-                DataRow row = dt.Rows[index];
-                IncidentID = Int32.Parse(row[0].ToString());
-                myDB.deleteOneIncident(IncidentID);
-                Response.Redirect("Default.aspx");
-            }
+          
         } // end of view resolved
 
         protected void UpdateStatusOnClick(object sender, EventArgs e)
         {
+            DataTable IncidentCategory;
+            DataTable statusLogUpdate;
             IncidentItem incidentItem;
             DataBaseHelper myDB = new DataBaseHelper();
             int incidentID = 0;
             string updateStatusLog = "";
             string updateStatus = "";
-            updateStatusLog = Status.Text;
             updateStatus = statusUpdate.Text;
             incidentID = Int32.Parse(IncidentID.Text); // NEED TO CHANGE, THIS CODE IS NOT DOING ANYTHIG, GET INCIDENTID FROM SELECTED INDEX
             incidentController.updateStatusByID(incidentID, updateStatus);
             if (updateStatusLog != ""){
                 incidentController.addStatusLogByID(incidentID, updateStatusLog);
             }
-                   
-            DataTable IncidentCategory;
-            DataTable statusLogUpdate;
-            
+
+            clearTextBox();
             incidentItem = incidentController.getIncidentByID(incidentID);
             IncidentCategory = myDB.getOneSupportType(incidentID);
             statusLogUpdate = myDB.getOneStatusLog(incidentID);
-
-            DateTimeDisplay.Text = incidentType.Text = IncidentID.Text = reporterName.Text = contactNumber.Text = Location.Text = postalCode.Text =
-            mainDispatch.Text = statusLog.Text = incidentDesc.Text = supportType.Text = Status.Text = "";
 
             DateTimeDisplay.Text = incidentItem.DateTime;
             incidentType.Text = incidentItem.TypeOfIncident;
@@ -230,10 +199,8 @@ namespace CMSEmergencySystem
             Location.Text = incidentItem.Location;
             postalCode.Text = incidentItem.PostalCode;
             mainDispatch.Text = incidentItem.MainDispatch;
-
            
-                for (int i = 0; i < statusLogUpdate.Rows.Count; i++)
-                {
+                for (int i = 0; i < statusLogUpdate.Rows.Count; i++){
                     DateTime datetime;
                     datetime = Convert.ToDateTime(statusLogUpdate.Rows[i]["dateTime"].ToString());
                     string messageLog = statusLogUpdate.Rows[i]["statusMessage"].ToString();
@@ -241,16 +208,14 @@ namespace CMSEmergencySystem
                     statusLog.Text += (result + System.Environment.NewLine);
                 }
             
-
-            for (int i = 0; i < IncidentCategory.Rows.Count; i++)
-            {
+            for (int i = 0; i < IncidentCategory.Rows.Count; i++){
                 string result = IncidentCategory.Rows[i]["departmentName"].ToString();
                 supportType.Text += (result + System.Environment.NewLine);
             }
 
             incidentDesc.Text = incidentItem.Description;
             updateUIIncident();
+            ScriptManager.RegisterStartupScript(this, GetType(), "script", "closeModal();", true);
         } // end of updateButton.
-
     }// end of class
 }//end of namespace

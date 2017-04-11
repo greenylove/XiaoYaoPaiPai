@@ -257,8 +257,6 @@ namespace CMSEmergencySystem
 
             IncidentItem i = new IncidentItem(reportPerson, typeOfIncident, location, mainDispatch, contactNo
             , postalCode, description, 0, 0);
-            i.Latitude = float.Parse(oneIncident.Rows[0]["Latitude"].ToString());
-            i.Longitude = float.Parse(oneIncident.Rows[0]["Longitude"].ToString());
             i.DateTime = convertDateTime;
             i.NewIncidentID = newIncidentID;
 
@@ -620,5 +618,29 @@ namespace CMSEmergencySystem
             return DS.Tables["getOneMapLocation"];
 
         }
+
+            public DataTable getAllBombShelter()
+        {
+            SqlConnection Connection = new SqlConnection();
+            SqlCommand Command = new SqlCommand();
+            DataSet DS = new DataSet();
+            SqlDataAdapter Adapter = new SqlDataAdapter();
+            string sqlText = "SELECT * FROM Database1.dbo.BombShelter";
+
+            settings = System.Configuration.ConfigurationManager.ConnectionStrings["Connection"];
+            string connectionString = settings.ConnectionString;
+            Connection = new SqlConnection(connectionString);
+
+            Command.CommandText = sqlText;
+            Command.Connection = Connection;
+            Adapter.SelectCommand = Command;
+
+            Connection.Open();
+            Adapter.Fill(DS, "getAllBombShelter");
+            Connection.Close();
+            return DS.Tables["getAllBombShelter"];
+
+        }
+
     }
 }

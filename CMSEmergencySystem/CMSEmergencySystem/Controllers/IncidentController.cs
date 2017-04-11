@@ -16,7 +16,7 @@ namespace CMSEmergencySystem.Controllers
     {
         DataBaseHelper myDB = new DataBaseHelper();
 
-        public IncidentItem createIncident(string reportPerson, string typeOfIncident, string location, string mainDispatch
+        public int createIncident(string reportPerson, string typeOfIncident, string location, string mainDispatch
             , string contactNo, string postalCode, string description, float latitude, float longitude)
         {
             //using create item constructor
@@ -30,8 +30,7 @@ namespace CMSEmergencySystem.Controllers
             
             //pass object to DAO, DAO deconstruct object and store to DB
             int newIncidentID = myDB.Create_Incident(i);
-
-            return getIncidentByID(newIncidentID);
+            return newIncidentID;
         }
         public IncidentItem getIncidentByID(int incidentID)
         {

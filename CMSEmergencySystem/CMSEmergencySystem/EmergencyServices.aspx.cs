@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using CMSEmergencySystem.Controllers;
-using CMSEmergencySystem.Entities;
 using System.Threading;
 
 namespace CMSEmergencySystem
 {
-    public partial class Default : System.Web.UI.Page
+    public partial class EmergencyServices : System.Web.UI.Page
     {
         IncidentController incidentController;
         AccountController accountController;
@@ -27,9 +21,9 @@ namespace CMSEmergencySystem
 
             //Load NEA API
             loadNEA();
-            displayNEAInfo(); 
+            displayNEAInfo();
             initAllController();
-            
+
             if (!this.IsPostBack)
             {
                 initIncidentList();
