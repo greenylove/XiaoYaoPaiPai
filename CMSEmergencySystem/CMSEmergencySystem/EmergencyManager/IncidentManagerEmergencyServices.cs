@@ -143,14 +143,14 @@ namespace CMSEmergencySystem
                 incidentItem = incidentController.getIncidentByID(incidentID);
                 IncidentCategory = incidentController.getSupportTypeByID(incidentID);
                 statusLogUpdate = incidentController.getStatusLogByID(incidentID);
-
+                clearTextBox();
                 DateTimeDisplay.Text = incidentItem.DateTime;
                 incidentType.Text = incidentItem.TypeOfIncident;
                 IncidentID.Text = incidentItem.NewIncidentID.ToString();
                 reporterName.Text = incidentItem.ReportPerson;
                 contactNumber.Text = incidentItem.ContactNo;
                 Location.Text = incidentItem.Location;
-                postalCode.Text = postalCodeConvert.ToString();
+                postalCode.Text = incidentItem.PostalCode;
                 mainDispatch.Text = incidentItem.MainDispatch;
 
                 for (int i = 0; i < statusLogUpdate.Rows.Count; i++)
@@ -181,7 +181,6 @@ namespace CMSEmergencySystem
             DataBaseHelper myDB = new DataBaseHelper();
             int incidentID = 0;
             string updateStatusLog = "";
-            string updateStatus = "";
             updateStatusLog = Status.Text;
             incidentID = Int32.Parse(IncidentID.Text); // NEED TO CHANGE, THIS CODE IS NOT DOING ANYTHIG, GET INCIDENTID FROM SELECTED INDEX
             if (updateStatusLog != "")

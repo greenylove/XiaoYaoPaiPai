@@ -832,11 +832,15 @@
                                 <li><a onclick="tab2();">Resolved Incidents</a></li>
                                 <li><a onclick="tab3();">NEA Data</a></li>
                             </ul>
+                            <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+                                    <ContentTemplate>
                             <div style="padding: 5px; border: 1px solid #dfd7ca;">
                                 <asp:TextBox ID="searchResult" runat="server" CssClass="form-control"></asp:TextBox>
                                 <asp:Button ID="sendQuery" runat="server" Text="Search" OnClick="sendQuery_Click" CssClass="btn btn-primary" />
                                 <asp:Button ID="clearQuery" runat="server" Text="Clear" OnClick="clearQuery_Click" CssClass="btn btn-primary" />
                             </div>
+                                        </ContentTemplate>
+                                </asp:UpdatePanel>
                             <div id="tabs-1" style="width: 100%;">
                                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                                     <ContentTemplate>

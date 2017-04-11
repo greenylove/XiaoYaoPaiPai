@@ -25,8 +25,8 @@ namespace CMSEmergencySystem
         }
         protected void CreateIncidentButton(object sender, EventArgs e)
         {
-           
-           float Lat = float.Parse(LatInfo.Value);
+            
+            float Lat = float.Parse(LatInfo.Value);
            float Long = float.Parse(LngInfo.Value);
             //pass form variable into incidentManager
             IncidentItem incident = incidentController.createIncident(reportPersonTextBox.Text, typeOfIncidentDDL.Text,
@@ -37,7 +37,15 @@ namespace CMSEmergencySystem
             foreach (ListItem assistTypeCBL in assistTypeCheckBoxList.Items)
                 if (assistTypeCBL.Selected == true)
                     incidentController.addSupportType(incident.NewIncidentID, Convert.ToInt32(assistTypeCBL.Value));
+            foreach (ListItem assistTypeCBL1 in CheckBoxList1.Items)
+                if (assistTypeCBL1.Selected == true)
+                    incidentController.addSupportType(incident.NewIncidentID, Convert.ToInt32(assistTypeCBL1.Value));
+            foreach (ListItem assistTypeCBL2 in CheckBoxList2.Items)
+                if (assistTypeCBL2.Selected == true)
+                    incidentController.addSupportType(incident.NewIncidentID, Convert.ToInt32(assistTypeCBL2.Value));
+
             //update UI
+            clearTextBox();
             updateUIIncident();
             //pass json string to javascript
             System.Web.Script.Serialization.JavaScriptSerializer oSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
@@ -45,6 +53,7 @@ namespace CMSEmergencySystem
             ScriptManager.RegisterStartupScript(this, GetType(), "script", "replaceDefaultMarker(" + sIncident + ");", true);
             //Response.Redirect("Default.aspx");
             //ScriptManager.RegisterStartupScript(this, GetType(), "script", "test();", true);
+        
         } // end of class
 
         protected void sendQuery_Click(object sender, EventArgs e)
@@ -69,7 +78,16 @@ namespace CMSEmergencySystem
         public void clearTextBox()
         {
             DateTimeDisplay.Text = incidentType.Text = IncidentID.Text = reporterName.Text = contactNumber.Text = Location.Text = postalCode.Text =
-            mainDispatch.Text = statusLog.Text = incidentDesc.Text = supportType.Text = "";
+            mainDispatch.Text = statusLog.Text = incidentDesc.Text = supportType.Text = reportPersonTextBox.Text = contactNoTextBox.Text
+            = postalCodeTextBox.Text = descriptionTextBox.Text = "";
+
+            for (int i = 0; i < 4; i++)
+            {
+                assistTypeCheckBoxList.Items[i].Selected = false;
+                CheckBoxList1.Items[i].Selected = false;
+            }
+            CheckBoxList2.Items[0].Selected = false;
+
         }
 
         public void updateUIIncident()
@@ -148,7 +166,7 @@ namespace CMSEmergencySystem
                 DataTable IncidentCategory;
                 DataTable statusLogUpdate;
 
-                int postalCodeConvert = 0;
+       
 
                 incidentItem = incidentController.getIncidentByID(incidentID);
                 IncidentCategory = incidentController.getSupportTypeByID(incidentID);
@@ -161,7 +179,7 @@ namespace CMSEmergencySystem
                 reporterName.Text = incidentItem.ReportPerson;
                 contactNumber.Text = incidentItem.ContactNo;
                 Location.Text = incidentItem.Location;
-                postalCode.Text = postalCodeConvert.ToString();
+                postalCode.Text = incidentItem.PostalCode;
                 mainDispatch.Text = incidentItem.MainDispatch;
 
                 for (int i = 0; i < statusLogUpdate.Rows.Count; i++)
