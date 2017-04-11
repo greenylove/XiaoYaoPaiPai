@@ -29,17 +29,20 @@ namespace CMSEmergencySystem
            float Lat = float.Parse(LatInfo.Value);
            float Long = float.Parse(LngInfo.Value);
             //pass form variable into incidentManager
-            int incidentID = incidentController.createIncident(reportPersonTextBox.Text, typeOfIncidentDDL.Text,
+            IncidentItem incident = incidentController.createIncident(reportPersonTextBox.Text, typeOfIncidentDDL.Text,
                                 locationTextBox.Text, MainDispatchDDL.Text, contactNoTextBox.Text,
                                 postalCodeTextBox.Text, descriptionTextBox.Text, Lat, Long);
 
             foreach (ListItem assistTypeCBL in assistTypeCheckBoxList.Items)
                 if (assistTypeCBL.Selected == true)
-                    incidentController.addSupportType(incidentID, Convert.ToInt32(assistTypeCBL.Value));
+                    incidentController.addSupportType(incident.NewIncidentID, Convert.ToInt32(assistTypeCBL.Value));
             //update UI
             updateUIIncident();
-            ScriptManager.RegisterStartupScript(this, GetType(), "script", "closeModal();", true);
-            Response.Redirect("Default.aspx");
+            //pass json string to javascript
+            System.Web.Script.Serialization.JavaScriptSerializer oSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            string sIncident = oSerializer.Serialize(incident); //converts object to json string
+            ScriptManager.RegisterStartupScript(this, GetType(), "script", "replaceDefaultMarker(" + sIncident + ");", true);
+            //Response.Redirect("Default.aspx");
             //ScriptManager.RegisterStartupScript(this, GetType(), "script", "test();", true);
         } // end of class
 

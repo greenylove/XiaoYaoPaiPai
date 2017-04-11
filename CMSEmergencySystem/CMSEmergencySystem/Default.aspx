@@ -154,6 +154,22 @@
             document.getElementById('CreateIncidentDialogBox').style.display = "none";
         }
 
+        function replaceDefaultMarker(incident) {
+            closeModal();
+            var type = document.getElementById("<%=typeOfIncidentDDL.ClientID%>");
+            var typeStr = type.options[type.selectedIndex].value;
+            console.log("replace Type",typeStr);
+            var marker = CMSEmergencySystem.Map.ReplaceFirstMarker(typeStr, incident.NewIncidentID, incident);
+            if (typeStr == "Fire Outbreak")
+                fire.push(marker);
+            else if (typeStr == "Car Accident")
+                caraccident.push(marker);
+            else if (typeStr == "Riot Outbreak")
+                riot.push(marker);
+            else if (typeStr == "Terrorist")
+                terrorist.push(marker);
+        }
+
     </script>
     <script>
         function ViewIncidentButtonTest() {
@@ -723,11 +739,11 @@
                     <input id="pac-input" class="controls" type="text" placeholder="Search Box" style="top: 10px; width: 300px;">
                     <div id="map"></div>
                     <div id="infowindow-content">
-                        <span id="place-name" class="title"></span><br />
+                        <span id="place-address" class="title"></span><br />
                         <span id="place-id"></span>
                         <span id="lat"></span><br />
                         <span id="lng"></span><br />
-                        <span id="place-address"></span><br />
+                        <%--<span id="place-address"></span>--%><br />
                         <a id="CreateIncident" style="font-weight: bold;text-decoration: underline;">Create Incident</a>
                     </div>
                     <div id="legend">
