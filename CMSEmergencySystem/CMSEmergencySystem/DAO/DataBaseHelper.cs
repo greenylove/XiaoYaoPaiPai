@@ -257,6 +257,8 @@ namespace CMSEmergencySystem
 
             IncidentItem i = new IncidentItem(reportPerson, typeOfIncident, location, mainDispatch, contactNo
             , postalCode, description, 0, 0);
+            i.Latitude = float.Parse(oneIncident.Rows[0]["Latitude"].ToString());
+            i.Longitude = float.Parse(oneIncident.Rows[0]["Longitude"].ToString());
             i.DateTime = convertDateTime;
             i.NewIncidentID = newIncidentID;
 

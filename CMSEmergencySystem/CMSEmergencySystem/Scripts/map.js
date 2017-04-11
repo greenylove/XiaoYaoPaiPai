@@ -440,7 +440,7 @@ CMSEmergencySystem.Map.OnPlaceResult = function () {
     if (CMSEmergencySystem.Map._DefaultMarker != null)
         CMSEmergencySystem.Map._DefaultMarker.setMap(null);
 };
-
+var firstMarker;
 CMSEmergencySystem.Map.OnGeocodeResult = function (results, status) {
     if (status == "OK") {
         var place = CMSEmergencySystem.Map._DefaultPlace;
@@ -454,6 +454,7 @@ CMSEmergencySystem.Map.OnGeocodeResult = function (results, status) {
         CMSEmergencySystem.Map._Map.setCenter(results[0].geometry.location);
 
         CMSEmergencySystem.Map.ShowInfoWindow(marker);
+        firstMarker = marker;
         CMSEmergencySystem.Map._DefaultMarker = marker;
 
         for (var i = 0; i < CMSEmergencySystem.Map._DefaultPlaceListener.length; i++)
@@ -471,6 +472,14 @@ CMSEmergencySystem.Map.OnMarkerSelected = function () {
         CMSEmergencySystem.Map._PlaceSelectedListener[index](this, CMSEmergencySystem.Map._GeocoderResultMap[this._State]);
 };
 
+CMSEmergencySystem.Map.ReplaceFirstMarker = function (type, state, geocoderResult) {
+    console.log("ReplaceFirstMarker", state);
+    var latlng = firstMarker.getPosition();
+    CMSEmergencySystem.Map.ClearMarker(firstMarker);
+
+    return CMSEmergencySystem.Map.AddMarker(latlng, type, state, geocoderResult);
+}
+
 CMSEmergencySystem.Map.ReplaceMarker = function (marker, type) {
     var latlng = marker.getPosition();
     var place = marker._Place;
@@ -485,10 +494,17 @@ CMSEmergencySystem.Map.ShowInfoWindow = function (marker) {
     var gresult = CMSEmergencySystem.Map._GeocoderResultMap[state];
 
     // Set information window content
-    CMSEmergencySystem.Map._InfoWindowContent.children["place-name"].textContent = gresult.name;
-    CMSEmergencySystem.Map._InfoWindowContent.children["place-address"].textContent = gresult.formatted_address ? gresult.formatted_address : "";
-    CMSEmergencySystem.Map._InfoWindowContent.children["lat"].textContent = "Latitude: " + gresult.latitude;
-    CMSEmergencySystem.Map._InfoWindowContent.children["lng"].textContent = "Longitude: " + gresult.longitude;
+    if (marker == firstMarker) {
+        //CMSEmergencySystem.Map._InfoWindowContent.children["place-name"].textContent = gresult.name;
+        CMSEmergencySystem.Map._InfoWindowContent.children["place-address"].textContent = gresult.formatted_address ? gresult.formatted_address : "";
+        CMSEmergencySystem.Map._InfoWindowContent.children["lat"].textContent = "Latitude: " + gresult.latitude;
+        CMSEmergencySystem.Map._InfoWindowContent.children["lng"].textContent = "Longitude: " + gresult.longitude;
+    }
+    else {
+        CMSEmergencySystem.Map._InfoWindowContent.children["place-address"].textContent = gresult.Location ? gresult.Location : "";
+        CMSEmergencySystem.Map._InfoWindowContent.children["lat"].textContent = "Latitude: " + gresult.Latitude;
+        CMSEmergencySystem.Map._InfoWindowContent.children["lng"].textContent = "Longitude: " + gresult.Longitude;
+    }
     //document.getElementById('LatInfo').value = gresult.latitude;
     //document.getElementById('LngInfo').value = gresult.longitude;
 

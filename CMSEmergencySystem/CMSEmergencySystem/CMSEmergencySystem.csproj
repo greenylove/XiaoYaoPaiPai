@@ -261,19 +261,19 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="DefaultManager\IncidentManagerEmergencyServices.cs">
+    <Compile Include="EmergencyManager\IncidentManagerEmergencyServices.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="DefaultManager\NEAManagerEmergencyServices.cs">
+    <Compile Include="EmergencyManager\NEAManagerEmergencyServices.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="DefaultManager\NEAManagerPublic.cs">
+    <Compile Include="PublicManager\NEAManagerPublic.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="DefaultManager\NewsFeedManagerEmergencyService.cs">
+    <Compile Include="EmergencyManager\NewsFeedManagerEmergencyService.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="DefaultManager\NewsFeedManagerPublic.cs">
+    <Compile Include="PublicManager\NewsFeedManagerPublic.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Email\EmailData.aspx.cs">

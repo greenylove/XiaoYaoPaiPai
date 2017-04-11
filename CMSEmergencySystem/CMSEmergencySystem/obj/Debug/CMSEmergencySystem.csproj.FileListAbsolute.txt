@@ -696,3 +696,6 @@ C:\Users\Low Zi Qing\Desktop\SSAD backup\CMSEmergencySystem v8 (Minor changes)\C
 C:\Users\Low Zi Qing\Desktop\SSAD backup\CMSEmergencySystem v8 (Minor changes)\CMSEmergencySystem\obj\Debug\CMSEmergencySystem.dll
 C:\Users\Low Zi Qing\Desktop\SSAD backup\CMSEmergencySystem v8 (Minor changes)\CMSEmergencySystem\obj\Debug\CMSEmergencySystem.pdb
 C:\Users\Low Zi Qing\Desktop\SSAD backup\CMSEmergencySystem v8 (Minor changes)\CMSEmergencySystem\obj\Debug\CMSEmergencySystem.csprojResolveAssemblyReference.cache
+C:\Users\jaichyi\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Facebook.dll
+C:\Users\jaichyi\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\itextsharp.dll
+C:\Users\jaichyi\Source\Repos\XiaoYaoPaiPai\CMSEmergencySystem\CMSEmergencySystem\bin\Facebook.xml
