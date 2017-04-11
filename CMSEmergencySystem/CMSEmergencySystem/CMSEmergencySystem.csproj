@@ -135,6 +135,7 @@
     <Content Include="BombShelterServlet.aspx" />
     <Content Include="Email\EmailData.aspx" />
     <Content Include="EmergencyServices.aspx" />
+    <Content Include="favicon.png" />
     <Content Include="Global.asax" />
     <Content Include="Icons\bombshelter.png" />
     <Content Include="Icons\bombshelterBig.png" />
@@ -261,21 +262,6 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="EmergencyManager\IncidentManagerEmergencyServices.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="EmergencyManager\NEAManagerEmergencyServices.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PublicManager\NEAManagerPublic.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="EmergencyManager\NewsFeedManagerEmergencyService.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PublicManager\NewsFeedManagerPublic.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Email\EmailData.aspx.cs">
       <DependentUpon>EmailData.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -301,6 +287,9 @@
     <Compile Include="DefaultManager\IncidentManager.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="EmergencyManager\IncidentManagerEmergencyServices.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="IncidentServlet.aspx.cs">
       <DependentUpon>IncidentServlet.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -312,6 +301,18 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="DefaultManager\NewsFeedManager.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmergencyManager\NEAManagerEmergencyServices.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmergencyManager\NewsFeedManagerEmergencyServices.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PublicManager\NEAManagerPublic.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PublicManager\NewsFeedManagerPublic.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -620,8 +620,7 @@ namespace CMSEmergencySystem
             return DS.Tables["getOneMapLocation"];
 
         }
-
-            public DataTable getAllBombShelter()
+        public DataTable getAllBombShelter()
         {
             SqlConnection Connection = new SqlConnection();
             SqlCommand Command = new SqlCommand();
@@ -643,6 +642,5 @@ namespace CMSEmergencySystem
             return DS.Tables["getAllBombShelter"];
 
         }
-
     }
 }

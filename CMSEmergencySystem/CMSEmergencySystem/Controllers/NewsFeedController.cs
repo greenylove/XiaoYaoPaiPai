@@ -14,25 +14,20 @@ namespace CMSEmergencySystem.Controllers
     {
         public void UpdateStatustoTwitter(string message)
         {
-            //The facebook json url to update the status
             string twitterURL = "https://api.twitter.com/1.1/statuses/update.json";
 
-            //set the access tokens (REQUIRED)
             string oauth_consumer_key = "bZ90ol3pHIWbQudynzhNGOy3S";
             string oauth_consumer_secret = "jwuuKARCVj2AORBuEkvPvaw6DyFQTKlwdMmeexTmvbjc2UYASQ";
             string oauth_token = "847409682490642432-QNW7iK3wYSsGINN4Oe19gB3Yz7Nvfqk";
             string oauth_token_secret = "Ln87plkr89HjiqUG5OIoIEU4g5c0pOg3MNECbbQB03tBF";
 
-            // set the oauth version and signature method
             string oauth_version = "1.0";
             string oauth_signature_method = "HMAC-SHA1";
 
-            // create unique request details
             string oauth_nonce = Convert.ToBase64String(new ASCIIEncoding().GetBytes(DateTime.Now.Ticks.ToString()));
             System.TimeSpan timeSpan = (DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc));
             string oauth_timestamp = Convert.ToInt64(timeSpan.TotalSeconds).ToString();
 
-            // create oauth signature
             string baseFormat = "oauth_consumer_key={0}&oauth_nonce={1}&oauth_signature_method={2}" + "&oauth_timestamp={3}&oauth_token={4}&oauth_version={5}&status={6}";
 
             string baseString = string.Format(
@@ -51,7 +46,6 @@ namespace CMSEmergencySystem.Controllers
                 oauth_signature = Convert.ToBase64String(hasher.ComputeHash(ASCIIEncoding.ASCII.GetBytes("POST&" + Uri.EscapeDataString(twitterURL) + "&" + Uri.EscapeDataString(baseString))));
             }
 
-            // create the request header
             string authorizationFormat = "OAuth oauth_consumer_key=\"{0}\", oauth_nonce=\"{1}\", " + "oauth_signature=\"{2}\", oauth_signature_method=\"{3}\", " + "oauth_timestamp=\"{4}\", oauth_token=\"{5}\", " + "oauth_version=\"{6}\"";
 
             string authorizationHeader = string.Format(
@@ -78,14 +72,12 @@ namespace CMSEmergencySystem.Controllers
             var responseResult = "";
             try
             {
-                //success posting
                 WebResponse objWebResponse = objHttpWebRequest.GetResponse();
                 StreamReader objStreamReader = new StreamReader(objWebResponse.GetResponseStream());
                 responseResult = objStreamReader.ReadToEnd().ToString();
             }
             catch (Exception ex)
             {
-                //throw exception error
                 responseResult = "Twitter Post Error: " + ex.Message.ToString() + ", authHeader: " + authorizationHeader;
             }
         }
@@ -96,49 +88,35 @@ namespace CMSEmergencySystem.Controllers
             string app_secret = "77b29db9a93f9ed80dcae99b8af74a28";
             string scope = "publish_actions,manage_pages";
 
-            if (HttpContext.Current.Request["code"] == null)
+            Dictionary<string, string> tokens = new Dictionary<string, string>();
+
+            string url = string.Format("https://graph.facebook.com/oauth/access_token?client_id={0}&redirect_uri={1}&scope={2}&code={3}&client_secret={4}",
+                app_id, HttpContext.Current.Request.Url.AbsoluteUri, scope, HttpContext.Current.Request["code"].ToString(), app_secret);
+
+            HttpWebRequest request = System.Net.WebRequest.Create(url) as HttpWebRequest;
+
+            using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
             {
-                HttpContext.Current.Response.Redirect(string.Format(
-                    "https://graph.facebook.com/oauth/authorize?client_id={0}&redirect_uri={1}&scope={2}",
-                    app_id, HttpContext.Current.Request.Url.AbsoluteUri, scope));
-            }
-            else
-            {
-                Dictionary<string, string> tokens = new Dictionary<string, string>();
+                StreamReader reader = new StreamReader(response.GetResponseStream());
 
-                string url = string.Format("https://graph.facebook.com/oauth/access_token?client_id={0}&redirect_uri={1}&scope={2}&code={3}&client_secret={4}",
-                    app_id, HttpContext.Current.Request.Url.AbsoluteUri, scope, HttpContext.Current.Request["code"].ToString(), app_secret);
+                string vals = reader.ReadToEnd();
 
-                HttpWebRequest request = System.Net.WebRequest.Create(url) as HttpWebRequest;
-
-                using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
+                foreach (string token in vals.Split(','))
                 {
-                    StreamReader reader = new StreamReader(response.GetResponseStream());
-
-                    string vals = reader.ReadToEnd();
-
-                    foreach (string token in vals.Split(','))
-                    {
-                        tokens.Add(token.Substring(0, token.IndexOf(":")),
-                            token.Substring(token.IndexOf(":") + 1, token.Length - token.IndexOf(":") - 1));
-                    }
+                    tokens.Add(token.Substring(0, token.IndexOf(":")),
+                        token.Substring(token.IndexOf(":") + 1, token.Length - token.IndexOf(":") - 1));
                 }
-
-                string access_token = tokens["{\"access_token\""];
-                access_token = access_token.Replace("\"", "");
-                var client = new FacebookClient(access_token);
-
-                dynamic parameters = new ExpandoObject();
-                parameters.message = message;
-                //parameters.link = "http://www.natiska.com/article.html";
-                //parameters.picture = "http://www.natiska.com/dav.png";
-                //parameters.name = "Article Title";
-                //parameters.caption = "Caption for the link";
-                parameters.access_token = access_token;
-
-                client.Post("/406096709760870/feed", parameters);
             }
 
+            string access_token = tokens["{\"access_token\""];
+            access_token = access_token.Replace("\"", "");
+            var client = new FacebookClient(access_token);
+
+            dynamic parameters = new ExpandoObject();
+            parameters.message = message;
+            parameters.access_token = access_token;
+
+            client.Post("/406096709760870/feed", parameters);
         }
 
     }

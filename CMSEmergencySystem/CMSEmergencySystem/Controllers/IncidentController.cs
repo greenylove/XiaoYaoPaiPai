@@ -30,6 +30,7 @@ namespace CMSEmergencySystem.Controllers
             
             //pass object to DAO, DAO deconstruct object and store to DB
             int newIncidentID = myDB.Create_Incident(i);
+
             return getIncidentByID(newIncidentID);
         }
         public IncidentItem getIncidentByID(int incidentID)

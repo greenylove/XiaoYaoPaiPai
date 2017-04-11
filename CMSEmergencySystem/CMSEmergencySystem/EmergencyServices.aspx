@@ -121,7 +121,7 @@
             }*/
 
             btn1.onclick = function () {
-             
+
                 if (document.getElementById('infowindow-content').children["CreateIncident"].textContent == "View Incident") {
                     //GridData.in
                     var table = document.getElementById("MainContent_GridData");
@@ -146,9 +146,9 @@
                 modal.style.display = "none";
             }
 
-            span1.onclick = function () {
-                createModal.style.display = "none";
-            }
+            //span1.onclick = function () {
+            //    createModal.style.display = "none";
+            //}
 
             // When the user clicks anywhere outside of the modal, close it
             window.onclick = function (event) {
@@ -168,9 +168,9 @@
             document.getElementById('myModal').style.display = "block";
         }
 
-        function closeModal() {
-            document.getElementById('CreateIncidentDialogBox').style.display = "none";
-        }
+        //function closeModal() {
+        //    document.getElementById('CreateIncidentDialogBox').style.display = "none";
+        //}
 
     </script>
     <script>
@@ -354,7 +354,7 @@
     function onPlaceSelected(marker, geocodeResult) {
         // Whenever a place is selected this listener will be called
         // Retrieve the place from marker._Place
-        document.getElementById('locationTextBox').value = geocodeResult.formatted_address ? geocodeResult.formatted_address : "";
+        //document.getElementById('locationTextBox').value = geocodeResult.formatted_address ? geocodeResult.formatted_address : "";
         if (fire.indexOf(marker) != -1 || caraccident.indexOf(marker) != -1 || riot.indexOf(marker) != -1 || terrorist.indexOf(marker) != -1) {
             document.getElementById('infowindow-content').children["CreateIncident"].textContent = "View Incident";
         }
@@ -461,10 +461,11 @@
             </div>
 
         </div>
-
+        <asp:HiddenField ID="LatInfo" runat="server" ClientIDMode="Static" />
+        <asp:HiddenField ID="LngInfo" runat="server" ClientIDMode="Static" />
 
         <!-- The Modal Create Incident -->
-        <div id="CreateIncidentDialogBox" class="modal">
+        <%--<div id="CreateIncidentDialogBox" class="modal">
 
             <!-- Modal content Create Incident -->
             <div class="modal-content">
@@ -565,7 +566,7 @@
                     <div class="modal-footer">
                     </div>
                 </div>
-            </div>
+            </div>--%>
             <div class="wrapMap" id="wrapmap">
 
                 <div id="leftpanel" style="position: fixed;">

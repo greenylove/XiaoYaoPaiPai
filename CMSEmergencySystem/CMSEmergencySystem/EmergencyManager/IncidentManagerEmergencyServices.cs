@@ -57,7 +57,7 @@ namespace CMSEmergencySystem
             initIncidentList();
         }
 
-       
+
 
         public void clearTextBox()
         {
@@ -123,7 +123,7 @@ namespace CMSEmergencySystem
                 ScriptManager.RegisterStartupScript(this, GetType(), "script", "displayModal();", true);
             }
             //TO BE REVISED
-    
+
         } // end of ViewPending
         public void ViewResolvedIncident_RowCommand(Object sender, GridViewCommandEventArgs e)
         {
@@ -172,7 +172,7 @@ namespace CMSEmergencySystem
                 ScriptManager.RegisterStartupScript(this, GetType(), "script", "displayModal();", true);
             }
             // TO BE REVISED
-     
+
         } // end of view resolved
 
         protected void UpdateStatusOnClick(object sender, EventArgs e)

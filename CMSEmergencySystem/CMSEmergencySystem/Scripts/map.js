@@ -163,11 +163,12 @@ CMSEmergencySystem.Map.WeatherAddMarker = function (location, forecast) {
 
 CMSEmergencySystem.Map.AddMarker = function (latlng, type, state, geocoderResult) {
     //console.log("latlng: " + geocoderResult.NewIncidentID);
+    console.log("AddMarker", state);
     var markerOpts = {
         map: CMSEmergencySystem.Map._Map,
         position: latlng
     };
-    
+    ;
 
     if (type != "default")
         markerOpts["icon"] = CMSEmergencySystem.Map._IconMap[type];
@@ -182,7 +183,6 @@ CMSEmergencySystem.Map.AddMarker = function (latlng, type, state, geocoderResult
 
     return marker;
 };
-
 
 CMSEmergencySystem.Map.BombShelterAddMarker = function (latlng) {
     // console.log("latlng: " + geocoderResult.NewIncidentID);
@@ -206,6 +206,7 @@ CMSEmergencySystem.Map.BombShelterAddMarker = function (latlng) {
 
     return marker;
 };
+
 
 CMSEmergencySystem.Map.AddDefaultPlaceListener = function (listener) {
     CMSEmergencySystem.Map._DefaultPlaceListener.push(listener);
@@ -452,9 +453,8 @@ CMSEmergencySystem.Map.OnGeocodeResult = function (results, status) {
 
         var marker = CMSEmergencySystem.Map.AddMarker(results[0].geometry.location, "default", 0, gresult);
         CMSEmergencySystem.Map._Map.setCenter(results[0].geometry.location);
-
-        CMSEmergencySystem.Map.ShowInfoWindow(marker);
         firstMarker = marker;
+        CMSEmergencySystem.Map.ShowInfoWindow(marker);
         CMSEmergencySystem.Map._DefaultMarker = marker;
 
         for (var i = 0; i < CMSEmergencySystem.Map._DefaultPlaceListener.length; i++)
@@ -488,11 +488,11 @@ CMSEmergencySystem.Map.ReplaceMarker = function (marker, type) {
 
     return CMSEmergencySystem.Map.AddMarker(latlng, type, place);
 };
-var state
+var state;
 CMSEmergencySystem.Map.ShowInfoWindow = function (marker) {
     state = marker._State;
     var gresult = CMSEmergencySystem.Map._GeocoderResultMap[state];
-
+    console.log(state);
     // Set information window content
     if (marker == firstMarker) {
         //CMSEmergencySystem.Map._InfoWindowContent.children["place-name"].textContent = gresult.name;

@@ -7,7 +7,6 @@ using Newtonsoft.Json.Linq;
 using System.Web.UI.HtmlControls;
 using CMSEmergencySystem.Entities;
 using Newtonsoft.Json;
-using System.Threading;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Globalization;
@@ -20,108 +19,8 @@ namespace CMSEmergencySystem
         protected FacebookFeeds feeds;
         protected string query = "SIUMIN";
         protected string url = "https://api.twitter.com/1.1/statuses/user_timeline.json";
-
-        private void RefreshSocialFeed()
-        {
-            if (Session["FBFeed"] != null)
-            {
-                FacebookFeeds feeds2 = Session["FBFeed"] as FacebookFeeds;
-
-                WebRequest request = WebRequest.Create("https://graph.facebook.com/CMSXiaoYaoPai/feed?fields=full_picture,picture,message,created_time,comments{comment_count},likes,link,name,admin_creator,description,caption&limit=10&access_token=" + FBAccessToken);
-                request.Credentials = CredentialCache.DefaultCredentials;
-                WebResponse response = request.GetResponse();
-                Console.WriteLine(((HttpWebResponse)response).StatusDescription);
-                Stream dataStream = response.GetResponseStream();
-                StreamReader reader = new StreamReader(dataStream, Encoding.UTF8);
-                String responseString = reader.ReadToEnd();
-
-                FacebookFeeds newFeeds = JsonConvert.DeserializeObject<FacebookFeeds>(responseString);
-                Session["FBFeed2"] = newFeeds;
-
-                if (feeds2.data[0].Created_time != newFeeds.data[0].Created_time)
-                {
-                    LookForNewFBFeed();
-                }
-            }
-        }
-
-        private void LookForNewFBFeed()
-        {
-            System.Windows.Forms.MessageBox.Show("Got new!");
-            FacebookFeeds oldfeeds = Session["FBFeed"] as FacebookFeeds;
-            FacebookFeeds newfeeds = Session["FBFeed2"] as FacebookFeeds;
-
-            foreach (FacebookFeed FBFeed in newfeeds.data)
-            {
-                //Session["FBFeed"] = newfeeds;
-                String attachedImg = FBFeed.Picture;
-                String message = FBFeed.Message;
-                String time = FBFeed.Created_time;
-                String link = FBFeed.Link;
-                String linkName = FBFeed.Name;
-
-                if (oldfeeds.data[0].Created_time != time)
-                {
-                    HtmlGenericControl mainDiv = new HtmlGenericControl("li");
-                    HtmlGenericControl postUserImg = new HtmlGenericControl("img");
-                    HtmlGenericControl divStatus = new HtmlGenericControl("div");
-                    HtmlGenericControl p = new HtmlGenericControl("p");
-                    HtmlGenericControl divLink = new HtmlGenericControl("div");
-                    HtmlGenericControl attachImg = new HtmlGenericControl("img");
-                    HtmlGenericControl commentsP = new HtmlGenericControl("p");
-                    HtmlGenericControl divAttach = new HtmlGenericControl("div");
-                    HtmlGenericControl attachPname = new HtmlGenericControl("p");
-                    HtmlGenericControl attachPdesc = new HtmlGenericControl("p");
-                    HtmlAnchor attachAHREF = new HtmlAnchor();
-                    HtmlAnchor imgAHREF = new HtmlAnchor();
-
-                    divStatus.Attributes.Add("class", "status");
-                    p.Attributes.Add("class", "message");
-                    p.InnerHtml = message;
-                    divStatus.Controls.Add(p);
-                    if ((link != null) && (link != String.Empty))
-                    {
-                        divLink.Attributes.Add("class", "attachment");
-                        if (attachedImg != "")
-                        {
-                            attachImg.Attributes["src"] = attachedImg;
-                            attachImg.Attributes.Add("class", "picture");
-                            imgAHREF.Controls.Add(attachImg);
-                            imgAHREF.Attributes["href"] = link;
-                            imgAHREF.Attributes["target"] = "_blank";
-                        }
-                        divAttach.Attributes.Add("class", "attachment-data");
-                        attachPname.Attributes.Add("class", "name");
-                        attachPdesc.Attributes.Add("class", "description");
-                        attachPdesc.InnerText = FBFeed.Description;
-                        attachAHREF.Attributes["href"] = link;
-                        attachAHREF.Attributes["target"] = "_blank";
-
-                        attachAHREF.InnerText = linkName;
-
-                        divLink.Controls.Add(imgAHREF);
-
-                        attachPname.Controls.Add(attachAHREF);
-
-                        divLink.Controls.Add(attachPname);
-                        divLink.Controls.Add(attachPdesc);
-
-                        divLink.Controls.Add(divAttach);
-                        divStatus.Controls.Add(divLink);
-                    }
-                    commentsP.Attributes.Add("class", "meta");
-                    DateTime dt = Convert.ToDateTime(FBFeed.Created_time);
-                    commentsP.InnerHtml += ToRelativeTimeString(dt) + " ";
-
-                    mainDiv.Controls.Add(divStatus);
-                    mainDiv.Controls.Add(commentsP);
-                    fbLiveFeed.Controls.Add(mainDiv);
-
-                }
-            }
-        }
-
-        private void RefreshFBFeed()
+        
+        public void RefreshFBFeed()
         {
             WebRequest request = WebRequest.Create("https://graph.facebook.com/CMSXiaoYaoPai/feed?fields=full_picture,picture,message,created_time,comments{comment_count},likes,link,name,admin_creator,description,caption&limit=10&access_token=" + FBAccessToken);
             request.Credentials = CredentialCache.DefaultCredentials;
@@ -134,92 +33,41 @@ namespace CMSEmergencySystem
 
             feeds = JsonConvert.DeserializeObject<FacebookFeeds>(responseString);
             Session["FBFeed"] = feeds;
+            int i = 0;
             foreach (FacebookFeed FBFeed in feeds.data)
             {
+                i++;
                 String attachedImg = FBFeed.Picture;
                 String message = FBFeed.Message;
                 String time = FBFeed.Created_time;
                 String link = FBFeed.Link;
                 String linkName = FBFeed.Name;
+                
+                HtmlGenericControl msg = (HtmlGenericControl) fbLiveFeed.FindControl("pmsg" + (i.ToString()));
+                msg.InnerText = message;
 
-                HtmlGenericControl mainDiv = new HtmlGenericControl("li");
-                HtmlGenericControl postUserImg = new HtmlGenericControl("img");
-                HtmlGenericControl divStatus = new HtmlGenericControl("div");
-                HtmlGenericControl p = new HtmlGenericControl("p");
-                HtmlGenericControl divLink = new HtmlGenericControl("div");
-                HtmlGenericControl attachImg = new HtmlGenericControl("img");
-                HtmlGenericControl commentsP = new HtmlGenericControl("p");
-                HtmlGenericControl divAttach = new HtmlGenericControl("div");
-                HtmlGenericControl attachPname = new HtmlGenericControl("p");
-                HtmlGenericControl attachPdesc = new HtmlGenericControl("p");
-                HtmlAnchor attachAHREF = new HtmlAnchor();
-                HtmlAnchor imgAHREF = new HtmlAnchor();
-
-                divStatus.Attributes.Add("class", "status");
-                p.Attributes.Add("class", "message");
-                p.InnerHtml = message;
-                divStatus.Controls.Add(p);
-                if ((link != null) && (link != String.Empty))
-                {
-                    divLink.Attributes.Add("class", "attachment");
-                    if (attachedImg != "")
-                    {
-                        attachImg.Attributes["src"] = attachedImg;
-                        attachImg.Attributes.Add("class", "picture");
-                        imgAHREF.Controls.Add(attachImg);
-                        imgAHREF.Attributes["href"] = link;
-                        imgAHREF.Attributes["target"] = "_blank";
-                    }
-                    divAttach.Attributes.Add("class", "attachment-data");
-                    attachPname.Attributes.Add("class", "name");
-                    attachPdesc.Attributes.Add("class", "description");
-                    attachPdesc.InnerText = FBFeed.Description;
-                    attachAHREF.Attributes["href"] = link;
-                    attachAHREF.Attributes["target"] = "_blank";
-
-                    attachAHREF.InnerText = linkName;
-
-                    divLink.Controls.Add(imgAHREF);
-
-                    attachPname.Controls.Add(attachAHREF);
-
-                    divLink.Controls.Add(attachPname);
-                    divLink.Controls.Add(attachPdesc);
-
-                    divLink.Controls.Add(divAttach);
-                    divStatus.Controls.Add(divLink);
-                }
-                commentsP.Attributes.Add("class", "meta");
+                HtmlGenericControl pmeta = (HtmlGenericControl)fbLiveFeed.FindControl("pmeta" + (i.ToString()));
                 DateTime dt = Convert.ToDateTime(FBFeed.Created_time);
-                commentsP.InnerHtml += ToRelativeTimeString(dt) + " ";
-
-                mainDiv.Controls.Add(divStatus);
-                mainDiv.Controls.Add(commentsP);
-                fbLiveFeed.Controls.Add(mainDiv);
-
+                pmeta.InnerHtml = ToRelativeTimeString(dt) + " ";
             }
             response.Close();
         }
 
-        private void RefreshTwitterFeed(String resource_url, String q)
+        public void RefreshTwitterFeed(String resource_url, String q)
         {
-            // oauth application keys
-            var oauth_token = "847409682490642432-QNW7iK3wYSsGINN4Oe19gB3Yz7Nvfqk"; //"insert here...";
-            var oauth_token_secret = "Ln87plkr89HjiqUG5OIoIEU4g5c0pOg3MNECbbQB03tBF"; //"insert here...";
-            var oauth_consumer_key = "bZ90ol3pHIWbQudynzhNGOy3S";// = "insert here...";
-            var oauth_consumer_secret = "jwuuKARCVj2AORBuEkvPvaw6DyFQTKlwdMmeexTmvbjc2UYASQ";// = "insert here...";
+            var oauth_token = "847409682490642432-QNW7iK3wYSsGINN4Oe19gB3Yz7Nvfqk";
+            var oauth_token_secret = "Ln87plkr89HjiqUG5OIoIEU4g5c0pOg3MNECbbQB03tBF"; 
+            var oauth_consumer_key = "bZ90ol3pHIWbQudynzhNGOy3S";
+            var oauth_consumer_secret = "jwuuKARCVj2AORBuEkvPvaw6DyFQTKlwdMmeexTmvbjc2UYASQ";
 
-            // oauth implementation details
             var oauth_version = "1.0";
             var oauth_signature_method = "HMAC-SHA1";
 
-            // unique request details
             var oauth_nonce = Convert.ToBase64String(new ASCIIEncoding().GetBytes(DateTime.Now.Ticks.ToString()));
             var timeSpan = DateTime.UtcNow
                 - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
             var oauth_timestamp = Convert.ToInt64(timeSpan.TotalSeconds).ToString();
 
-            // create oauth signature
             var baseFormat = "oauth_consumer_key={0}&oauth_nonce={1}&oauth_signature_method={2}" +
                             "&oauth_timestamp={3}&oauth_token={4}&oauth_version={5}&q={6}";
 
@@ -245,7 +93,6 @@ namespace CMSEmergencySystem
                     hasher.ComputeHash(ASCIIEncoding.ASCII.GetBytes(baseString)));
             }
 
-            // create the request header
             var headerFormat = "OAuth oauth_nonce=\"{0}\", oauth_signature_method=\"{1}\", " +
                                "oauth_timestamp=\"{2}\", oauth_consumer_key=\"{3}\", " +
                                "oauth_token=\"{4}\", oauth_signature=\"{5}\", " +
@@ -263,7 +110,6 @@ namespace CMSEmergencySystem
 
             ServicePointManager.Expect100Continue = false;
 
-            // make the request
             var postBody = "q=" + Uri.EscapeDataString(q);//
             resource_url += "?" + postBody;
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(resource_url);
@@ -292,7 +138,7 @@ namespace CMSEmergencySystem
 
                     String time = jsonDat[x]["created_at"].ToString();
                     DateTime dt = DateTime.ParseExact(jsonDat[x]["created_at"].ToString(), "ddd MMM dd HH:mm:ss K yyyy", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
-
+                    
                     html += "<p class=\"message\">" + mystring + "</p>";
                     html += "<p class=\"meta\">" + ToRelativeTimeString(dt) + "</p>";
                     html += "</div>";
@@ -303,15 +149,6 @@ namespace CMSEmergencySystem
             catch (Exception twit_error)
             {
                 twitterLiveFeed.InnerHtml = html + twit_error.ToString();
-            }
-        }
-
-        private void InvokeMethod()
-        {
-            while (true)
-            {
-                //RefreshSocialFeed();
-                Thread.Sleep(10000); // 30 sec
             }
         }
 
