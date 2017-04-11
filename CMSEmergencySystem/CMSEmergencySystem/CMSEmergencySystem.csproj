@@ -133,6 +133,7 @@
       <DependentUpon>Database1.mdf</DependentUpon>
     </Content>
     <Content Include="Email\EmailData.aspx" />
+    <Content Include="favicon.png" />
     <Content Include="Global.asax" />
     <Content Include="Icons\CarAccident.png" />
     <Content Include="Icons\clear.png" />

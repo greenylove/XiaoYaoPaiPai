@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using CMSEmergencySystem.Controllers;
-using CMSEmergencySystem.Entities;
 using System.Threading;
+using System.Web;
 
 namespace CMSEmergencySystem
 {
@@ -19,8 +14,14 @@ namespace CMSEmergencySystem
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Thread printer = new Thread(new ThreadStart(InvokeMethod));
-            printer.Start();
+            //Facebook page authentication
+            string app_id = "1677399102562906";
+            string scope = "publish_actions,manage_pages";
+
+            if (HttpContext.Current.Request["code"] == null)
+            {
+                HttpContext.Current.Response.Redirect(string.Format("https://graph.facebook.com/oauth/authorize?client_id={0}&redirect_uri={1}&scope={2}", app_id, HttpContext.Current.Request.Url.AbsoluteUri, scope));
+            }
 
             RefreshFBFeed();
             RefreshTwitterFeed(url, query);
@@ -33,12 +34,6 @@ namespace CMSEmergencySystem
             if (!this.IsPostBack)
             {
                 initIncidentList();
-
-                //    string incidentID = "";
-                //    incidentID = Request.QueryString["ID"];
-
-                //    DataTable CategoryTable = new DataTable();
-                //    CategoryTable = myDB.getAllCategoryData();
             } // end of if post back
         } // end page load
 
@@ -49,7 +44,6 @@ namespace CMSEmergencySystem
             newsFeedController = new NewsFeedController();
             incidentController = new IncidentController();
         }
-
     }//end of class
 }//end of name space
 

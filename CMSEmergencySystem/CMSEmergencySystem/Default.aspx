@@ -2,6 +2,17 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <script runat="server" type="text/c#">
+        protected void TimerFB_Tick(object sender, EventArgs e)
+        {
+            RefreshFBFeed();
+        }
+        protected void TimerTwitter_Tick(object sender, EventArgs e)
+        {
+            RefreshTwitterFeed(url, query);
+        }
+    </script>
+
     <script>
         function CheckedChanged() {
             for (var i = 0; i < fire.length; i++) {
@@ -46,7 +57,6 @@
             document.getElementById("hiddenleftpanel").style.display = 'block';
             document.getElementById("rightpanel").style.marginLeft = document.getElementById("hiddenleftpanel").offsetWidth + "px";
             document.getElementById("rightpanel").style.marginRight = "0px";
-
         }
         function w3_closeleft() {
             document.getElementById("mySidenav").style.display = "none";
@@ -55,7 +65,6 @@
             document.getElementById("hiddenleftpanel").style.width = "0%";
             document.getElementById("rightpanel").style.marginLeft = document.getElementById("leftsidepanel").offsetWidth + "px";
         }
-
         function w3_openright() {
             document.getElementById("closerightpanel").style.width = "auto";
             document.getElementById("myRightSidenav").style.width = "100%";
@@ -71,7 +80,6 @@
             document.getElementById("closerightpanel").style.width = "0%";
             document.getElementById("rightpanel").style.marginRight = document.getElementById("rightopenpanel").offsetWidth + "px";
         }
-
         function tab1() {
             document.getElementById("tabs-2").style.display = "none";
             document.getElementById("tabs-1").style.display = "inline-block";
@@ -82,7 +90,6 @@
             document.getElementById("tabs-2").style.display = "inline-block";
             document.getElementById("tabs-3").style.display = "none";
         }
-
         function tab3() {
             document.getElementById("tabs-1").style.display = "none";
             document.getElementById("tabs-2").style.display = "none";
@@ -97,18 +104,10 @@
             var createModal = document.getElementById('CreateIncidentDialogBox');
 
             // Get the button that opens the modal
-            //var btn = document.getElementById("ViewDetails");
             var btn1 = document.getElementById("CreateIncident");
 
-            // Get the <span> element that closes the modal
             var span = document.getElementsByClassName("close")[0];
             var span1 = document.getElementsByClassName("close1")[0];
-
-            // When the user clicks the button, open the modal
-            /*btn.onclick = function () {
-                modal.style.display = "block";
-                return false;
-            }*/
 
             btn1.onclick = function () {
                 if (document.getElementById('infowindow-content').children["CreateIncident"].textContent == "Create Incident") {
@@ -117,7 +116,6 @@
                     document.getElementById('LngInfo').value = window.defaultPlaceGResult.longitude;
                 }
                 else if (document.getElementById('infowindow-content').children["CreateIncident"].textContent == "View Incident") {
-                    //GridData.in
                     var table = document.getElementById("MainContent_GridData");
                     for (var i = 1; i < table.rows.length; i++) {
                         if (state == table.rows[i].cells[0].innerHTML) {
@@ -126,16 +124,8 @@
                     }
                 }
                 console.log("MAP_ID: " + state);
-
-                //console.log("TableID: "+table.rows[2].cells[0].innerHTML);
-                //console.log(document.getElementById("MainContent_GridData").children[0].);
-
-                // document.getElementById('LatInfo').value = window.defaultPlaceGResult.latitude;
-                // document.getElementById('LngInfo').value = window.defaultPlaceGResult.longitude;
                 return false;
             }
-
-            // When the user clicks on <span> (x), close the modal
             span.onclick = function () {
                 modal.style.display = "none";
             }
@@ -143,8 +133,6 @@
             span1.onclick = function () {
                 createModal.style.display = "none";
             }
-
-            // When the user clicks anywhere outside of the modal, close it
             window.onclick = function (event) {
                 if (event.target == modal) {
                     modal.style.display = "none";
@@ -173,21 +161,16 @@
 
             // Get the <span> element that closes the modal
             var spanTest = document.getElementsByClassName("close")[0];
-            //var span1 = document.getElementsByClassName("close1")[0];
 
             // When the user clicks the button, open the modal
             viewIncidentTest.onclick = function () {
                 modal.style.display = "block";
                 return false;
             }
-
-
             // When the user clicks on <span> (x), close the modal
             spanTest.onclick = function () {
                 modal.style.display = "none";
             }
-
-
             // When the user clicks anywhere outside of the modal, close it
             window.onclick = function (event) {
                 if (event.target == modal) {
@@ -228,7 +211,6 @@
             console.log(document.getElementById('LatInfo').value);
             //Load Dengue KML
             dengueLayer = CMSEmergencySystem.Map.LoadDengue();
-
             //NEA Marker Function
         <%
         for (var i = 0; i < weather2hrArray.GetLength(0); i++)
@@ -532,7 +514,69 @@
                                 <div class="LiveFeedCSS">
                                     <asp:UpdatePanel ID="UpdatePanelFBLiveFeed" class="feed" runat="server">
                                         <ContentTemplate>
-                                            <div id="fbLiveFeed" runat="server"></div>
+                                            <asp:Timer runat="server" id="TimerFB" Interval="10000" OnTick="TimerFB_Tick"></asp:Timer>
+                                            <div id="fbLiveFeed" runat="server">
+                                                <li id="li1">
+                                                    <div id="div1" class="status">
+                                                        <p id="pmsg1" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="pmeta1" runat="server" class="meta"></p>
+                                                </li>
+                                                <li id="li2">
+                                                    <div id="div2" class="status">
+                                                        <p id="pmsg2" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="pmeta2" runat="server" class="meta"></p>
+                                                </li>
+                                                <li id="li3">
+                                                    <div id="div3" class="status">
+                                                        <p id="pmsg3" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="pmeta3" runat="server" class="meta"></p>
+                                                </li>
+                                                <li id="li4">
+                                                    <div id="div4" class="status">
+                                                        <p id="pmsg4" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="pmeta4" runat="server" class="meta"></p>
+                                                </li>
+                                                <li id="li5">
+                                                    <div id="div5" class="status">
+                                                        <p id="pmsg5" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="pmeta5" runat="server" class="meta"></p>
+                                                </li>
+                                                <li id="li6">
+                                                    <div id="div6" class="status">
+                                                        <p id="pmsg6" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="pmeta6" runat="server" class="meta"></p>
+                                                </li>
+                                                <li id="li7">
+                                                    <div id="div7" class="status">
+                                                        <p id="pmsg7" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="pmeta7" runat="server" class="meta"></p>
+                                                </li>
+                                                <li id="li8">
+                                                    <div id="div8" class="status">
+                                                        <p id="pmsg8" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="pmeta8" runat="server" class="meta"></p>
+                                                </li>
+                                                <li id="li9">
+                                                    <div id="div9" class="status">
+                                                        <p id="pmsg9" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="pmeta9" runat="server" class="meta"></p>
+                                                </li>
+                                                <li id="li10">
+                                                    <div id="div10" class="status">
+                                                        <p id="pmsg10" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="pmeta10" runat="server" class="meta"></p>
+                                                </li>
+                                            </div>
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
                                 </div>
@@ -543,7 +587,130 @@
                                 <div class="LiveFeedCSS">
                                     <asp:UpdatePanel ID="UpdatePanel4" class="feed" runat="server">
                                         <ContentTemplate>
-                                            <div id="twitterLiveFeed" runat="server"></div>
+                                            <asp:Timer runat="server" id="TimerTwitter" Interval="10000" OnTick="TimerTwitter_Tick"></asp:Timer>
+                                            <div id="twitterLiveFeed" runat="server">
+                                                <li id="twitterli1">
+                                                    <div id="twitterdiv1" class="status">
+                                                        <p id="twitterpmsg1" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="twitterpmeta1" runat="server" class="meta"></p>
+                                                </li>
+                                                <li id="twitterli2">
+                                                    <div id="twitterdiv2" class="status">
+                                                        <p id="twitterpmsg2" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="twitterpmeta2" runat="server" class="meta"></p>
+                                                </li>
+                                                <li id="twitterli3">
+                                                    <div id="twitterdiv3" class="status">
+                                                        <p id="twitterpmsg3" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="twitterpmeta3" runat="server" class="meta"></p>
+                                                </li>
+                                                <li id="twitterli4">
+                                                    <div id="twitterdiv4" class="status">
+                                                        <p id="twitterpmsg4" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="twitterpmeta4" runat="server" class="meta"></p>
+                                                </li>
+                                                <li id="twitterli5">
+                                                    <div id="twitterdiv5" class="status">
+                                                        <p id="twitterpmsg5" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="twitterpmeta5" runat="server" class="meta"></p>
+                                                </li>
+                                                <li id="twitterli6">
+                                                    <div id="twitterdiv6" class="status">
+                                                        <p id="twitterpmsg6" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="twitterpmeta6" runat="server" class="meta"></p>
+                                                </li>
+                                                <li id="twitterli7">
+                                                    <div id="twitterdiv7" class="status">
+                                                        <p id="twitterpmsg7" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="twitterpmeta7" runat="server" class="meta"></p>
+                                                </li>
+                                                <li id="twitterli8">
+                                                    <div id="twitterdiv8" class="status">
+                                                        <p id="twitterpmsg8" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="twitterpmeta8" runat="server" class="meta"></p>
+                                                </li>
+                                                <li id="twitterli9">
+                                                    <div id="twitterdiv9" class="status">
+                                                        <p id="twitterpmsg9" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="twitterpmeta9" runat="server" class="meta"></p>
+                                                </li>
+                                                <li id="twitterli10">
+                                                    <div id="twitterdiv10" class="status">
+                                                        <p id="twitterpmsg10" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="twitterpmeta10" runat="server" class="meta"></p>
+                                                </li>
+                                                <li id="twitterli11">
+                                                    <div id="div11" class="status">
+                                                        <p id="twitterpmsg11" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="twitterpmeta11" runat="server" class="meta"></p>
+                                                </li>
+                                                <li id="twitterli12">
+                                                    <div id="div12" class="status">
+                                                        <p id="twitterpmsg12" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="twitterpmeta12" runat="server" class="meta"></p>
+                                                </li>
+                                                <li id="twitterli13">
+                                                    <div id="div13" class="status">
+                                                        <p id="twitterpmsg13" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="twitterpmeta13" runat="server" class="meta"></p>
+                                                </li>
+                                                <li id="twitterli14">
+                                                    <div id="div14" class="status">
+                                                        <p id="twitterpmsg14" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="twitterpmeta14" runat="server" class="meta"></p>
+                                                </li>
+                                                <li id="twitterli15">
+                                                    <div id="div15" class="status">
+                                                        <p id="twitterpmsg15" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="twitterpmeta15" runat="server" class="meta"></p>
+                                                </li>
+                                                <li id="twitterli16">
+                                                    <div id="div16" class="status">
+                                                        <p id="twitterpmsg16" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="twitterpmeta16" runat="server" class="meta"></p>
+                                                </li>
+                                                <li id="twitterli17">
+                                                    <div id="div17" class="status">
+                                                        <p id="twitterpmsg17" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="twitterpmeta17" runat="server" class="meta"></p>
+                                                </li>
+                                                <li id="twitterli18">
+                                                    <div id="div18" class="status">
+                                                        <p id="twitterpmsg18" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="twitterpmeta18" runat="server" class="meta"></p>
+                                                </li>
+                                                <li id="twitterli19">
+                                                    <div id="div19" class="status">
+                                                        <p id="twitterpmsg19" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="twitterpmeta19" runat="server" class="meta"></p>
+                                                </li>
+                                                <li id="twitterli20">
+                                                    <div id="div20" class="status">
+                                                        <p id="twitterpmsg20" runat="server" class="message"></p>
+                                                    </div>
+                                                    <p id="twitterpmeta20" runat="server" class="meta"></p>
+                                                </li>
+
+                                            </div>
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
                                 </div>
