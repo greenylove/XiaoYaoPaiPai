@@ -39,7 +39,6 @@
 
         function toggleBomb() {
             for (var i = 0; i < pushBombShelter.length; i++) {
-                //console.log(listOfBombShelter.length);
                 if (document.getElementById("bombShelterCheckBox").checked == true)
                     pushBombShelter[i].setVisible(true);
                 else
@@ -245,9 +244,8 @@
                 console.log(list);
                 for (var i = 0; i < list.length; i++) {
                     var incident = list[i];
-                    //console.log("Retrieve var from incident");
+
                     if (incident.Status == "Unresolved") {
-                        //console.log("if statement");
                         incident.formatted_address = incident.Location;
                         incident.latitude = incident.Latitude;
                         incident.longitude = incident.Longitude;
@@ -263,41 +261,27 @@
                             terrorist.push(marker);
                     }
                 }
-                //alert("go pass through here");
-                //CMSEmergencySystem.Map.ClearMarker();
+
             },
             error: function () { }
         });
-        //CMSEmergencySystem.Map.AddDefaultPlaceListener(cachePlace);
+
 
 
         $.ajax("/BombShelterServlet.aspx", {
             success: function (data) {
-                //console.log(JSON.parse(data));
-                //var x ='[{"Location":"AAAAAAA","Latitude":1.345555,"Longitude":103.932465,"Postal":529757,"Description":"AAAAAA","Address":"AAAAA"}]';
                 listOfBombShelter = JSON.parse(data);
-                //console.log(listOfBombShelter)
                 for (var i = 0; i < listOfBombShelter.length; i++) {
                     var BombShelter = listOfBombShelter[i];
-                    //console.log("Retrieve var from incident");
-                    //console.log("if statement");
-                    // incident.formatted_address = incident.Location;
                     BombShelter.latitude = BombShelter.Latitude;
                     BombShelter.longitude = BombShelter.Longitude;
                     var marker = CMSEmergencySystem.Map.BombShelterAddMarker(new google.maps.LatLng(BombShelter.Latitude, BombShelter.Longitude));
                     marker.setVisible(false);
                     pushBombShelter.push(marker);
-                    //new google.maps.LatLng(incident.Latitude, incident.Longitude), Map,
-
                 }
-                //alert("go pass through here");
-                //CMSEmergencySystem.Map.ClearMarker();
             },
             error: function () { }
         });
-
-
-
 
         }
 
@@ -318,12 +302,6 @@
             document.getElementById('infowindow-content').children["CreateIncident"].textContent = "Create Incident"
         }
     }
-
-    /*var place, gresult;
-    function cachePlace(marker, geocodeResult) {
-        place = marker._Place;
-        geocodeResult = gresult;
-    }*/
 
     //Dengue Toggle Function
     function toggleDengue() {
@@ -644,8 +622,6 @@
                                 <li><a onclick="tab3();">NEA Data</a></li>
                             </ul>
                             
-                          
-
                             <div id="tabs-1" style="width: 100%;">
                                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                                     <ContentTemplate>

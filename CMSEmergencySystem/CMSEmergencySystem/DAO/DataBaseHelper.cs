@@ -10,13 +10,14 @@ namespace CMSEmergencySystem
     public class DataBaseHelper
     {
         private ConnectionStringSettings settings;
+        SqlCommand Command = new SqlCommand();
+        SqlDataAdapter Adapter = new SqlDataAdapter();
+        SqlConnection Connection = new SqlConnection();
+        DataSet DS = new DataSet();
 
         public DataRow loginUser(string userName, string Password)
         {
-
-            SqlCommand Command = new SqlCommand();
-            SqlDataAdapter Adapter = new SqlDataAdapter();
-            DataSet ds = new DataSet();
+               
             DataRow userRow;
             string sqlText = "SELECT departmentID FROM Database1.dbo.CredentialDB WHERE Username=@userName AND userPW=@Password";
 
@@ -38,16 +39,16 @@ namespace CMSEmergencySystem
             Adapter.Fill(ds, "UserData");
             Connection.Close();
 
-            if (ds.Tables["UserData"].Rows.Count != 0)
+            if (DS.Tables["UserData"].Rows.Count != 0)
             {
                 //Return the DataRow that contains the user information
                 //so that the web form logic can check the user's role id.
-                return ds.Tables["UserData"].Rows[0];
+                return DS.Tables["UserData"].Rows[0];
             }
             else
             {
                 //Create an empty DataRow
-                userRow = ds.Tables["UserData"].Rows.Add();
+                userRow = DS.Tables["UserData"].Rows.Add();
                 //Set the empty DataRow's SystemUserRecordId 
                 //field with a value of 0
                 userRow["departmentId"] = 0;
@@ -60,10 +61,8 @@ namespace CMSEmergencySystem
 
         public DataTable getSearchIncident(string Query)
         {
-            SqlCommand Command = new SqlCommand();
-            SqlDataAdapter Adapter = new SqlDataAdapter();
-            DataSet ds = new DataSet();
-            
+           
+            Command.Parameters.Clear();
             Command.Parameters.Add("@Query", SqlDbType.VarChar, 100);
             Command.Parameters["@Query"].Value = Query;
 
@@ -86,17 +85,14 @@ namespace CMSEmergencySystem
             Adapter.SelectCommand = Command;
 
             Connection.Open();
-            Adapter.Fill(ds, "searchResult");
+            Adapter.Fill(DS, "searchResult");
             Connection.Close();
-            return ds.Tables["searchResult"];
+            return DS.Tables["searchResult"];
         }
 
         public DataTable getAllLocation()
         {
-            SqlConnection Connection = new SqlConnection();
-            SqlCommand Command = new SqlCommand();
-            DataSet DS = new DataSet();
-            SqlDataAdapter Adapter = new SqlDataAdapter();
+                      
             string sqlText = "SELECT * FROM Database1.dbo.IncidentManager";
 
             settings = System.Configuration.ConfigurationManager.ConnectionStrings["Connection"];
@@ -116,11 +112,7 @@ namespace CMSEmergencySystem
 
         public DataTable getAllIncident()
         {
-            SqlConnection Connection = new SqlConnection();
-            SqlCommand Command = new SqlCommand();
-            SqlDataAdapter Adapter = new SqlDataAdapter();
-            DataSet Ds = new DataSet();
-
+       
             settings = System.Configuration.ConfigurationManager.ConnectionStrings["Connection"];
             string connectionString = settings.ConnectionString;
             Connection = new SqlConnection(connectionString);
@@ -131,19 +123,14 @@ namespace CMSEmergencySystem
             Adapter.SelectCommand = Command;
 
             Connection.Open();
-            Adapter.Fill(Ds, "allIncident");
+            Adapter.Fill(DS, "allIncident");
             Connection.Close();
-            return Ds.Tables["allIncident"];
+            return DS.Tables["allIncident"];
 
         } // end of getAllIncident
 
         public DataTable getAllPendingIncident()
         {
-            SqlConnection Connection = new SqlConnection();
-            SqlCommand Command = new SqlCommand();
-            SqlDataAdapter Adapter = new SqlDataAdapter();
-            DataSet Ds = new DataSet();
-
             settings = System.Configuration.ConfigurationManager.ConnectionStrings["Connection"];
             string connectionString = settings.ConnectionString;
             Connection = new SqlConnection(connectionString);
@@ -154,19 +141,15 @@ namespace CMSEmergencySystem
             Adapter.SelectCommand = Command;
 
             Connection.Open();
-            Adapter.Fill(Ds, "Id");
+            Adapter.Fill(DS, "Id");
             Connection.Close();
-            return Ds.Tables["Id"];
+            return DS.Tables["Id"];
 
         } // end of getAllPendingIncident
 
 
         public DataTable getAllResolvedIncident()
-        {
-            SqlConnection Connection = new SqlConnection();
-            SqlCommand Command = new SqlCommand();
-            SqlDataAdapter Adapter = new SqlDataAdapter();
-            DataSet Ds = new DataSet();
+        {          
 
             settings = System.Configuration.ConfigurationManager.ConnectionStrings["Connection"];
             string connectionString = settings.ConnectionString;
@@ -178,18 +161,15 @@ namespace CMSEmergencySystem
             Adapter.SelectCommand = Command;
 
             Connection.Open();
-            Adapter.Fill(Ds, "Id");
+            Adapter.Fill(DS, "Id");
             Connection.Close();
-            return Ds.Tables["Id"];
+            return DS.Tables["Id"];
 
         } // end of getAllResolvedIncident
 
 
         public int updateIncidentStatus(int IncidentID, string Status)
         {
-
-            SqlConnection Connection = new SqlConnection();
-            SqlCommand Command = new SqlCommand();
             int numOfRecordAffected = 0;
 
             settings = System.Configuration.ConfigurationManager.ConnectionStrings["Connection"];
@@ -197,6 +177,7 @@ namespace CMSEmergencySystem
             Connection = new SqlConnection(connectionString);
             string sqlText = "UPDATE Database1.dbo.IncidentManager SET Status=@Status WHERE IncidentID=@IncidentID";
 
+            Command.Parameters.Clear();
             Command.CommandText = sqlText;
             Command.Connection = Connection;
 
@@ -218,17 +199,12 @@ namespace CMSEmergencySystem
         public IncidentItem getOneIncident(int IncidentID)
         {
             //IncidentItem i;
-            SqlConnection Connection = new SqlConnection();
-            SqlCommand Command = new SqlCommand();
-            SqlDataAdapter Adapter = new SqlDataAdapter();
-            DataSet ds = new DataSet();
-
             settings = System.Configuration.ConfigurationManager.ConnectionStrings["Connection"];
             string connectionString = settings.ConnectionString;
             Connection = new SqlConnection(connectionString);
             string sqlText = "SELECT * FROM Database1.dbo.IncidentManager WHERE IncidentID=@IncidentID";
 
-
+            Command.Parameters.Clear();
             Command.Parameters.Add("@IncidentID", SqlDbType.Int);
             Command.Parameters["@IncidentID"].Value = IncidentID;
 
@@ -237,9 +213,9 @@ namespace CMSEmergencySystem
             Adapter.SelectCommand = Command;
 
             Connection.Open();
-            Adapter.Fill(ds, "getOneIncident");
+            Adapter.Fill(DS, "getOneIncident");
             Connection.Close();
-            DataTable oneIncident = ds.Tables["getOneIncident"];
+            DataTable oneIncident = DS.Tables["getOneIncident"];
             DateTime dateTime = Convert.ToDateTime(oneIncident.Rows[0]["dateTime"].ToString());
             string convertDateTime = dateTime.ToString();
             string reportPerson = oneIncident.Rows[0]["reporterName"].ToString();
@@ -251,10 +227,7 @@ namespace CMSEmergencySystem
             string description = oneIncident.Rows[0]["incidentDesc"].ToString();
             string dt = oneIncident.Rows[0]["dateTime"].ToString();
             int newIncidentID = int.Parse(oneIncident.Rows[0]["incidentID"].ToString());
-            // float lat = float.Parse(ds.Tables["Latitude"].ToString());
-            //float lng = float.Parse(ds.Tables["Longitutde"].ToString());
-
-
+       
             IncidentItem i = new IncidentItem(reportPerson, typeOfIncident, location, mainDispatch, contactNo
             , postalCode, description, 0, 0);
             i.Latitude = float.Parse(oneIncident.Rows[0]["Latitude"].ToString());
@@ -262,9 +235,7 @@ namespace CMSEmergencySystem
             i.DateTime = convertDateTime;
             i.NewIncidentID = newIncidentID;
 
-            // i = loadItem(ds);
             return i;
-            //return ds.Tables["Id"];
         }
         public IncidentItem loadItem(DataSet ds)
         {
@@ -285,11 +256,9 @@ namespace CMSEmergencySystem
         }
         public int AddSupportTypeDB(int IncidentID, int DepartmentID)
         {
-            SqlCommand Command = new SqlCommand();
-            DataSet ds = new DataSet();
-            SqlDataAdapter Adapter = new SqlDataAdapter();
             string sqlText = "INSERT INTO Database1.dbo.SupportType (IncidentID, DepartmentID) VALUES(@IncidentID, @DepartmentID)";
 
+            Command.Parameters.Clear();
             Command.Parameters.Add("@IncidentID", SqlDbType.VarChar, 100);
             Command.Parameters["@IncidentID"].Value = IncidentID;
 
@@ -313,12 +282,7 @@ namespace CMSEmergencySystem
         } // end of AddSupportType
 
         public DataTable getAllPendingIncidentDB()
-        {
-            SqlConnection Connection = new SqlConnection();
-            SqlCommand Command = new SqlCommand();
-            SqlDataAdapter Adapter = new SqlDataAdapter();
-            DataSet ds = new DataSet();
-
+        {         
             settings = System.Configuration.ConfigurationManager.ConnectionStrings["Connection"];
             string connectionString = settings.ConnectionString;
             Connection = new SqlConnection(connectionString);
@@ -329,18 +293,13 @@ namespace CMSEmergencySystem
             Adapter.SelectCommand = Command;
 
             Connection.Open();
-            Adapter.Fill(ds, "Id");
+            Adapter.Fill(DS, "Id");
             Connection.Close();
-            return ds.Tables["Id"];
+            return DS.Tables["Id"];
 
         } // end of getAllPendingIncident
         public DataTable getAllResolvedIncidentDB()
         {
-            SqlConnection Connection = new SqlConnection();
-            SqlCommand Command = new SqlCommand();
-            SqlDataAdapter Adapter = new SqlDataAdapter();
-            DataSet ds = new DataSet();
-
             settings = System.Configuration.ConfigurationManager.ConnectionStrings["Connection"];
             string connectionString = settings.ConnectionString;
             Connection = new SqlConnection(connectionString);
@@ -351,18 +310,16 @@ namespace CMSEmergencySystem
             Adapter.SelectCommand = Command;
 
             Connection.Open();
-            Adapter.Fill(ds, "Id");
+            Adapter.Fill(DS, "Id");
             Connection.Close();
-            return ds.Tables["Id"];
+            return DS.Tables["Id"];
 
         } // end of getAllPendingIncident
 
 
         public void deleteOneIncident(int IncidentID)
         {
-            SqlConnection Connection = new SqlConnection();
-            SqlCommand Command = new SqlCommand();
-
+          
             settings = System.Configuration.ConfigurationManager.ConnectionStrings["Connection"];
             string connectionString = settings.ConnectionString;
             Connection = new SqlConnection(connectionString);
@@ -371,9 +328,9 @@ namespace CMSEmergencySystem
             Command.CommandText = sqlText;
             Command.Connection = Connection;
 
+            Command.Parameters.Clear();
             Command.Parameters.Add("@IncidentID", SqlDbType.Int);
             Command.Parameters["@IncidentID"].Value = IncidentID;
-
 
             Connection.Open();
             Command.ExecuteNonQuery();
@@ -383,10 +340,7 @@ namespace CMSEmergencySystem
 
         public DataTable getOneSupportType(int IncidentID)
         {
-            SqlConnection Connection = new SqlConnection();
-            SqlCommand Command = new SqlCommand();
-            DataSet DS = new DataSet();
-            SqlDataAdapter Adapter = new SqlDataAdapter();
+         
             string sqlText = "SELECT departmentName FROM Database1.dbo.SupportName " +
                              "JOIN Database1.dbo.SupportType " +
                              "ON Database1.dbo.SupportName.departmentID = Database1.dbo.SupportType.departmentID " +
@@ -396,6 +350,7 @@ namespace CMSEmergencySystem
             string connectionString = settings.ConnectionString;
             Connection = new SqlConnection(connectionString);
 
+            Command.Parameters.Clear();
             Command.Parameters.Add("@IncidentID", SqlDbType.Int);
             Command.Parameters["@IncidentID"].Value = IncidentID;
 
@@ -414,12 +369,8 @@ namespace CMSEmergencySystem
         public DataTable getAllCategoryData()
         {
 
-            SqlConnection Connection = new SqlConnection();
-            SqlCommand Command = new SqlCommand();
-            DataSet ds = new DataSet();
-            SqlDataAdapter Adapter = new SqlDataAdapter();
             string sqlText = "SELECT * FROM Database1.dbo.CategoryList";
-
+     
             Command.CommandText = sqlText;
             settings = System.Configuration.ConfigurationManager.ConnectionStrings["Connection"];
             string connectionString = settings.ConnectionString;
@@ -428,18 +379,14 @@ namespace CMSEmergencySystem
             Adapter.SelectCommand = Command;
 
             Connection.Open();
-            Adapter.Fill(ds, "CategoryData");
+            Adapter.Fill(DS, "CategoryData");
             Connection.Close();
-            return ds.Tables["CategoryData"];
+            return DS.Tables["CategoryData"];
 
         }
 
         public void addStatusLog(int IncidentID, string statusMessage)
         {
-
-            SqlCommand Command = new SqlCommand();
-            DataSet ds = new DataSet();
-            SqlDataAdapter Adapter = new SqlDataAdapter();
             string sqlText = "INSERT INTO Database1.dbo.StatusLog (IncidentID, statusMessage) VALUES(@IncidentID,@statusMessage)";
 
             Command.Parameters.Add("@IncidentID", SqlDbType.VarChar, 100);
@@ -463,11 +410,11 @@ namespace CMSEmergencySystem
 
         public int Create_Incident(IncidentItem i)
         {
-            SqlCommand Command = new SqlCommand();
-            SqlDataAdapter Adapter = new SqlDataAdapter();
+
             int IncidentID = 0;
             string sqlText = "INSERT INTO Database1.dbo.IncidentManager (incidentType, reporterName, reportContact, Location, postalCode, mainDispatch, incidentDesc, Latitude, Longitude) OUTPUT INSERTED.IncidentID VALUES(@incidentType, @reporterName, @reportContact, @Location, @postalCode, @mainDispatch, @incidentDesc, @latitude, @longitude)";
 
+            Command.Parameters.Clear();
             Command.Parameters.Add("@incidentType", SqlDbType.VarChar, 100);        //incidentType
             Command.Parameters["@incidentType"].Value = i.TypeOfIncident;
 
@@ -513,9 +460,7 @@ namespace CMSEmergencySystem
 
         public void AddSupportType(int IncidentID, int DepartmentID)
         {
-            SqlCommand Command = new SqlCommand();
-            DataSet ds = new DataSet();
-            SqlDataAdapter Adapter = new SqlDataAdapter();
+
             string sqlText = "INSERT INTO Database1.dbo.SupportType (IncidentID, DepartmentID) VALUES(@IncidentID, @DepartmentID)";
 
             Command.Parameters.Add("@IncidentID", SqlDbType.VarChar, 100);
@@ -541,10 +486,6 @@ namespace CMSEmergencySystem
 
         public DataTable getOneStatusLog(int IncidentID)
         {
-            SqlConnection Connection = new SqlConnection();
-            SqlCommand Command = new SqlCommand();
-            DataSet DS = new DataSet();
-            SqlDataAdapter Adapter = new SqlDataAdapter();
             string sqlText = "SELECT statusMessage, dateTime FROM Database1.dbo.StatusLog " +
                              "WHERE IncidentID = @IncidentID";
 
@@ -552,6 +493,7 @@ namespace CMSEmergencySystem
             string connectionString = settings.ConnectionString;
             Connection = new SqlConnection(connectionString);
 
+            Command.Parameters.Clear();
             Command.Parameters.Add("@IncidentID", SqlDbType.Int);
             Command.Parameters["@IncidentID"].Value = IncidentID;
 
@@ -568,10 +510,9 @@ namespace CMSEmergencySystem
 
         public void addMapLocation(int IncidentID, float Latitude, float Longitude)
         {
-            SqlCommand Command = new SqlCommand();
-            SqlDataAdapter Adapter = new SqlDataAdapter();
             string sqlText = "INSERT INTO Database1.dbo.MapManager (IncidentID, Latitude, Longitude) VALUES(@IncidentID, @Latitude, @Longitude)";
 
+            Command.Parameters.Clear();
             Command.Parameters.Add("@IncidentID", SqlDbType.Int);
             Command.Parameters["@IncidentID"].Value = IncidentID;
             Command.Parameters.Add("@Longitude", SqlDbType.Float, 100);
@@ -596,10 +537,6 @@ namespace CMSEmergencySystem
 
         public DataTable getOneMapLocation(string IncidentID)
         {
-            SqlConnection Connection = new SqlConnection();
-            SqlCommand Command = new SqlCommand();
-            DataSet DS = new DataSet();
-            SqlDataAdapter Adapter = new SqlDataAdapter();
             string sqlText = "SELECT * FROM Database1.dbo.MapManager " +
                              "WHERE IncidentID = @IncidentID";
 
@@ -607,6 +544,7 @@ namespace CMSEmergencySystem
             string connectionString = settings.ConnectionString;
             Connection = new SqlConnection(connectionString);
 
+            Command.Parameters.Clear();
             Command.Parameters.Add("@IncidentID", SqlDbType.Int);
             Command.Parameters["@IncidentID"].Value = IncidentID;
 
@@ -622,10 +560,6 @@ namespace CMSEmergencySystem
         }
         public DataTable getAllBombShelter()
         {
-            SqlConnection Connection = new SqlConnection();
-            SqlCommand Command = new SqlCommand();
-            DataSet DS = new DataSet();
-            SqlDataAdapter Adapter = new SqlDataAdapter();
             string sqlText = "SELECT * FROM Database1.dbo.BombShelter";
 
             settings = System.Configuration.ConfigurationManager.ConnectionStrings["Connection"];

@@ -5,7 +5,6 @@
     <script runat="server" type="text/c#">
         protected void TimerFB_Tick(object sender, EventArgs e)
         {
-
             RefreshFBFeed();// return
             // byID of your panel update that panel
         }
@@ -49,15 +48,14 @@
                     weatherList[w].setVisible(false);
             }
         }
-        //function toggleBomb() {
-        //    for (var i = 0; i < pushBombShelter.length; i++) {
-        //        //console.log(listOfBombShelter.length);
-        //        if (document.getElementById("bombShelterCheckBox").checked == true)
-        //            pushBombShelter[i].setVisible(true);
-        //        else
-        //            pushBombShelter[i].setVisible(false);
-        //    }
-        //}
+        function toggleBomb() {
+            for (var i = 0; i < pushBombShelter.length; i++) {
+                if (document.getElementById("bombShelterCheckBox").checked == true)
+                    pushBombShelter[i].setVisible(true);
+                else
+                    pushBombShelter[i].setVisible(false);
+            }
+        }
     </script>
     <script>
         function w3_openleft() {
@@ -259,9 +257,7 @@
                     console.log(list);
                     for (var i = 0; i < list.length; i++) {
                         var incident = list[i];
-                        //console.log("Retrieve var from incident");
                         if (incident.Status == "Unresolved") {
-                            //console.log("if statement");
                             incident.formatted_address = incident.Location;
                             incident.latitude = incident.Latitude;
                             incident.longitude = incident.Longitude;
@@ -277,36 +273,26 @@
                                 terrorist.push(marker);
                         }
                     }
-                    //alert("go pass through here");
-                    //CMSEmergencySystem.Map.ClearMarker();
                 },
                 error: function () { }
             });
-            //CMSEmergencySystem.Map.AddDefaultPlaceListener(cachePlace);
-            //$.ajax("/BombShelterServlet.aspx", {
-            //    success: function (data) {
-            //        //console.log(JSON.parse(data));
-            //        //var x ='[{"Location":"AAAAAAA","Latitude":1.345555,"Longitude":103.932465,"Postal":529757,"Description":"AAAAAA","Address":"AAAAA"}]';
-            //        listOfBombShelter = JSON.parse(data);
-            //        //console.log(listOfBombShelter)
-            //        for (var i = 0; i < listOfBombShelter.length; i++) {
-            //            var BombShelter = listOfBombShelter[i];
-            //            //console.log("Retrieve var from incident");
-            //            //console.log("if statement");
-            //            // incident.formatted_address = incident.Location;
-            //            BombShelter.latitude = BombShelter.Latitude;
-            //            BombShelter.longitude = BombShelter.Longitude;
-            //            var marker = CMSEmergencySystem.Map.BombShelterAddMarker(new google.maps.LatLng(BombShelter.Latitude, BombShelter.Longitude));
-            //            marker.setVisible(false);
-            //            pushBombShelter.push(marker);
-            //            //new google.maps.LatLng(incident.Latitude, incident.Longitude), Map,
 
-            //        }
-            //        //alert("go pass through here");
-            //        //CMSEmergencySystem.Map.ClearMarker();
-            //    },
-            //    error: function () { }
-            //});
+
+            CMSEmergencySystem.Map.AddDefaultPlaceListener(cachePlace);
+            $.ajax("/BombShelterServlet.aspx", {
+                success: function (data) {
+                    listOfBombShelter = JSON.parse(data);
+                    for (var i = 0; i < listOfBombShelter.length; i++) {
+                        var BombShelter = listOfBombShelter[i];
+                        BombShelter.latitude = BombShelter.Latitude;
+                        BombShelter.longitude = BombShelter.Longitude;
+                        var marker = CMSEmergencySystem.Map.BombShelterAddMarker(new google.maps.LatLng(BombShelter.Latitude, BombShelter.Longitude));
+                        marker.setVisible(false);
+                        pushBombShelter.push(marker);
+                    }
+                },
+                error: function () { }
+            });
         }
 
 
@@ -327,11 +313,11 @@
         }
     }
 
-    /*var place, gresult;
+    var place, gresult;
     function cachePlace(marker, geocodeResult) {
         place = marker._Place;
         geocodeResult = gresult;
-    }*/
+    }
 
     //Dengue Toggle Function
     function toggleDengue() {
@@ -357,7 +343,7 @@
                 <div class="modal-body">
                     <asp:ScriptManager ID="ScriptManager1" runat="server">
                     </asp:ScriptManager>
-                    <asp:UpdatePanel UpdateMode="Conditional" ID="UpdatePanel1" runat="server">
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                         <ContentTemplate>
 
                             <table class="CurrentIncident">
@@ -834,7 +820,7 @@
                                 <li><a onclick="tab2();">Resolved Incidents</a></li>
                                 <li><a onclick="tab3();">NEA Data</a></li>
                             </ul>
-                            <asp:UpdatePanel UpdateMode="Conditional" ID="UpdatePanel5" runat="server">
+                            <asp:UpdatePanel ID="UpdatePanel5" runat="server">
                                     <ContentTemplate>
                             <div style="padding: 5px; border: 1px solid #dfd7ca;">
                                 <asp:TextBox ID="searchResult" runat="server" CssClass="form-control"></asp:TextBox>
@@ -844,7 +830,7 @@
                                         </ContentTemplate>
                                 </asp:UpdatePanel>
                             <div id="tabs-1" style="width: 100%;">
-                                <asp:UpdatePanel UpdateMode="Conditional" ID="UpdatePanel3" runat="server">
+                                <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                                     <ContentTemplate>
                                         <div class="gridViewTable">
                                             <asp:GridView ID="GridData" runat="server" AutoGenerateColumns="False" OnRowCommand="ViewPendingIncident_RowCommand"
@@ -869,7 +855,7 @@
                             </div>
 
                             <div id="tabs-2" style="display: none; width: 100%;">
-                                <asp:UpdatePanel UpdateMode="Conditional" ID="UpdatePanel2" runat="server">
+                                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                                     <ContentTemplate>
                                         <asp:GridView ID="GridData2" runat="server" AutoGenerateColumns="False" OnRowCommand="ViewResolvedIncident_RowCommand"
                                             Width="100%" CssClass="table table-striped table-hover">

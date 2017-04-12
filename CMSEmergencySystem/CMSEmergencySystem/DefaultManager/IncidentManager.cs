@@ -19,7 +19,6 @@ namespace CMSEmergencySystem
             GridData.DataBind();
             GridData2.DataSource = DT2;
             GridData2.DataBind();
-
             ViewState["DS2"] = DT2;
             ViewState["DS"] = DT;
         }
@@ -47,12 +46,11 @@ namespace CMSEmergencySystem
             //update UI
             clearTextBox();
             updateUIIncident();
+
             //pass json string to javascript
             System.Web.Script.Serialization.JavaScriptSerializer oSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             string sIncident = oSerializer.Serialize(incident); //converts object to json string
             ScriptManager.RegisterStartupScript(this, GetType(), "script", "replaceDefaultMarker(" + sIncident + ");", true);
-            //Response.Redirect("Default.aspx");
-            //ScriptManager.RegisterStartupScript(this, GetType(), "script", "test();", true);
         
         } // end of class
 
@@ -101,8 +99,6 @@ namespace CMSEmergencySystem
             ViewState["DS"] = DT;
             ViewState["DS2"] = DT2;
         }
-
-       
 
         public void ViewPendingIncident_RowCommand(Object sender, GridViewCommandEventArgs e)
         {
@@ -166,8 +162,6 @@ namespace CMSEmergencySystem
                 DataTable IncidentCategory;
                 DataTable statusLogUpdate;
 
-       
-
                 incidentItem = incidentController.getIncidentByID(incidentID);
                 IncidentCategory = incidentController.getSupportTypeByID(incidentID);
                 statusLogUpdate = incidentController.getStatusLogByID(incidentID);
@@ -214,24 +208,28 @@ namespace CMSEmergencySystem
             int incidentID = 0;
             string updateStatus = "";
             updateStatus = statusUpdate.Text;
-            incidentID = Int32.Parse(IncidentID.Text); // NEED TO CHANGE, THIS CODE IS NOT DOING ANYTHIG, GET INCIDENTID FROM SELECTED INDEX
-            incidentController.updateStatusByID(incidentID, updateStatus);
-                        
-            incidentItem = incidentController.getIncidentByID(incidentID);
-            IncidentCategory = myDB.getOneSupportType(incidentID);
-            statusLogUpdate = myDB.getOneStatusLog(incidentID);
+            // NEED TO CHANGE, THIS CODE IS NOT DOING ANYTHIG, GET INCIDENTID FROM SELECTED INDEX
 
-            clearTextBox();
-            DateTimeDisplay.Text = incidentItem.DateTime;
-            incidentType.Text = incidentItem.TypeOfIncident;
-            IncidentID.Text = incidentItem.NewIncidentID.ToString();
-            reporterName.Text = incidentItem.ReportPerson;
-            contactNumber.Text = incidentItem.ContactNo;
-            Location.Text = incidentItem.Location;
-            postalCode.Text = incidentItem.PostalCode;
-            mainDispatch.Text = incidentItem.MainDispatch;
+                Int32.TryParse(IncidentID.Text.ToString(),out incidentID);
+            if (incidentID != 0)
+            {
+                incidentController.updateStatusByID(incidentID, updateStatus);
 
-           
+                incidentItem = incidentController.getIncidentByID(incidentID);
+                IncidentCategory = myDB.getOneSupportType(incidentID);
+                statusLogUpdate = myDB.getOneStatusLog(incidentID);
+
+                clearTextBox();
+                DateTimeDisplay.Text = incidentItem.DateTime;
+                incidentType.Text = incidentItem.TypeOfIncident;
+                IncidentID.Text = incidentItem.NewIncidentID.ToString();
+                reporterName.Text = incidentItem.ReportPerson;
+                contactNumber.Text = incidentItem.ContactNo;
+                Location.Text = incidentItem.Location;
+                postalCode.Text = incidentItem.PostalCode;
+                mainDispatch.Text = incidentItem.MainDispatch;
+
+
                 for (int i = 0; i < statusLogUpdate.Rows.Count; i++)
                 {
                     DateTime datetime;
@@ -240,16 +238,16 @@ namespace CMSEmergencySystem
                     string result = "[" + datetime + "]" + messageLog;
                     statusLog.Text += (result + System.Environment.NewLine);
                 }
-            
 
-            for (int i = 0; i < IncidentCategory.Rows.Count; i++)
-            {
-                string result = IncidentCategory.Rows[i]["departmentName"].ToString();
-                supportType.Text += (result + System.Environment.NewLine);
+                for (int i = 0; i < IncidentCategory.Rows.Count; i++)
+                {
+                    string result = IncidentCategory.Rows[i]["departmentName"].ToString();
+                    supportType.Text += (result + System.Environment.NewLine);
+                }
+
+                incidentDesc.Text = incidentItem.Description;
+                updateUIIncident();
             }
-
-            incidentDesc.Text = incidentItem.Description;
-            updateUIIncident();
         } // end of updateButton.
 
     }// end of class
