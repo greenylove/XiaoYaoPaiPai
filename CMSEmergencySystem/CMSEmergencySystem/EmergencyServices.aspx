@@ -114,12 +114,6 @@
             var span = document.getElementsByClassName("close")[0];
             var span1 = document.getElementsByClassName("close1")[0];
 
-            // When the user clicks the button, open the modal
-            /*btn.onclick = function () {
-                modal.style.display = "block";
-                return false;
-            }*/
-
             btn1.onclick = function () {
 
                 if (document.getElementById('infowindow-content').children["CreateIncident"].textContent == "View Incident") {
@@ -131,13 +125,6 @@
                         }
                     }
                 }
-                console.log("MAP_ID: " + state);
-
-                //console.log("TableID: "+table.rows[2].cells[0].innerHTML);
-                //console.log(document.getElementById("MainContent_GridData").children[0].);
-
-                // document.getElementById('LatInfo').value = window.defaultPlaceGResult.latitude;
-                // document.getElementById('LngInfo').value = window.defaultPlaceGResult.longitude;
                 return false;
             }
 
@@ -145,10 +132,6 @@
             span.onclick = function () {
                 modal.style.display = "none";
             }
-
-            //span1.onclick = function () {
-            //    createModal.style.display = "none";
-            //}
 
             // When the user clicks anywhere outside of the modal, close it
             window.onclick = function (event) {
@@ -168,9 +151,6 @@
             document.getElementById('myModal').style.display = "block";
         }
 
-        //function closeModal() {
-        //    document.getElementById('CreateIncidentDialogBox').style.display = "none";
-        //}
 
     </script>
     <script>
@@ -294,9 +274,7 @@
                 console.log(list);
                 for (var i = 0; i < list.length; i++) {
                     var incident = list[i];
-                    //console.log("Retrieve var from incident");
                     if (incident.Status == "Unresolved") {
-                        //console.log("if statement");
                         incident.formatted_address = incident.Location;
                         incident.latitude = incident.Latitude;
                         incident.longitude = incident.Longitude;
@@ -312,35 +290,22 @@
                             terrorist.push(marker);
                     }
                 }
-                //alert("go pass through here");
-                //CMSEmergencySystem.Map.ClearMarker();
+
             },
             error: function () { }
         });
-        //CMSEmergencySystem.Map.AddDefaultPlaceListener(cachePlace);
-
 
         $.ajax("/BombShelterServlet.aspx", {
             success: function (data) {
-                //console.log(JSON.parse(data));
-                //var x ='[{"Location":"AAAAAAA","Latitude":1.345555,"Longitude":103.932465,"Postal":529757,"Description":"AAAAAA","Address":"AAAAA"}]';
                 listOfBombShelter = JSON.parse(data);
-                //console.log(listOfBombShelter)
                 for (var i = 0; i < listOfBombShelter.length; i++) {
                     var BombShelter = listOfBombShelter[i];
-                    //console.log("Retrieve var from incident");
-                    //console.log("if statement");
-                    // incident.formatted_address = incident.Location;
                     BombShelter.latitude = BombShelter.Latitude;
                     BombShelter.longitude = BombShelter.Longitude;
                     var marker = CMSEmergencySystem.Map.BombShelterAddMarker(new google.maps.LatLng(BombShelter.Latitude, BombShelter.Longitude));
                     marker.setVisible(false);
                     pushBombShelter.push(marker);
-                    //new google.maps.LatLng(incident.Latitude, incident.Longitude), Map,
-
                 }
-                //alert("go pass through here");
-                //CMSEmergencySystem.Map.ClearMarker();
             },
             error: function () { }
         });
@@ -354,7 +319,6 @@
     function onPlaceSelected(marker, geocodeResult) {
         // Whenever a place is selected this listener will be called
         // Retrieve the place from marker._Place
-        //document.getElementById('locationTextBox').value = geocodeResult.formatted_address ? geocodeResult.formatted_address : "";
         if (fire.indexOf(marker) != -1 || caraccident.indexOf(marker) != -1 || riot.indexOf(marker) != -1 || terrorist.indexOf(marker) != -1) {
             document.getElementById('infowindow-content').children["CreateIncident"].textContent = "View Incident";
         }
@@ -464,109 +428,7 @@
         <asp:HiddenField ID="LatInfo" runat="server" ClientIDMode="Static" />
         <asp:HiddenField ID="LngInfo" runat="server" ClientIDMode="Static" />
 
-        <!-- The Modal Create Incident -->
-        <%--<div id="CreateIncidentDialogBox" class="modal">
-
-            <!-- Modal content Create Incident -->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <span class="close1">&times;</span>
-                    <h3>Create Incident Report</h3>
-                </div>
-                <div class="modal-body">
-                    <asp:UpdatePanel ID="UpdateCreate" runat="server">
-                        <ContentTemplate>
-                            <asp:HiddenField ID="LatInfo" runat="server" ClientIDMode="Static" />
-                            <asp:HiddenField ID="LngInfo" runat="server" ClientIDMode="Static" />
-                            <table class="CreateIncident">
-                                <tr>
-                                    <th>Type of Incident : </th>
-                                    <td>
-                                        <asp:DropDownList style="height: 1%;padding: 5px;width: auto;" CssClass="form-control" ID="typeOfIncidentDDL" runat="server">
-                                            <asp:ListItem Text="Fire Outbreak" Value="Fire Outbreak" />
-                                            <asp:ListItem Text="Riot Outbreak" Value="Riot Outbreak" />
-                                            <asp:ListItem Text="Car Accident" Value="Car Accident" />
-                                            <asp:ListItem Text="Terrorist" Value="Terrorist" />
-                                        </asp:DropDownList></td>
-                                </tr>
-                                <tr>
-                                    <th>Reporting Person : </th>
-                                    <td>
-                                        <asp:TextBox style="width:100%;" ID="reportPersonTextBox" runat="server"></asp:TextBox></td>
-
-                                    <th>Contact No:</th>
-                                    <td>
-                                        <asp:TextBox style="width:100%;" ID="contactNoTextBox" runat="server"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <th>Location : </th>
-                                    <td>
-                                        <asp:TextBox style="width:100%;" ID="locationTextBox" runat="server" ClientIDMode="Static"></asp:TextBox></td>
-
-                                    <th>Postal Code : </th>
-                                    <td>
-                                        <asp:TextBox style="width:100%;" ID="postalCodeTextBox" runat="server"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <th>Main Dispatch : </th>
-                                    <td>
-                                        <asp:DropDownList style="height: 1%;padding: 5px;width: auto;" CssClass="form-control" ID="MainDispatchDDL" runat="server">
-                                            <asp:ListItem Text="SCDF - Emergency Ambulance" Value="Emergency Ambulance" />
-                                            <asp:ListItem Text="SCDF - Rescue and Evacuation" Value="Rescue and Evacuation" />
-                                            <asp:ListItem Text="SCDF - FireFighting" Value="FireFighting" />
-                                            <asp:ListItem Text="SCDF - Hazmat Responder" Value="Hazmat Responder" />
-                                            <asp:ListItem Text="SPF - Protective Sercurity" Value="Protective Sercurity" />
-                                            <asp:ListItem Text="SPF - Police Tactical Troop" Value="Police Tactical Troop" />
-                                            <asp:ListItem Text="SPF - Neighbouring Policing" Value="Neighbouring Policing" />
-                                            <asp:ListItem Text="SPF - Community Engagement Policing" Value="Community Engagement Policing" />
-                                            <asp:ListItem Text="SAF - Medical Unit" Value="Medical Unit" />
-                                        </asp:DropDownList>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Assist Type : </th>
-                                </tr>
-                                <tr>
-                                    <th style="text-align: left;">SCDF</th>
-                                    <th style="text-align: left;">SPF</th>
-                                    <th style="text-align: left;">SAF</th>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <asp:CheckBoxList ID="assistTypeCheckBoxList" runat="server">
-                                            <asp:ListItem Text="Emergency Ambulance" Value="1"></asp:ListItem>
-                                            <asp:ListItem Text="Rescue and Evacuation" Value="2"></asp:ListItem>
-                                            <asp:ListItem Text="FireFighting" Value="3"></asp:ListItem>
-                                            <asp:ListItem Text="Hazmat Responder" Value="4"></asp:ListItem>
-                                        </asp:CheckBoxList>
-                                    </td>
-                                    <td>
-                                        <asp:CheckBoxList ID="CheckBoxList1" runat="server">
-                                            <asp:ListItem Text="Protective Sercurity" Value="5"></asp:ListItem>
-                                            <asp:ListItem Text="Police Tactical Troop" Value="6"></asp:ListItem>
-                                            <asp:ListItem Text="Neighbouring Policing" Value="7"></asp:ListItem>
-                                            <asp:ListItem Text="Community Engagement Policing" Value="8"></asp:ListItem>
-                                        </asp:CheckBoxList>
-                                    </td>
-                                    <td>
-                                        <asp:CheckBoxList ID="CheckBoxList2" runat="server">
-                                            <asp:ListItem Text="Medical Unit" Value="9"></asp:ListItem>
-                                        </asp:CheckBoxList>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Description : </th>
-                                    <td><asp:TextBox style="width:100%;" ID="descriptionTextBox" runat="server"></asp:TextBox></td>
-                                    <td><asp:Button ID="submit" style="padding: 5px 10px;" Text="Create Incident" runat="server"  CssClass="btn btn-primary"  OnClick="CreateIncidentButton" OnClientClick="return userValid();"/></td>
-                                </tr>
-                            </table>
-                            </div>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                    <div class="modal-footer">
-                    </div>
-                </div>
-            </div>--%>
+        
             <div class="wrapMap" id="wrapmap">
 
                 <div id="leftpanel" style="position: fixed;">
