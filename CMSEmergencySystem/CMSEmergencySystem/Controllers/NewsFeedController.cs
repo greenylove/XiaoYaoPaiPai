@@ -88,6 +88,7 @@ namespace CMSEmergencySystem.Controllers
             string app_secret = "77b29db9a93f9ed80dcae99b8af74a28";
             string scope = "publish_actions,manage_pages";
 
+            if (HttpContext.Current.Session["accessToken"] == null){ 
             Dictionary<string, string> tokens = new Dictionary<string, string>();
 
             string url = string.Format("https://graph.facebook.com/oauth/access_token?client_id={0}&redirect_uri={1}&scope={2}&code={3}&client_secret={4}",
@@ -107,14 +108,18 @@ namespace CMSEmergencySystem.Controllers
                         token.Substring(token.IndexOf(":") + 1, token.Length - token.IndexOf(":") - 1));
                 }
             }
-
             string access_token = tokens["{\"access_token\""];
             access_token = access_token.Replace("\"", "");
-            var client = new FacebookClient(access_token);
+            HttpContext.Current.Session.Add("accessToken", access_token);
+        }
+            string accessToken = HttpContext.Current.Session["accessToken"].ToString();
+
+
+            var client = new FacebookClient(accessToken);
 
             dynamic parameters = new ExpandoObject();
             parameters.message = message;
-            parameters.access_token = access_token;
+            parameters.access_token = accessToken;
 
             client.Post("/406096709760870/feed", parameters);
         }

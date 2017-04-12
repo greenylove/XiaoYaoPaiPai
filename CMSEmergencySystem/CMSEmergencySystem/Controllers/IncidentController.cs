@@ -27,7 +27,7 @@ namespace CMSEmergencySystem.Controllers
             
             new NewsFeedController().UpdateStatustoFB(message);
             new NewsFeedController().UpdateStatustoTwitter(message);
-            
+
             //pass object to DAO, DAO deconstruct object and store to DB
             int newIncidentID = myDB.Create_Incident(i);
 

@@ -5,7 +5,9 @@
     <script runat="server" type="text/c#">
         protected void TimerFB_Tick(object sender, EventArgs e)
         {
-            RefreshFBFeed();
+
+            RefreshFBFeed();// return
+            // byID of your panel update that panel
         }
         protected void TimerTwitter_Tick(object sender, EventArgs e)
         {
@@ -47,15 +49,15 @@
                     weatherList[w].setVisible(false);
             }
         }
-        function toggleBomb() {
-            for (var i = 0; i < pushBombShelter.length; i++) {
-                //console.log(listOfBombShelter.length);
-                if (document.getElementById("bombShelterCheckBox").checked == true)
-                    pushBombShelter[i].setVisible(true);
-                else
-                    pushBombShelter[i].setVisible(false);
-            }
-        }
+        //function toggleBomb() {
+        //    for (var i = 0; i < pushBombShelter.length; i++) {
+        //        //console.log(listOfBombShelter.length);
+        //        if (document.getElementById("bombShelterCheckBox").checked == true)
+        //            pushBombShelter[i].setVisible(true);
+        //        else
+        //            pushBombShelter[i].setVisible(false);
+        //    }
+        //}
     </script>
     <script>
         function w3_openleft() {
@@ -281,30 +283,30 @@
                 error: function () { }
             });
             //CMSEmergencySystem.Map.AddDefaultPlaceListener(cachePlace);
-            $.ajax("/BombShelterServlet.aspx", {
-                success: function (data) {
-                    //console.log(JSON.parse(data));
-                    //var x ='[{"Location":"AAAAAAA","Latitude":1.345555,"Longitude":103.932465,"Postal":529757,"Description":"AAAAAA","Address":"AAAAA"}]';
-                    listOfBombShelter = JSON.parse(data);
-                    //console.log(listOfBombShelter)
-                    for (var i = 0; i < listOfBombShelter.length; i++) {
-                        var BombShelter = listOfBombShelter[i];
-                        //console.log("Retrieve var from incident");
-                        //console.log("if statement");
-                        // incident.formatted_address = incident.Location;
-                        BombShelter.latitude = BombShelter.Latitude;
-                        BombShelter.longitude = BombShelter.Longitude;
-                        var marker = CMSEmergencySystem.Map.BombShelterAddMarker(new google.maps.LatLng(BombShelter.Latitude, BombShelter.Longitude));
-                        marker.setVisible(false);
-                        pushBombShelter.push(marker);
-                        //new google.maps.LatLng(incident.Latitude, incident.Longitude), Map,
+            //$.ajax("/BombShelterServlet.aspx", {
+            //    success: function (data) {
+            //        //console.log(JSON.parse(data));
+            //        //var x ='[{"Location":"AAAAAAA","Latitude":1.345555,"Longitude":103.932465,"Postal":529757,"Description":"AAAAAA","Address":"AAAAA"}]';
+            //        listOfBombShelter = JSON.parse(data);
+            //        //console.log(listOfBombShelter)
+            //        for (var i = 0; i < listOfBombShelter.length; i++) {
+            //            var BombShelter = listOfBombShelter[i];
+            //            //console.log("Retrieve var from incident");
+            //            //console.log("if statement");
+            //            // incident.formatted_address = incident.Location;
+            //            BombShelter.latitude = BombShelter.Latitude;
+            //            BombShelter.longitude = BombShelter.Longitude;
+            //            var marker = CMSEmergencySystem.Map.BombShelterAddMarker(new google.maps.LatLng(BombShelter.Latitude, BombShelter.Longitude));
+            //            marker.setVisible(false);
+            //            pushBombShelter.push(marker);
+            //            //new google.maps.LatLng(incident.Latitude, incident.Longitude), Map,
 
-                    }
-                    //alert("go pass through here");
-                    //CMSEmergencySystem.Map.ClearMarker();
-                },
-                error: function () { }
-            });
+            //        }
+            //        //alert("go pass through here");
+            //        //CMSEmergencySystem.Map.ClearMarker();
+            //    },
+            //    error: function () { }
+            //});
         }
 
 
@@ -355,7 +357,7 @@
                 <div class="modal-body">
                     <asp:ScriptManager ID="ScriptManager1" runat="server">
                     </asp:ScriptManager>
-                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <asp:UpdatePanel UpdateMode="Conditional" ID="UpdatePanel1" runat="server">
                         <ContentTemplate>
 
                             <table class="CurrentIncident">
@@ -447,7 +449,7 @@
                     <h3>Create Incident Report</h3>
                 </div>
                 <div class="modal-body">
-                    <asp:UpdatePanel ID="UpdateCreate" runat="server">
+                    <asp:UpdatePanel UpdateMode="Conditional" ID="UpdateCreate" runat="server">
                         <ContentTemplate>
                             <asp:HiddenField ID="LatInfo" runat="server" ClientIDMode="Static" />
                             <asp:HiddenField ID="LngInfo" runat="server" ClientIDMode="Static" />
@@ -561,7 +563,7 @@
                                     FACEBOOK
                                 </div>
                                 <div class="LiveFeedCSS">
-                                    <asp:UpdatePanel ID="UpdatePanelFBLiveFeed" class="feed" runat="server">
+                                    <asp:UpdatePanel UpdateMode="Conditional" ID="UpdatePanelFBLiveFeed" class="feed" runat="server">
                                         <ContentTemplate>
                                             <asp:Timer runat="server" id="TimerFB" Interval="10000" OnTick="TimerFB_Tick"></asp:Timer>
                                             <div id="fbLiveFeed" runat="server">
@@ -634,7 +636,7 @@
                                     TWITTER
                                 </div>
                                 <div class="LiveFeedCSS">
-                                    <asp:UpdatePanel ID="UpdatePanel4" class="feed" runat="server">
+                                    <asp:UpdatePanel UpdateMode="Conditional" ID="UpdatePanel4" class="feed" runat="server">
                                         <ContentTemplate>
                                             <asp:Timer runat="server" id="TimerTwitter" Interval="10000" OnTick="TimerTwitter_Tick"></asp:Timer>
                                             <div id="twitterLiveFeed" runat="server">
@@ -832,7 +834,7 @@
                                 <li><a onclick="tab2();">Resolved Incidents</a></li>
                                 <li><a onclick="tab3();">NEA Data</a></li>
                             </ul>
-                            <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+                            <asp:UpdatePanel UpdateMode="Conditional" ID="UpdatePanel5" runat="server">
                                     <ContentTemplate>
                             <div style="padding: 5px; border: 1px solid #dfd7ca;">
                                 <asp:TextBox ID="searchResult" runat="server" CssClass="form-control"></asp:TextBox>
@@ -842,7 +844,7 @@
                                         </ContentTemplate>
                                 </asp:UpdatePanel>
                             <div id="tabs-1" style="width: 100%;">
-                                <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                                <asp:UpdatePanel UpdateMode="Conditional" ID="UpdatePanel3" runat="server">
                                     <ContentTemplate>
                                         <div class="gridViewTable">
                                             <asp:GridView ID="GridData" runat="server" AutoGenerateColumns="False" OnRowCommand="ViewPendingIncident_RowCommand"
@@ -867,7 +869,7 @@
                             </div>
 
                             <div id="tabs-2" style="display: none; width: 100%;">
-                                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                <asp:UpdatePanel UpdateMode="Conditional" ID="UpdatePanel2" runat="server">
                                     <ContentTemplate>
                                         <asp:GridView ID="GridData2" runat="server" AutoGenerateColumns="False" OnRowCommand="ViewResolvedIncident_RowCommand"
                                             Width="100%" CssClass="table table-striped table-hover">
